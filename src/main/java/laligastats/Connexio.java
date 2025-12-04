@@ -11,10 +11,11 @@ public class Connexio {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
-    public boolean crearBBDD() {
-        try (Connection con = Connexio.getConnection()) {
+    public static boolean crearBBDD() {
+        try (Connection con = Connexio.getConnection();
+             Statement stmt = con.createStatement()) {
             String sql = "CREATE DATABASE LaLiga_23_24_Stats";
-            PreparedStatement ps = con.prepareStatement(sql);
+            stmt.executeUpdate(sql);
             System.out.println("BBDD LaLiga_23_24_Stats creada");
             return true;
         } catch (SQLException e) {
@@ -23,13 +24,12 @@ public class Connexio {
         }
     }
 
-    public boolean deleteBBDD() {
-        try (Connection con = Connexio.getConnection()) {
-            String sql = "DROP IF EXISTS LaLiga_23_24_Stats";
-            PreparedStatement ps = con.prepareStatement(sql);
+    public static boolean deleteBBDD() {
+        try (Connection con = Connexio.getConnection();
+             Statement st = con.createStatement()) {
+            String sql = "DROP DATABASE IF EXISTS LaLiga_23_24_Stats";
+            st.executeUpdate(sql);
             System.out.println("BBDD LaLiga_23_24_Stats eliminada");
-            
-
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
