@@ -1,9 +1,9 @@
 package laligastats;
 
 public class Jugador {
-    private int ID;
+    private final int ID;
     private int Posicio;
-    private int Nom;
+    private final int Nom;
     private Equip Equip;
     private int Gols_marcats;
     private int Partits;
