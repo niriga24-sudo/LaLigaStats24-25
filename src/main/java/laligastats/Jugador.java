@@ -3,7 +3,7 @@ package laligastats;
 public class Jugador {
     private final int ID;
     private int Posicio;
-    private final int Nom;
+    private final String Nom;
     private Equip Equip;
     private int Gols_marcats;
     private int Partits;
@@ -15,7 +15,7 @@ public class Jugador {
     private int Passades_Completades;
     private int Passades_Totals;
 
-    public Jugador(int iD, int posicio, int nom, laligastats.Equip equip, int gols_marcats, int partits,
+    public Jugador(int iD, int posicio, String nom, Equip equip, int gols_marcats, int partits,
             double gols_x_Partit, int posicio_Assistencies, int assistencies, double assist_x_Partit,
             int posicio_Passades, int passades_Completades, int passades_Totals) {
         this.ID = iD;
