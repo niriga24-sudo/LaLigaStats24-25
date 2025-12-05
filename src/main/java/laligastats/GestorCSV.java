@@ -45,6 +45,7 @@ public class GestorCSV {
                 equips.add(e);
                 id++;
             }
+            br.close();
             return equips;
         } catch (Exception e) {
             e.printStackTrace();
@@ -100,6 +101,7 @@ public class GestorCSV {
                 jugadors.add(j);
                 id++;
             }
+            br.close();
             return jugadors;
         } catch (Exception e) {
             e.printStackTrace();
