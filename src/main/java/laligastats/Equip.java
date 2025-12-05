@@ -38,6 +38,19 @@ public class Equip {
         this.Targetes_Vermelles = targetes_Vermelles;
     }
 
+    
+
+    @Override
+    public String toString() {
+        return "Equip [ID=" + ID + ", Posicio=" + Posicio + ", nom_Equip=" + nom_Equip + ", Punts=" + Punts
+                + ", Partits_Jugats=" + Partits_Jugats + ", Victories=" + Victories + ", Empats=" + Empats
+                + ", Derrotes=" + Derrotes + ", Gols_Marcats=" + Gols_Marcats + ", Gols_Encaixats=" + Gols_Encaixats
+                + ", Diferencia_Gols=" + Diferencia_Gols + ", Xuts_a_Porteria=" + Xuts_a_Porteria + ", Faltes=" + Faltes
+                + ", Targetes_Grogues=" + Targetes_Grogues + ", Targetes_Vermelles=" + Targetes_Vermelles + "]";
+    }
+
+
+
     public int getID() {
         return ID;
     }

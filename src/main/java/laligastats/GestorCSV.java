@@ -19,6 +19,8 @@ public class GestorCSV {
             String linia;
 
             while ((linia = br.readLine()) != null) {
+                // Eliminar comillas dobles al principio y al final
+                linia = linia.replaceAll("^\"|\"$", "");
                 String parts[] = linia.split(",");
                 int posicio = Integer.parseInt(parts[0]);
                 String nomEquip = parts[1];
@@ -29,7 +31,8 @@ public class GestorCSV {
                 int derrotes = Integer.parseInt(parts[6]);
                 int gols_marcats = Integer.parseInt(parts[7]);
                 int gols_encaixats = Integer.parseInt(parts[8]);
-                int diferencia_gols = Integer.parseInt(parts[9]);
+                // Eliminar el símbolo + de la diferencia de gols
+                int diferencia_gols = Integer.parseInt(parts[9].replace("+", ""));
                 int xuts_a_porteria = Integer.parseInt(parts[10]);
                 int faltes = Integer.parseInt(parts[11]);
                 int targetes_grogues = Integer.parseInt(parts[12]);
@@ -73,6 +76,8 @@ public class GestorCSV {
             int id = 1;
             String linia;
             while ((linia = br.readLine()) != null) {
+                // Eliminar comillas dobles al principio y al final
+                linia = linia.replaceAll("^\"|\"$", "");
                 String parts[] = linia.split(",");
                 int posicio = Integer.parseInt(parts[0]);
                 String nom = parts[1];
@@ -84,9 +89,9 @@ public class GestorCSV {
                 int posicio_assistencies = Integer.parseInt(parts[6]);
                 int assistencies = Integer.parseInt(parts[7]);
                 double assist_x_partit = Double.parseDouble(parts[8]);
-                int posicio_passades = Integer.parseInt(parts[8]);
-                int passades_completades = Integer.parseInt(parts[9]);
-                int passades_totals = Integer.parseInt(parts[10]);
+                int posicio_passades = Integer.parseInt(parts[9]);
+                int passades_completades = Integer.parseInt(parts[10]);
+                int passades_totals = Integer.parseInt(parts[11]);
 
                 Jugador j = new Jugador(id, posicio, nom, equip, gols_marcats, partits,
                         Gols_x_partit, posicio_assistencies, assistencies, assist_x_partit,

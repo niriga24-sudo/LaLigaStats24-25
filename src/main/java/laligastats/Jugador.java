@@ -34,4 +34,113 @@ public class Jugador {
     }
 
     
+
+    @Override
+    public String toString() {
+        return "Jugador [ID=" + ID + ", Posicio=" + Posicio + ", Nom=" + Nom + ", Equip=" + Equip.getNom_Equip() + ", Gols_marcats="
+                + Gols_marcats + ", Partits=" + Partits + ", Gols_x_Partit=" + Gols_x_Partit + ", Posicio_Assistencies="
+                + Posicio_Assistencies + ", Assistencies=" + Assistencies + ", Assist_x_Partit=" + Assist_x_Partit
+                + ", Posicio_Passades=" + Posicio_Passades + ", Passades_Completades=" + Passades_Completades
+                + ", Passades_Totals=" + Passades_Totals + "]";
+    }
+
+
+
+    public int getID() {
+        return ID;
+    }
+
+    public int getPosicio() {
+        return Posicio;
+    }
+
+    public void setPosicio(int posicio) {
+        Posicio = posicio;
+    }
+
+    public String getNom() {
+        return Nom;
+    }
+
+    public Equip getEquip() {
+        return Equip;
+    }
+
+    public void setEquip(Equip equip) {
+        Equip = equip;
+    }
+
+    public int getGols_marcats() {
+        return Gols_marcats;
+    }
+
+    public void setGols_marcats(int gols_marcats) {
+        Gols_marcats = gols_marcats;
+    }
+
+    public int getPartits() {
+        return Partits;
+    }
+
+    public void setPartits(int partits) {
+        Partits = partits;
+    }
+
+    public double getGols_x_Partit() {
+        return Gols_x_Partit;
+    }
+
+    public void setGols_x_Partit(double gols_x_Partit) {
+        Gols_x_Partit = gols_x_Partit;
+    }
+
+    public int getPosicio_Assistencies() {
+        return Posicio_Assistencies;
+    }
+
+    public void setPosicio_Assistencies(int posicio_Assistencies) {
+        Posicio_Assistencies = posicio_Assistencies;
+    }
+
+    public int getAssistencies() {
+        return Assistencies;
+    }
+
+    public void setAssistencies(int assistencies) {
+        Assistencies = assistencies;
+    }
+
+    public double getAssist_x_Partit() {
+        return Assist_x_Partit;
+    }
+
+    public void setAssist_x_Partit(double assist_x_Partit) {
+        Assist_x_Partit = assist_x_Partit;
+    }
+
+    public int getPosicio_Passades() {
+        return Posicio_Passades;
+    }
+
+    public void setPosicio_Passades(int posicio_Passades) {
+        Posicio_Passades = posicio_Passades;
+    }
+
+    public int getPassades_Completades() {
+        return Passades_Completades;
+    }
+
+    public void setPassades_Completades(int passades_Completades) {
+        Passades_Completades = passades_Completades;
+    }
+
+    public int getPassades_Totals() {
+        return Passades_Totals;
+    }
+
+    public void setPassades_Totals(int passades_Totals) {
+        Passades_Totals = passades_Totals;
+    }
+
+    
 }
