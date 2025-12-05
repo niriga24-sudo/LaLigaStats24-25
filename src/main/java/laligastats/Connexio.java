@@ -14,9 +14,9 @@ public class Connexio {
     public static boolean crearBBDD() {
         try (Connection con = Connexio.getConnection();
              Statement stmt = con.createStatement()) {
-            String sql = "CREATE DATABASE LaLiga_23_24_Stats";
+            String sql = "CREATE DATABASE LaLiga_24_25_Stats";
             stmt.executeUpdate(sql);
-            System.out.println("BBDD LaLiga_23_24_Stats creada");
+            System.out.println("BBDD LaLiga_24_25_Stats creada");
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -27,9 +27,9 @@ public class Connexio {
     public static boolean deleteBBDD() {
         try (Connection con = Connexio.getConnection();
              Statement st = con.createStatement()) {
-            String sql = "DROP DATABASE IF EXISTS LaLiga_23_24_Stats";
+            String sql = "DROP DATABASE IF EXISTS LaLiga_24_25_Stats";
             st.executeUpdate(sql);
-            System.out.println("BBDD LaLiga_23_24_Stats eliminada");
+            System.out.println("BBDD LaLiga_24_25_Stats eliminada");
             return true;
         } catch (SQLException e) {
             e.printStackTrace();

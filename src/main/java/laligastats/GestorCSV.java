@@ -46,6 +46,7 @@ public class GestorCSV {
                 id++;
             }
             br.close();
+            fr.close();
             return equips;
         } catch (Exception e) {
             e.printStackTrace();
@@ -67,7 +68,6 @@ public class GestorCSV {
         return null;
     }
 
-    // Añadir id manualmente y completar funcion
     public static ArrayList<Jugador> llegirJugadors() {
         try {
             FileReader fr = new FileReader(RUTA_CSV_JUGADORS);
@@ -102,6 +102,7 @@ public class GestorCSV {
                 id++;
             }
             br.close();
+            fr.close();
             return jugadors;
         } catch (Exception e) {
             e.printStackTrace();
