@@ -32,7 +32,7 @@ public class GestorCSV {
                 int gols_marcats = Integer.parseInt(parts[7]);
                 int gols_encaixats = Integer.parseInt(parts[8]);
                 // Eliminar el símbolo + de la diferencia de gols
-                int diferencia_gols = Integer.parseInt(parts[9].replace("+", ""));
+                int diferencia_gols = Integer.parseInt(parts[9]);
                 int xuts_a_porteria = Integer.parseInt(parts[10]);
                 int faltes = Integer.parseInt(parts[11]);
                 int targetes_grogues = Integer.parseInt(parts[12]);
