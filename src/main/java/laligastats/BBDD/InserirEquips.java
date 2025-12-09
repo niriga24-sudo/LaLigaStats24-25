@@ -1,6 +1,4 @@
 package laligastats.BBDD;
-
-import laligastats.Equip;
 import laligastats.DAO.EquipDAO;
 
 public class InserirEquips {

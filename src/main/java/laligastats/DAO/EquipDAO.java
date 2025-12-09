@@ -1,6 +1,5 @@
 package laligastats.DAO;
 
-import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
