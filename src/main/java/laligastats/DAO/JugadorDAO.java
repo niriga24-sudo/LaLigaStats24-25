@@ -104,7 +104,7 @@ public class JugadorDAO {
 
     public Boolean actualitzarJugador(Jugador j) {
         try (Connection con = Connexio.getConnectionBBDD()) {
-            String sql = "UPDATE jugadors SET Posicio=?, Nom=?, Equip=?, Gols_Marcats=?, Partits=?, Gols_Per =?, Posicio_Assistencies=?, Assistencies=?, Assistencies_Per_Partit=?, Posicio_Passades=?, Passades_Completades=?, Passades_Totals=? WHERE ID=?";
+            String sql = "UPDATE jugadors SET Posicio=?, Nom=?, Equip=?, Gols_Marcats=?, Partits=?, Gols_Per_Partit=?, Posicio_Assistencies=?, Assistencies=?, Assistencies_Per_Partit=?, Posicio_Passades=?, Passades_Completades=?, Passades_Totals=? WHERE ID=?";
             PreparedStatement ps = con.prepareStatement(sql);
             
             ps.setInt(1, j.getPosicio());
@@ -119,6 +119,7 @@ public class JugadorDAO {
             ps.setInt(10, j.getPosicio_Passades());
             ps.setInt(11, j.getPassades_Completades());
             ps.setInt(12, j.getPassades_Totals());
+            ps.setInt(13, j.getID());
             ps.executeUpdate();
             ps.close();
             return true;
@@ -165,4 +166,51 @@ public class JugadorDAO {
         }
     }
 
+    public ArrayList<Jugador> obtenirTotsJugadors() {
+        ArrayList<Jugador> jugadors = new ArrayList<>();
+        try (Connection con = Connexio.getConnectionBBDD()) {
+            String sql = "SELECT * FROM jugadors";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            GestorCSV gCSV = new GestorCSV();
+            while (rs.next()) {
+                Jugador j = new Jugador( 
+                    rs.getInt("ID"),
+                    rs.getInt("Posicio"),
+                    rs.getString("Nom"),
+                    gCSV.cercarEquipxNom(rs.getString("Equip")),
+                    rs.getInt("Gols_Marcats"),
+                    rs.getInt("Partits"),
+                    rs.getDouble("Gols_Per_Partit")
+                    ,rs.getInt("Posicio_Assistencies"),
+                    rs.getInt("Assistencies"),
+                    rs.getDouble("Assistencies_Per_Partit"),
+                    rs.getInt("Posicio_Passades"),
+                    rs.getInt("Passades_Completades"),
+                    rs.getInt("Passades_Totals")
+                );
+                jugadors.add(j);
+            }
+            rs.close();
+            ps.close();
+            return jugadors;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public Boolean eliminarJugador(int id) {
+        try (Connection con = Connexio.getConnectionBBDD()) {
+            String sql = "DELETE FROM jugadors WHERE ID=?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            ps.close();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
