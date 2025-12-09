@@ -76,7 +76,7 @@ public class JugadorDAO {
     }
 
     public boolean insertarJugador(Jugador j) {
-        try (Connection con = Connexio.getConnection()){
+        try (Connection con = Connexio.getConnection()) {
             String sql = "INSERT INTO jugadors VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(sql);
 
@@ -85,7 +85,7 @@ public class JugadorDAO {
             ps.setString(3, j.getNom());
             ps.setString(4, j.getEquip().getNom_Equip());
             ps.setInt(5, j.getGols_marcats());
-            ps.setInt(6, j.getPartits());   
+            ps.setInt(6, j.getPartits());
             ps.setDouble(7, j.getGols_x_Partit());
             ps.setInt(8, j.getPosicio_Assistencies());
             ps.setInt(9, j.getAssistencies());
@@ -104,9 +104,23 @@ public class JugadorDAO {
 
     public Boolean actualitzarJugador(Jugador j) {
         try (Connection con = Connexio.getConnectionBBDD()) {
-            String sql = "UPDATE jugadors SET Posicio=?, Nom=?, Equip=?, Gols_Marcats=?, Partits=?, Gols_Per_Partit=?, Posicio_Assistencies=?, Assistencies=?, Assistencies_Per_Partit=?, Posicio_Passades=?, Passades_Completades=?, Passades_Totals=? WHERE ID=?";
+            String sql = """
+                    UPDATE jugadors SET
+                        Posicio=?,
+                        Nom=?,
+                        Equip=?,
+                        Gols_Marcats=?,
+                        Partits=?,
+                        Gols_Per_Partit=?,
+                        Posicio_Assistencies=?,
+                        Assistencies=?,
+                        Assistencies_Per_Partit=?,
+                        Posicio_Passades=?,
+                        Passades_Completades=?,
+                        Passades_Totals=?
+                        WHERE ID=?""";
             PreparedStatement ps = con.prepareStatement(sql);
-            
+
             ps.setInt(1, j.getPosicio());
             ps.setString(2, j.getNom());
             ps.setString(3, j.getEquip().getNom_Equip());
@@ -128,6 +142,7 @@ public class JugadorDAO {
             return false;
         }
     }
+
     public Jugador obtenirJugadorxID(int id) {
         try (Connection con = Connexio.getConnectionBBDD()) {
             String sql = "SELECT * FROM jugadors WHERE ID=?";
@@ -136,21 +151,19 @@ public class JugadorDAO {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 GestorCSV gCSV = new GestorCSV();
-                Jugador j = new Jugador( 
-                    rs.getInt("ID"),
-                    rs.getInt("Posicio"),
-                    rs.getString("Nom"),
-                    gCSV.cercarEquipxNom(rs.getString("Equip")),
-                    rs.getInt("Gols_Marcats"),
-                    rs.getInt("Partits"),
-                    rs.getDouble("Gols_Per_Partit")
-                    ,rs.getInt("Posicio_Assistencies"),
-                    rs.getInt("Assistencies"),
-                    rs.getDouble("Assistencies_Per_Partit"),
-                    rs.getInt("Posicio_Passades"),
-                    rs.getInt("Passades_Completades"),
-                    rs.getInt("Passades_Totals")
-                );
+                Jugador j = new Jugador(
+                        rs.getInt("ID"),
+                        rs.getInt("Posicio"),
+                        rs.getString("Nom"),
+                        gCSV.cercarEquipxNom(rs.getString("Equip")),
+                        rs.getInt("Gols_Marcats"),
+                        rs.getInt("Partits"),
+                        rs.getDouble("Gols_Per_Partit"), rs.getInt("Posicio_Assistencies"),
+                        rs.getInt("Assistencies"),
+                        rs.getDouble("Assistencies_Per_Partit"),
+                        rs.getInt("Posicio_Passades"),
+                        rs.getInt("Passades_Completades"),
+                        rs.getInt("Passades_Totals"));
                 rs.close();
                 ps.close();
                 return j;
@@ -174,21 +187,19 @@ public class JugadorDAO {
             ResultSet rs = ps.executeQuery();
             GestorCSV gCSV = new GestorCSV();
             while (rs.next()) {
-                Jugador j = new Jugador( 
-                    rs.getInt("ID"),
-                    rs.getInt("Posicio"),
-                    rs.getString("Nom"),
-                    gCSV.cercarEquipxNom(rs.getString("Equip")),
-                    rs.getInt("Gols_Marcats"),
-                    rs.getInt("Partits"),
-                    rs.getDouble("Gols_Per_Partit")
-                    ,rs.getInt("Posicio_Assistencies"),
-                    rs.getInt("Assistencies"),
-                    rs.getDouble("Assistencies_Per_Partit"),
-                    rs.getInt("Posicio_Passades"),
-                    rs.getInt("Passades_Completades"),
-                    rs.getInt("Passades_Totals")
-                );
+                Jugador j = new Jugador(
+                        rs.getInt("ID"),
+                        rs.getInt("Posicio"),
+                        rs.getString("Nom"),
+                        gCSV.cercarEquipxNom(rs.getString("Equip")),
+                        rs.getInt("Gols_Marcats"),
+                        rs.getInt("Partits"),
+                        rs.getDouble("Gols_Per_Partit"), rs.getInt("Posicio_Assistencies"),
+                        rs.getInt("Assistencies"),
+                        rs.getDouble("Assistencies_Per_Partit"),
+                        rs.getInt("Posicio_Passades"),
+                        rs.getInt("Passades_Completades"),
+                        rs.getInt("Passades_Totals"));
                 jugadors.add(j);
             }
             rs.close();
