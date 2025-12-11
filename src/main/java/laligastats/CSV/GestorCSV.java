@@ -1,8 +1,11 @@
-package laligastats;
+package laligastats.CSV;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+
+import laligastats.CLASES.Equip;
+import laligastats.CLASES.Jugador;
 
 public class GestorCSV {
 

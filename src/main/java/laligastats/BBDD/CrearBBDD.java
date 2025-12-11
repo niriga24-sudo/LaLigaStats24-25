@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import laligastats.Connexio;
 import laligastats.DAO.EquipDAO;
 import laligastats.DAO.JugadorDAO;
 

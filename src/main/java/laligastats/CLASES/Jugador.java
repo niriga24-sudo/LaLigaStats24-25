@@ -1,9 +1,9 @@
-package laligastats;
+package laligastats.CLASES;
 
 public class Jugador {
-    private final int ID;
+    private int ID;
     private int Posicio;
-    private final String Nom;
+    private String Nom;
     private Equip Equip;
     private int Gols_marcats;
     private int Partits;
@@ -50,6 +50,10 @@ public class Jugador {
         return ID;
     }
 
+    public void setId(int id) {
+        ID = id;
+    }
+
     public int getPosicio() {
         return Posicio;
     }
@@ -60,6 +64,10 @@ public class Jugador {
 
     public String getNom() {
         return Nom;
+    }
+
+    public void setNom(String nom){
+        Nom = nom;
     }
 
     public Equip getEquip() {

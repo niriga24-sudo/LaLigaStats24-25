@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import laligastats.Connexio;
-
 public class EliminarBBDD {
     public static boolean deleteBBDD() {
         try (Connection con = Connexio.getConnection();

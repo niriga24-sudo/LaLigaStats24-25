@@ -6,7 +6,13 @@ public class InserirJugadors {
 
     public static void main(String[] args) {
         JugadorDAO jDAO = new JugadorDAO();
-        Boolean inserits = jDAO.insertarCSVJugadorsaBBDD();
-        System.out.println(inserits);
+
+        if (jDAO.insertarCSVJugadorsaBBDD()) {
+            try {
+                System.out.println("Jugadors inserits correctament");
+            } catch (Exception e) {
+                System.err.println("Error al inserir els jugadors");
+            }
+        }
     }
 }

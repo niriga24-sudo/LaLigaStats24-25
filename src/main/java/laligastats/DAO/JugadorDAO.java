@@ -1,12 +1,15 @@
 package laligastats.DAO;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
-import laligastats.Connexio;
-import laligastats.Equip;
-import laligastats.GestorCSV;
-import laligastats.Jugador;
+import laligastats.BBDD.Connexio;
+import laligastats.CLASES.Jugador;
+import laligastats.CSV.GestorCSV;
 
 public class JugadorDAO {
 
@@ -75,31 +78,44 @@ public class JugadorDAO {
 
     }
 
-    public boolean insertarJugador(Jugador j) {
-        try (Connection con = Connexio.getConnection()) {
-            String sql = "INSERT INTO jugadors VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement ps = con.prepareStatement(sql);
+    public int insertarJugador(Jugador j) {
+        String sql = """
+                    INSERT INTO jugadors
+                    (Posicio, Nom, Equip, Gols_Marcats, Partits,
+                     Gols_Per_Partit, Posicio_Assistencies, Assistencies, Assistencies_Per_Partit,
+                     Posicio_Passades, Passades_Completades, Passades_Totals)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """;
 
-            ps.setInt(1, j.getID());
-            ps.setInt(2, j.getPosicio());
-            ps.setString(3, j.getNom());
-            ps.setString(4, j.getEquip().getNom_Equip());
-            ps.setInt(5, j.getGols_marcats());
-            ps.setInt(6, j.getPartits());
-            ps.setDouble(7, j.getGols_x_Partit());
-            ps.setInt(8, j.getPosicio_Assistencies());
-            ps.setInt(9, j.getAssistencies());
-            ps.setDouble(10, j.getAssist_x_Partit());
-            ps.setInt(11, j.getPosicio_Passades());
-            ps.setInt(12, j.getPassades_Completades());
-            ps.setInt(13, j.getPassades_Totals());
+        try (Connection con = Connexio.getConnectionBBDD();
+                PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+            ps.setInt(1, j.getPosicio());
+            ps.setString(2, j.getNom());
+            ps.setString(3, j.getEquip().getNom_Equip());
+            ps.setInt(4, j.getGols_marcats());
+            ps.setInt(5, j.getPartits());
+            ps.setDouble(6, j.getGols_x_Partit());
+            ps.setInt(7, j.getPosicio_Assistencies());
+            ps.setInt(8, j.getAssistencies());
+            ps.setDouble(9, j.getAssist_x_Partit());
+            ps.setInt(10, j.getPosicio_Passades());
+            ps.setInt(11, j.getPassades_Completades());
+            ps.setInt(12, j.getPassades_Totals());
+
             ps.executeUpdate();
-            ps.close();
-            return true;
+
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                int nouID = rs.getInt(1);
+                j.setId(nouID);
+                return nouID;
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
+        return -1;
     }
 
     public Boolean actualitzarJugador(Jugador j) {

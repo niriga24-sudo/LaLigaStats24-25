@@ -1,4 +1,4 @@
-package laligastats;
+package laligastats.CLASES;
 
 public class Equip {
     private int ID;

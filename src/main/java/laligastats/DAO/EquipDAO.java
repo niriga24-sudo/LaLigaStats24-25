@@ -4,11 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
-import laligastats.Connexio;
-import laligastats.Equip;
-import laligastats.GestorCSV;
+import laligastats.BBDD.Connexio;
+import laligastats.CLASES.Equip;
+import laligastats.CSV.GestorCSV;
 
 public class EquipDAO {
 
@@ -79,33 +80,48 @@ public class EquipDAO {
         }
     }
 
-    public Boolean insertarEquip(Equip e) {
-        try (Connection con = Connexio.getConnectionBBDD()) {
-            String sql = "INSERT INTO equips VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement ps = con.prepareStatement(sql);
+    public int insertarEquip(Equip e) {
+        String sql = """
+                    INSERT INTO equips
+                    (Posicio_Equip, Equip, Punts, Partits_Jugats, Victories, Empats, Derrotes,
+                     Gols_Marcats, Gols_Encaixats, Diferencia_Gols, Xuts_a_Porteria, Faltes,
+                     Targetes_Grogues, Targetes_Vermelles)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """;
 
-            ps.setInt(1, e.getID());
-            ps.setInt(2, e.getPosicio());
-            ps.setString(3, e.getNom_Equip());
-            ps.setInt(4, e.getPunts());
-            ps.setInt(5, e.getPartits_Jugats());
-            ps.setInt(6, e.getVictories());
-            ps.setInt(7, e.getEmpats());
-            ps.setInt(8, e.getDerrotes());
-            ps.setInt(9, e.getGols_Marcats());
-            ps.setInt(10, e.getGols_Encaixats());
-            ps.setInt(11, e.getDiferencia_Gols());
-            ps.setInt(12, e.getXuts_a_Porteria());
-            ps.setInt(13, e.getFaltes());
-            ps.setInt(14, e.getTargetes_Grogues());
-            ps.setInt(15, e.getTargetes_Vermelles());
+        try (Connection con = Connexio.getConnectionBBDD();
+                PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+            ps.setInt(1, e.getPosicio());
+            ps.setString(2, e.getNom_Equip());
+            ps.setInt(3, e.getPunts());
+            ps.setInt(4, e.getPartits_Jugats());
+            ps.setInt(5, e.getVictories());
+            ps.setInt(6, e.getEmpats());
+            ps.setInt(7, e.getDerrotes());
+            ps.setInt(8, e.getGols_Marcats());
+            ps.setInt(9, e.getGols_Encaixats());
+            ps.setInt(10, e.getDiferencia_Gols());
+            ps.setInt(11, e.getXuts_a_Porteria());
+            ps.setInt(12, e.getFaltes());
+            ps.setInt(13, e.getTargetes_Grogues());
+            ps.setInt(14, e.getTargetes_Vermelles());
+
             ps.executeUpdate();
-            ps.close();
-            return true;
+
+            // Obtenir ID generat
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                int nouID = rs.getInt(1);
+                e.setID(nouID);
+                return nouID;
+            }
+
         } catch (SQLException ex) {
             ex.printStackTrace();
-            return false;
         }
+
+        return -1; // Error
     }
 
     public Boolean actualitzarEquip(Equip e) {
@@ -151,7 +167,7 @@ public class EquipDAO {
             return false;
         }
     }
-    
+
     public Equip obtenirEquipPerNom(String nomEquip) {
         try (Connection con = Connexio.getConnectionBBDD()) {
             String sql = "SELECT * FROM equips WHERE Equip LIKE ?";
@@ -227,16 +243,16 @@ public class EquipDAO {
     }
 
     public Boolean eliminarEquipPerNom(String nomEquip) {
-        try (Connection con = Connexio.getConnectionBBDD()) {
-            String sql = "DELETE FROM equips WHERE Equip LIKE ?";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, "%" + nomEquip + "%");
-            int filesEliminades = ps.executeUpdate();
-            ps.close();
-            return true;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        }
+    try (Connection con = Connexio.getConnectionBBDD()) {
+        String sql = "DELETE FROM equips WHERE Equip = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, nomEquip);
+        int filesEliminades = ps.executeUpdate();
+        ps.close();
+        return filesEliminades > 0; // Retorna true només si s'ha eliminat algun registre
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+        return false;
     }
+}
 }
