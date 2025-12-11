@@ -1,10 +1,12 @@
 package laligastats;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class Connexio {
 
     public static final String URL = "jdbc:mysql://localhost:3306/";
-    public static final String URLBBDD = "jdbc:mysql://localhost:3306/LaLiga_24_25_Stats";
+    public static final String URLBBDD = "jdbc:mysql://localhost:3306/LaLiga_23_24_Stats";
     public static final String USER =  "root";
     public static final String PASSWORD = "";
 
