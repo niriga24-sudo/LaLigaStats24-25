@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+
+<BorderPane fx:id="mainPane" prefHeight="720.0" prefWidth="1080.0"
+    style="-fx-background-color: #f4f7f6;"
+    xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="europestats.GUI.MainController"
+    stylesheets="@estils.css">
+
+    <top>
+        <HBox alignment="CENTER" spacing="15"
+            style="-fx-background-color: #243447; -fx-padding: 10 30; -fx-border-color: #1a2533; -fx-border-width: 0 0 2 0;">
+            <children>
+                <ImageView fx:id="imgLogo" fitHeight="80.0" preserveRatio="true" smooth="true"
+                    cache="true">
+                </ImageView>
+
+                <Label text="EUROPESTATS"
+                    style="-fx-text-fill: white; 
+                       -fx-font-size: 30px; 
+                       -fx-font-weight: 900; 
+                       -fx-letter-spacing: 1px;
+                       -fx-font-family: 'Segoe UI', 'System', 'sans-serif';" />
+            </children>
+        </HBox>
+    </top>
+
+    <left>
+        <VBox fx:id="sideBar" prefWidth="180" spacing="10"
+            style="-fx-background-color: #2c3e50; -fx-padding: 15;" visible="false" managed="false">
+
+            <Button onAction="#tornarAInici" text="🏠 Inici" styleClass="side-button"
+                prefWidth="Infinity" />
+            <Separator style="-fx-opacity: 0.2;" />
+
+            <Button onAction="#mostrarEquips" text="⚽ Equips" styleClass="side-button"
+                prefWidth="Infinity" />
+            <Button onAction="#mostrarJugadors" text="👤 Jugadors" styleClass="side-button"
+                prefWidth="Infinity" />
+
+            <Button fx:id="btnSideAPI" onAction="#mostrarAPI" text="🌐 API" styleClass="side-button"
+                prefWidth="Infinity" />
+
+            <Separator style="-fx-opacity: 0.2;" />
+
+            <Button fx:id="btnSideImport" onAction="#ImportarCSV" text="📥 Importar CSV"
+                styleClass="side-button" prefWidth="Infinity" />
+            <Button fx:id="btnSideExport" onAction="#ExportarCSV" text="📤 Exportar CSV"
+                styleClass="side-button" prefWidth="Infinity" />
+            <Button onAction="#ObrirCSV" text="📂 Obrir CSV" styleClass="side-button"
+                prefWidth="Infinity" />
+        </VBox>
+    </left>
+
+    <center>
+        <StackPane fx:id="contentArea">
+            <VBox fx:id="menuRajoles" alignment="CENTER" spacing="30">
+                <padding>
+                    <Insets bottom="40" left="40" right="40" top="40" />
+                </padding>
+                <GridPane alignment="CENTER" hgap="25" vgap="25">
+                    <Button onAction="#mostrarEquips" prefHeight="180" prefWidth="180"
+                        styleClass="menu-button" text="⚽&#10;Equips" textAlignment="CENTER"
+                        GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <Button onAction="#mostrarJugadors" prefHeight="180" prefWidth="180"
+                        styleClass="menu-button" text="👤&#10;Jugadors" textAlignment="CENTER"
+                        GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <Button fx:id="btnAPI" onAction="#mostrarAPI" prefHeight="180" prefWidth="180"
+                        styleClass="menu-button" text="🌐&#10;API" textAlignment="CENTER"
+                        GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                    <Button fx:id="btnImportCSV" onAction="#ImportarCSV" prefHeight="180"
+                        prefWidth="180" styleClass="menu-button" text="📥&#10;Importar CSV"
+                        textAlignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <Button fx:id="btnExportCSV" onAction="#ExportarCSV" prefHeight="180"
+                        prefWidth="180" styleClass="menu-button" text="📤&#10;Exportar CSV"
+                        textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <Button onAction="#ObrirCSV" prefHeight="180" prefWidth="180"
+                        styleClass="menu-button" text="📂&#10;Obrir CSV" textAlignment="CENTER"
+                        GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                </GridPane>
+            </VBox>
+        </StackPane>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="20"
+            style="-fx-background-color: #ecf0f1; -fx-padding: 8 20; -fx-border-color: #bdc3c7; -fx-border-width: 1 0 0 0;">
+            <Label fx:id="lblEstatSistema" style="-fx-font-weight: bold; -fx-font-size: 13px;"
+                text="ESTAT DEL SISTEMA" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button onAction="#tancarSessio"
+                style="-fx-background-color: #c0392b; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 6 15; -fx-cursor: hand; -fx-background-radius: 5;"
+                text="🚪 Tancar Sessió" />
+        </HBox>
+    </bottom>
+</BorderPane>

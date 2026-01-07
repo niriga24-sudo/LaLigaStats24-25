@@ -1,0 +1,72 @@
+/* --- BOTONS GENERALS --- */
+.button {
+    -fx-cursor: hand;
+    /* Tots els botons tindran la mà per defecte */
+}
+
+/* Botons grans del menú central */
+.menu-button {
+    -fx-background-color: white;
+    -fx-border-color: #dcdde1;
+    -fx-border-width: 2;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2f3640;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 10, 0, 0, 5);
+}
+
+.menu-button:hover {
+    -fx-background-color: #f5f6fa;
+    -fx-border-color: #3498db;
+    -fx-text-fill: #3498db;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+/* Botons de la barra lateral */
+.side-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ecf0f1;
+    -fx-alignment: BASELINE_LEFT;
+    -fx-padding: 12 15;
+    -fx-font-size: 14px;
+}
+
+.side-button:hover {
+    -fx-background-color: #34495e;
+    -fx-text-fill: #3498db;
+}
+
+.side-button:pressed,
+.side-button:focused {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+}
+
+/* --- CLASSES PER A BOTONS D'ACCIÓ (Panell d'edició) --- */
+.btn-guardar {
+    -fx-background-color: #27ae60;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10;
+}
+
+.btn-guardar:hover {
+    -fx-background-color: #2ecc71;
+}
+
+/* Botó Eliminar - Vermell més potent */
+.btn-eliminar {
+    -fx-background-color: #ff0000;
+    /* Vermell pur i fort */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10;
+}
+
+/* Efecte Hover - Un vermell una mica més fosc per quan hi passes el ratolí */
+.btn-eliminar:hover {
+    -fx-background-color: #cc0000;
+}

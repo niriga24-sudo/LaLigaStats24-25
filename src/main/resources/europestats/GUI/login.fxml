@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+
+<VBox alignment="CENTER" spacing="25.0" prefHeight="600.0" prefWidth="460.0"
+    style="-fx-background-color: #243447; -fx-border-color: #1a2533; -fx-border-width: 0;"
+    xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="europestats.GUI.LoginController">
+
+    <padding>
+        <Insets bottom="40.0" left="60.0" right="60.0" top="40.0" />
+    </padding>
+
+    <VBox alignment="CENTER" spacing="10.0">
+        <ImageView fx:id="imgLogo" fitHeight="195.0" preserveRatio="true" smooth="true" cache="true" />
+    </VBox>
+
+    <VBox spacing="15.0">
+        <VBox spacing="8.0">
+            <Label text="CORREU ELECTRÒNIC"
+                style="-fx-text-fill: #95a5a6; -fx-font-size: 11px; -fx-font-weight: bold; -fx-letter-spacing: 1.5;" />
+            <TextField fx:id="emailField" promptText="admin@europestats.com"
+                style="-fx-pref-height: 48px; -fx-background-color: #1a2533; -fx-text-fill: white; -fx-background-radius: 6; -fx-border-color: #34495e; -fx-border-radius: 6; -fx-padding: 0 15;" />
+        </VBox>
+
+        <VBox spacing="8.0">
+            <Label text="CONTRASSENYA"
+                style="-fx-text-fill: #95a5a6; -fx-font-size: 11px; -fx-font-weight: bold; -fx-letter-spacing: 1.5;" />
+            <PasswordField fx:id="passwordField" promptText="••••••••••••"
+                style="-fx-pref-height: 48px; -fx-background-color: #1a2533; -fx-text-fill: white; -fx-background-radius: 6; -fx-border-color: #34495e; -fx-border-radius: 6; -fx-padding: 0 15;" />
+        </VBox>
+    </VBox>
+
+    <VBox spacing="20.0" alignment="CENTER">
+        <Button fx:id="loginButton" onAction="#handleLogin" prefWidth="Infinity"
+            text="LOGIN"
+            style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-pref-height: 52px; -fx-background-radius: 6; -fx-cursor: hand;" />
+
+        <Label fx:id="errorLabel" text="" wrapText="true" textAlignment="CENTER"
+            style="-fx-font-weight: bold; -fx-font-size: 12px;" />
+    </VBox>
+
+    <Region VBox.vgrow="ALWAYS" />
+
+    <Label text="© 2026 EUROPESTATS MANAGER"
+        style="-fx-font-size: 10px; -fx-text-fill: #5d6d7e; -fx-letter-spacing: 2;" />
+
+</VBox>

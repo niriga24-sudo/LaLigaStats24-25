@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.Cursor?>
+
+<VBox spacing="20" style="-fx-padding: 30; -fx-background-color: #f0f2f5;"
+  xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+  fx:controller="europestats.GUI.APIController">
+
+  <VBox spacing="5">
+    <Label text="Centre de Sincronització API"
+      style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #1a202c;" />
+    <Label text="Gestió de dades en temps real amb Football-API-Sports (Temporada 23-24)"
+      style="-fx-text-fill: #718096; -fx-font-size: 14px;" />
+  </VBox>
+
+  <Separator />
+
+  <HBox spacing="25" VBox.vgrow="ALWAYS">
+
+    <VBox spacing="20" prefWidth="380" minWidth="350">
+
+      <VBox spacing="15"
+        style="-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 12; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 15, 0, 0, 0);">
+        <Label text="Actualització per Lliga"
+          style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #2d3748;" />
+        <Label text="Sincronitza la classificació i tots els jugadors d'una competició específica."
+          wrapText="true" style="-fx-text-fill: #4a5568; -fx-font-size: 13px;" />
+
+        <ComboBox fx:id="comboLligues" maxWidth="Infinity" promptText="Selecciona una lliga..."
+          style="-fx-background-radius: 6; -fx-padding: 5;" />
+
+        <Button fx:id="btnImportarLliga" onAction="#handleImportarLligaIndividual"
+          text="Sincronitzar Lliga Seleccionada" maxWidth="Infinity"
+          style="-fx-background-color: #3182ce; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 12; -fx-background-radius: 8; -fx-cursor: hand;" />
+      </VBox>
+
+      <VBox spacing="15"
+        style="-fx-background-color: #2d3748; -fx-padding: 25; -fx-background-radius: 12; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 15, 0, 0, 0);">
+        <Label text="Manteniment Global d'Europa"
+          style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: white;" />
+        <Label
+          text="Actualització completa de les 7 lligues europees. Atenció: Procés de llarga durada."
+          wrapText="true" style="-fx-text-fill: #cbd5e0; -fx-font-size: 13px;" />
+
+        <Button fx:id="btnImportar" onAction="#iniciarImportacioTotal"
+          text="EXECUTAR IMPORTACIÓ MASSIVA" maxWidth="Infinity"
+          style="-fx-background-color: #ed8936; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 14; -fx-background-radius: 8; -fx-cursor: hand;" />
+      </VBox>
+    </VBox>
+
+    <VBox spacing="12" HBox.hgrow="ALWAYS"
+      style="-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 12; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 15, 0, 0, 0);">
+
+      <HBox alignment="CENTER_LEFT" spacing="15">
+        <StackPane>
+          <ProgressIndicator fx:id="progressIndicator" prefWidth="28" prefHeight="28"
+            visible="false" />
+        </StackPane>
+        <VBox HBox.hgrow="ALWAYS">
+          <Label text="Monitor de Sincronització"
+            style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #2d3748;" />
+          <Label fx:id="lblEstat" text="Sistema a punt..."
+            style="-fx-text-fill: #718096; -fx-font-size: 13px;" />
+        </VBox>
+
+        <Button fx:id="btnCancelar" onAction="#handleCancelar" text="Aturar"
+          style="-fx-background-color: #e53e3e; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-padding: 8 15; -fx-cursor: hand;" />
+      </HBox>
+
+      <TextArea fx:id="txtLog" editable="false" VBox.vgrow="ALWAYS" focusTraversable="false"
+        style="-fx-font-family: 'Consolas', 'Monospace'; -fx-font-size: 12px; 
+                             -fx-control-inner-background: #1a202c; -fx-text-fill: #48bb78; 
+                             -fx-background-radius: 8; -fx-padding: 10; -fx-border-color: #2d3748; -fx-border-radius: 8;"
+        wrapText="true" />
+
+      <HBox alignment="CENTER_RIGHT">
+        <Label text="Dades connectades amb MySQL"
+          style="-fx-text-fill: #a0aec0; -fx-font-size: 11px;" />
+      </HBox>
+    </VBox>
+  </HBox>
+</VBox>

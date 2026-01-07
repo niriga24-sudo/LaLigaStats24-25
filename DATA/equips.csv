@@ -1,0 +1,133 @@
+ID;ID_Lliga;Lliga;Posicio_Equip;Equip;Punts;Partits_Jugats;Victories;Empats;Derrotes;Gols_Marcats;Gols_Encaixats;Diferencia_Gols
+33;39;Premier League;8;Manchester United;60;38;18;6;14;57;58;-1
+34;39;Premier League;7;Newcastle;60;38;18;6;14;85;62;23
+35;39;Premier League;12;Bournemouth;48;38;13;9;16;54;67;-13
+36;39;Premier League;13;Fulham;47;38;13;8;17;55;61;-6
+39;39;Premier League;14;Wolves;46;38;13;7;18;50;65;-15
+40;39;Premier League;3;Liverpool;82;38;24;10;4;86;41;45
+42;39;Premier League;2;Arsenal;89;38;28;5;5;91;29;62
+44;39;Premier League;19;Burnley;24;38;5;9;24;41;78;-37
+45;39;Premier League;15;Everton;40;38;13;9;16;40;51;-11
+47;39;Premier League;5;Tottenham;66;38;20;6;12;74;61;13
+48;39;Premier League;9;West Ham;52;38;14;10;14;60;74;-14
+49;39;Premier League;6;Chelsea;63;38;18;9;11;77;63;14
+50;39;Premier League;1;Manchester City;91;38;28;7;3;96;34;62
+51;39;Premier League;11;Brighton;48;38;12;12;14;55;62;-7
+52;39;Premier League;10;Crystal Palace;49;38;13;10;15;57;58;-1
+55;39;Premier League;16;Brentford;39;38;10;9;19;56;65;-9
+62;39;Premier League;20;Sheffield Utd;16;38;3;7;28;35;104;-69
+65;39;Premier League;17;Nottingham Forest;32;38;9;9;20;49;67;-18
+66;39;Premier League;4;Aston Villa;68;38;20;8;10;76;61;15
+79;61;Ligue 1;4;Lille;59;34;16;11;7;52;34;18
+80;61;Ligue 1;6;Lyon;53;34;16;5;13;49;55;-6
+81;61;Ligue 1;8;Marseille;50;34;13;11;10;52;41;11
+82;61;Ligue 1;12;Montpellier;41;34;10;12;12;43;48;-5
+83;61;Ligue 1;14;Nantes;33;34;9;6;19;30;55;-25
+84;61;Ligue 1;5;Nice;55;34;15;10;9;40;29;11
+85;61;Ligue 1;1;Paris Saint Germain;76;34;22;10;2;81;33;48
+91;61;Ligue 1;2;Monaco;67;34;20;7;7;68;42;26
+93;61;Ligue 1;9;Reims;47;34;13;8;13;42;47;-5
+94;61;Ligue 1;10;Rennes;46;34;12;10;12;53;46;7
+95;61;Ligue 1;13;Strasbourg;39;34;10;9;15;38;50;-12
+96;61;Ligue 1;11;Toulouse;43;34;11;10;13;42;46;-4
+97;61;Ligue 1;17;Lorient;29;34;7;8;19;43;66;-23
+99;61;Ligue 1;18;Clermont Foot;25;34;5;10;19;26;60;-34
+106;61;Ligue 1;3;Stade Brestois 29;61;34;17;10;7;53;34;19
+111;61;Ligue 1;15;LE Havre;32;34;7;11;16;34;45;-11
+112;61;Ligue 1;16;Metz;29;34;8;5;21;35;58;-23
+116;61;Ligue 1;7;Lens;51;34;14;9;11;45;37;8
+157;78;Bundesliga;3;Bayern Munich;72;34;23;3;8;94;45;49
+160;78;Bundesliga;10;SC Freiburg;42;34;11;9;14;45;58;-13
+161;78;Bundesliga;12;VfL Wolfsburg;37;34;10;7;17;41;56;-15
+162;78;Bundesliga;9;Werder Bremen;42;34;11;9;14;48;54;-6
+163;78;Bundesliga;14;Borussia Monchengladbach;34;34;7;13;14;56;67;-11
+164;78;Bundesliga;13;FSV Mainz 05;35;34;7;14;13;39;51;-12
+165;78;Bundesliga;5;Borussia Dortmund;63;34;18;9;7;68;43;25
+167;78;Bundesliga;7;1899 Hoffenheim;46;34;13;7;14;66;66;0
+168;78;Bundesliga;1;Bayer Leverkusen;90;34;28;6;0;89;24;65
+169;78;Bundesliga;6;Eintracht Frankfurt;47;34;11;14;9;51;50;1
+170;78;Bundesliga;11;FC Augsburg;39;34;10;9;15;50;60;-10
+172;78;Bundesliga;2;VfB Stuttgart;73;34;23;4;7;78;39;39
+173;78;Bundesliga;4;RB Leipzig;65;34;19;8;7;77;39;38
+176;78;Bundesliga;16;Vfl Bochum;33;34;7;12;15;42;74;-32
+180;78;Bundesliga;8;FC Heidenheim;42;34;10;12;12;50;55;-5
+181;78;Bundesliga;18;SV Darmstadt 98;17;34;3;8;23;30;86;-56
+182;78;Bundesliga;15;Union Berlin;33;34;9;6;19;33;58;-25
+192;78;Bundesliga;17;1.FC Köln;27;34;5;12;17;28;60;-32
+193;88;Eredivisie;12;PEC Zwolle;36;34;9;9;16;45;67;-22
+194;88;Eredivisie;5;Ajax;56;34;15;11;8;74;61;13
+196;88;Eredivisie;16;Excelsior;29;34;6;11;17;50;73;-23
+197;88;Eredivisie;1;PSV Eindhoven;91;34;29;4;1;111;21;90
+200;88;Eredivisie;18;Vitesse;6;34;6;6;22;30;74;-44
+201;88;Eredivisie;4;AZ Alkmaar;65;34;19;8;7;70;39;31
+205;88;Eredivisie;10;Fortuna Sittard;38;34;9;11;14;37;56;-19
+206;88;Eredivisie;14;Heracles;33;34;9;6;19;41;74;-33
+207;88;Eredivisie;7;Utrecht;50;34;13;11;10;49;47;2
+209;88;Eredivisie;2;Feyenoord;84;34;26;6;2;92;26;66
+210;88;Eredivisie;11;Heerenveen;37;34;10;7;17;53;70;-17
+211;94;Primeira Liga;2;Benfica;80;34;25;5;4;77;28;49
+212;94;Primeira Liga;3;FC Porto;72;34;22;6;6;63;27;36
+215;94;Primeira Liga;6;Moreirense;55;34;16;7;11;36;35;1
+216;94;Primeira Liga;16;Portimonense;32;34;8;8;18;39;72;-33
+217;94;Primeira Liga;4;SC Braga;68;34;21;5;8;71;50;21
+222;94;Primeira Liga;15;Boavista;32;34;7;11;16;39;62;-23
+223;94;Primeira Liga;18;Chaves;23;34;5;8;21;31;72;-41
+224;94;Primeira Liga;5;Guimaraes;63;34;19;6;9;52;38;14
+226;94;Primeira Liga;11;Rio Ave;37;34;6;19;9;38;43;-5
+228;94;Primeira Liga;1;Sporting CP;90;34;29;3;2;96;29;67
+230;94;Primeira Liga;13;Estoril;33;34;9;6;19;49;58;-9
+231;94;Primeira Liga;10;Farense;37;34;10;7;17;46;51;-5
+240;94;Primeira Liga;7;Arouca;46;34;13;7;14;54;50;4
+242;94;Primeira Liga;8;Famalicao;42;34;10;12;12;37;41;-4
+410;88;Eredivisie;9;GO Ahead Eagles;46;34;12;10;12;47;46;1
+413;88;Eredivisie;6;NEC Nijmegen;53;34;14;11;9;68;51;17
+415;88;Eredivisie;3;Twente;69;34;21;6;7;69;36;33
+416;88;Eredivisie;17;FC Volendam;19;34;4;7;23;34;88;-54
+417;88;Eredivisie;15;Waalwijk;29;34;7;8;19;38;56;-18
+419;88;Eredivisie;13;Almere City FC;34;34;7;13;14;33;59;-26
+426;88;Eredivisie;8;Sparta Rotterdam;49;34;14;7;13;51;48;3
+487;135;Serie A;7;Lazio;61;38;18;7;13;49;39;10
+488;135;Serie A;19;Sassuolo;30;38;7;9;22;43;75;-32
+489;135;Serie A;2;AC Milan;75;38;22;9;7;76;49;27
+490;135;Serie A;16;Cagliari;36;38;8;12;18;42;68;-26
+492;135;Serie A;10;Napoli;53;38;13;14;11;55;48;7
+494;135;Serie A;15;Udinese;37;38;6;19;13;37;53;-16
+495;135;Serie A;11;Genoa;49;38;12;13;13;45;45;0
+496;135;Serie A;3;Juventus;71;38;19;14;5;54;31;23
+497;135;Serie A;6;AS Roma;63;38;18;9;11;65;46;19
+499;135;Serie A;4;Atalanta;69;38;21;6;11;72;42;30
+500;135;Serie A;5;Bologna;68;38;18;14;6;54;32;22
+502;135;Serie A;8;Fiorentina;60;38;17;9;12;61;46;15
+503;135;Serie A;9;Torino;53;38;13;14;11;36;36;0
+504;135;Serie A;13;Verona;38;38;9;11;18;38;51;-13
+505;135;Serie A;1;Inter;94;38;29;7;2;89;22;67
+511;135;Serie A;17;Empoli;36;38;9;9;20;29;54;-25
+512;135;Serie A;18;Frosinone;35;38;8;11;19;44;69;-25
+514;135;Serie A;20;Salernitana;17;38;2;11;25;32;81;-49
+529;140;La Liga;2;Barcelona;85;38;26;7;5;79;44;35
+530;140;La Liga;4;Atletico Madrid;76;38;24;4;10;70;43;27
+531;140;La Liga;5;Athletic Club;68;38;19;11;8;61;37;24
+532;140;La Liga;9;Valencia;49;38;13;10;15;40;45;-5
+533;140;La Liga;8;Villarreal;53;38;14;11;13;65;65;0
+534;140;La Liga;16;Las Palmas;40;38;10;10;18;33;47;-14
+536;140;La Liga;14;Sevilla;41;38;10;11;17;48;54;-6
+538;140;La Liga;13;Celta Vigo;41;38;10;11;17;46;57;-11
+541;140;La Liga;1;Real Madrid;95;38;29;8;1;87;26;61
+542;140;La Liga;10;Alaves;46;38;12;10;16;36;46;-10
+543;140;La Liga;7;Real Betis;57;38;14;15;9;48;45;3
+546;140;La Liga;12;Getafe;43;38;10;13;15;42;54;-12
+547;140;La Liga;3;Girona;81;38;25;6;7;85;46;39
+548;140;La Liga;6;Real Sociedad;60;38;16;12;10;51;39;12
+715;140;La Liga;20;Granada CF;21;38;4;9;25;38;79;-41
+723;140;La Liga;19;Almeria;21;38;3;12;23;43;75;-32
+724;140;La Liga;18;Cadiz;33;38;6;15;17;26;55;-29
+727;140;La Liga;11;Osasuna;45;38;12;9;17;45;56;-11
+728;140;La Liga;17;Rayo Vallecano;38;38;8;14;16;29;48;-19
+762;94;Primeira Liga;12;GIL Vicente;36;34;9;9;16;42;52;-10
+798;140;La Liga;15;Mallorca;40;38;8;16;14;33;44;-11
+810;94;Primeira Liga;17;Vizela;26;34;5;11;18;36;66;-30
+867;135;Serie A;14;Lecce;38;38;8;14;16;32;54;-22
+1359;39;Premier League;18;Luton;26;38;6;8;24;52;85;-33
+1579;135;Serie A;12;Monza;45;38;11;12;15;39;51;-12
+4716;94;Primeira Liga;9;Casa Pia;38;34;10;8;16;38;50;-12
+15130;94;Primeira Liga;14;Estrela;33;34;7;12;15;33;53;-20

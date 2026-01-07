@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="europestats.GUI.EquipsController">
+
+    <top>
+        <HBox spacing="15" style="-fx-background-color: #34495e; -fx-padding: 15;"
+            alignment="CENTER_LEFT">
+            <Label text="⚽ GESTIÓ D'EQUIPS"
+                style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 18px;" />
+            <Region HBox.hgrow="ALWAYS" />
+            <TextField fx:id="filtreField" promptText="Cerca per nom..." prefWidth="250" />
+            <Button text="Refrescar" onAction="#carregarDades" />
+            <Button text="+ Nou Equip" onAction="#handleAfegirEquip"
+                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" />
+        </HBox>
+    </top>
+
+    <center>
+        <TableView fx:id="taulaEquips">
+            <columns>
+                <TableColumn fx:id="colId" text="ID Equip" prefWidth="65" />
+                <TableColumn fx:id="colIdLliga" text="ID Lliga" prefWidth="65" />
+                <TableColumn fx:id="colLliga" text="Lliga" prefWidth="120" />
+                <TableColumn fx:id="colPos" text="Pos" prefWidth="50" />
+                <TableColumn fx:id="colEquip" text="Equip" prefWidth="150" />
+                <TableColumn fx:id="colPunts" text="Pts" prefWidth="50" />
+                <TableColumn fx:id="colPJ" text="PJ" prefWidth="45" />
+                <TableColumn fx:id="colVictories" text="V" prefWidth="40" />
+                <TableColumn fx:id="colEmpats" text="E" prefWidth="40" />
+                <TableColumn fx:id="colDerrotes" text="D" prefWidth="40" />
+                <TableColumn fx:id="colGolsM" text="GF" prefWidth="45" />
+                <TableColumn fx:id="colGolsE" text="GC" prefWidth="45" />
+                <TableColumn fx:id="colDiff" text="DG" prefWidth="45" />
+            </columns>
+        </TableView>
+    </center>
+
+    <right>
+        <ScrollPane fitToWidth="true" prefWidth="240">
+            <VBox spacing="10"
+                style="-fx-padding: 15; -fx-background-color: #f8f9fa; -fx-border-color: #dee2e6; -fx-border-width: 0 0 0 1;">
+
+                <Label text="PANELL D'EDICIÓ"
+                    style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #2c3e50;" />
+                <Separator />
+
+                <VBox spacing="5">
+                    <Label text="Lliga:" style="-fx-font-size: 11px;" />
+                    <TextField fx:id="txtLligaNom" prefWidth="Infinity" />
+                </VBox>
+
+                <VBox spacing="5">
+                    <Label text="Nom de l'Equip:" style="-fx-font-size: 11px;" />
+                    <TextField fx:id="txtNom" prefWidth="Infinity" />
+                </VBox>
+
+                <HBox spacing="10">
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="ID Equip:" style="-fx-font-size: 11px;" />
+                        <TextField fx:id="txtIdEquip" />
+                    </VBox>
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="ID Lliga:" style="-fx-font-size: 11px;" />
+                        <TextField fx:id="txtIdLliga" />
+                    </VBox>
+                </HBox>
+
+                <HBox spacing="10">
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="Posició:" style="-fx-font-size: 11px;" />
+                        <TextField fx:id="txtPosicio" />
+                    </VBox>
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="Punts:" style="-fx-font-size: 11px;" />
+                        <TextField fx:id="txtPunts" />
+                    </VBox>
+                </HBox>
+
+                <Separator />
+                <Label text="Estadístiques:" style="-fx-font-weight: bold; -fx-font-size: 12px;" />
+
+                <HBox spacing="10">
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="P. Jugats:" style="-fx-font-size: 11px;" />
+                        <TextField fx:id="txtPartits" />
+                    </VBox>
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="Victòries:" style="-fx-font-size: 11px;" />
+                        <TextField fx:id="txtVictories" />
+                    </VBox>
+                </HBox>
+
+                <HBox spacing="10">
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="Empats:" style="-fx-font-size: 11px;" />
+                        <TextField fx:id="txtEmpats" />
+                    </VBox>
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="Derrotes:" style="-fx-font-size: 11px;" />
+                        <TextField fx:id="txtDerrotes" />
+                    </VBox>
+                </HBox>
+
+                <HBox spacing="10">
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="Gols Marcats:" style="-fx-font-size: 11px;" />
+                        <TextField fx:id="txtGolsM" />
+                    </VBox>
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="Gols Encaixats:" style="-fx-font-size: 11px;" />
+                        <TextField fx:id="txtGolsE" />
+                    </VBox>
+                </HBox>
+
+                <Region VBox.vgrow="ALWAYS" />
+
+                <Button onAction="#guardarCanvi" text="GUARDAR CANVIS" prefWidth="Infinity"
+                    styleClass="btn-guardar" />
+                <Button onAction="#eliminarEquip" text="ELIMINAR EQUIP" prefWidth="Infinity"
+                    styleClass="btn-eliminar" />
+            </VBox>
+        </ScrollPane>
+    </right>
+</BorderPane>

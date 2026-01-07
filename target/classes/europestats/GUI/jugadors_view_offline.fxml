@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="europestats.GUI.JugadorsOfflineController"
+    stylesheets="@estils.css">
+
+    <top>
+        <HBox spacing="15" style="-fx-background-color: #34495e; -fx-padding: 15;"
+            alignment="CENTER_LEFT">
+            <Label text="👤 GESTIÓ OFFLINE DE JUGADORS"
+                style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 18px;" />
+            <Region HBox.hgrow="ALWAYS" />
+            <TextField fx:id="filtreField" promptText="Cerca per nom..." prefWidth="250" />
+            <Button text="Refrescar" onAction="#carregarDadesCSV" />
+            <Button text="+ Nou Jugador" onAction="#handleAfegirJugador"
+                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" />
+        </HBox>
+    </top>
+
+    <center>
+        <TableView fx:id="taulaJugadors">
+            <columns>
+                <TableColumn fx:id="colId" text="ID" prefWidth="50" />
+                <TableColumn fx:id="colNom" text="Nom" prefWidth="150" />
+                <TableColumn fx:id="colPosicio" text="Posició" prefWidth="90" />
+                <TableColumn fx:id="colIdEquip" text="ID Equip" prefWidth="50" />
+                <TableColumn fx:id="colIdLliga" text="ID Lliga" prefWidth="50" />
+                <TableColumn fx:id="colGols" text="Gols" prefWidth="40" />
+                <TableColumn fx:id="colAssists" text="Assistències" prefWidth="40" />
+                <TableColumn fx:id="colMinuts" text="Minuts" prefWidth="60" />
+                <TableColumn fx:id="colGrogues" text="Targetes Grogues" prefWidth="35" />
+                <TableColumn fx:id="colVermelles" text="Targetes Vermelles" prefWidth="35" />
+                <TableColumn fx:id="colGols90" text="Gols/90 minuts" prefWidth="55" />
+                <TableColumn fx:id="colAssists90" text="Assistències/90 minuts" prefWidth="55" />
+            </columns>
+        </TableView>
+    </center>
+
+    <right>
+        <ScrollPane fitToWidth="true" prefWidth="240">
+            <VBox spacing="8" style="-fx-padding: 15; -fx-background-color: #f8f9fa;">
+                <Label text="PANELL D'EDICIÓ"
+                    style="-fx-font-weight: bold; -fx-text-fill: #2c3e50; -fx-font-size: 14px;" />
+                <Separator />
+
+                <Label text="Nom:" style="-fx-font-size: 11px;" />
+                <TextField fx:id="txtNom" />
+
+                <HBox spacing="10">
+                    <VBox HBox.hgrow="ALWAYS">
+                        <Label text="ID Jugador:" style="-fx-font-size: 11px;" />
+                        <TextField fx:id="txtId" />
+                    </VBox>
+                    <VBox HBox.hgrow="ALWAYS">
+                        <Label text="Posició:" style="-fx-font-size: 11px;" />
+                        <ComboBox fx:id="comboPosicio" maxWidth="Infinity" prefWidth="100.0" />
+                    </VBox>
+                </HBox>
+
+                <HBox spacing="10">
+                    <VBox HBox.hgrow="ALWAYS">
+                        <Label text="Equip:" style="-fx-font-size: 11px;" />
+                        <ComboBox fx:id="comboEquip" maxWidth="Infinity" />
+                    </VBox>
+                    <VBox HBox.hgrow="ALWAYS">
+                        <Label text="ID Lliga:" style="-fx-font-size: 11px;" />
+                        <TextField fx:id="txtIdLliga" />
+                    </VBox>
+                </HBox>
+
+                <Separator />
+                <Label text="ESTADÍSTIQUES" style="-fx-font-weight: bold; -fx-font-size: 12px;" />
+
+                <HBox spacing="10">
+                    <VBox HBox.hgrow="ALWAYS">
+                        <Label text="Gols:" />
+                        <TextField fx:id="txtGols" />
+                    </VBox>
+                    <VBox HBox.hgrow="ALWAYS">
+                        <Label text="Asist:" />
+                        <TextField fx:id="txtAssists" />
+                    </VBox>
+                </HBox>
+
+                <Label text="Minuts Jugats:" />
+                <TextField fx:id="txtMinuts" />
+
+                <HBox spacing="10">
+                    <VBox HBox.hgrow="ALWAYS">
+                        <Label text="Grogues:" />
+                        <TextField fx:id="txtGrogues" />
+                    </VBox>
+                    <VBox HBox.hgrow="ALWAYS">
+                        <Label text="Vermelles:" />
+                        <TextField fx:id="txtVermelles" />
+                    </VBox>
+                </HBox>
+
+                <Separator />
+                <Label text="Ràtios (Auto):" style="-fx-font-size: 10px;" />
+                <HBox spacing="10">
+                    <TextField fx:id="txtGols90" editable="false" HBox.hgrow="ALWAYS"
+                        promptText="G/90" />
+                    <TextField fx:id="txtAssists90" editable="false" HBox.hgrow="ALWAYS"
+                        promptText="A/90" />
+                </HBox>
+
+                <Region prefHeight="10" />
+                <Button onAction="#guardarCanvi" text="GUARDAR CANVIS" prefWidth="Infinity"
+                    styleClass="btn-guardar" />
+                <Button onAction="#eliminarJugador" text="ELIMINAR JUGADOR" prefWidth="Infinity"
+                    styleClass="btn-eliminar" />
+            </VBox>
+        </ScrollPane>
+    </right>
+</BorderPane>
