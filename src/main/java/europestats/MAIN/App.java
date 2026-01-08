@@ -45,7 +45,7 @@ public class App extends Application {
             FXMLLoader loader = new FXMLLoader(App.class.getResource("/europestats/GUI/login.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
-            mainStage.setTitle("EUROPE STATS - Login");
+            mainStage.setTitle("EUROPESTATS - Login");
             mainStage.setScene(scene);
             configurarIcona(mainStage); // Apliquem al login
             mainStage.setResizable(false);
