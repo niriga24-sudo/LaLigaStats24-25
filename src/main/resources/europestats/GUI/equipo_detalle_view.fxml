@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="europestats.GUI.EquipoDetalleController" 
+            prefHeight="750.0" prefWidth="1200.0" 
+            stylesheets="@public_styles.css"
+            styleClass="root-pane">
+
+    <!-- Header -->
+    <top>
+        <HBox alignment="CENTER" spacing="20" styleClass="header-bar">
+            <HBox alignment="CENTER_LEFT" minWidth="200">
+                <padding>
+                    <Insets left="20"/>
+                </padding>
+                <Button text="← Volver" onAction="#handleVolver" style="-fx-background-color: transparent; -fx-text-fill: #58a6ff; -fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+            </HBox>
+            
+            <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                <MenuButton fx:id="menuLogo" styleClass="logo-menu-button">
+                    <graphic>
+                        <ImageView fx:id="imgLogoHeader" fitHeight="50" fitWidth="150" preserveRatio="true"/>
+                    </graphic>
+                    <items>
+                        <MenuItem text="🏠 Inicio" onAction="#handleInicio"/>
+                        <MenuItem text="🏟️ Todos los Equipos" onAction="#handleEquipos"/>
+                        <MenuItem text="⚽ Todos los Jugadores" onAction="#handleJugadores"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem text="ℹ️ Acerca de" onAction="#handleAcercaDe"/>
+                    </items>
+                </MenuButton>
+            </HBox>
+            
+            <HBox alignment="CENTER_RIGHT" minWidth="200">
+                <padding>
+                    <Insets right="20"/>
+                </padding>
+            </HBox>
+        </HBox>
+    </top>
+
+    <!-- Contenido Central - Layout horizontal -->
+    <center>
+        <HBox spacing="20" styleClass="content-area">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            
+            <!-- IZQUIERDA: Tabla de Jugadores y Top 3 -->
+            <VBox spacing="8" HBox.hgrow="ALWAYS" style="-fx-min-width: 550;">
+                <Label text="👥 PLANTILLA DEL EQUIPO" style="-fx-text-fill: #63b3ed; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+                <Label fx:id="lblTotalJugadores" text="Total: 0 jugadores" style="-fx-text-fill: #a0aec0; -fx-font-size: 12px;"/>
+                
+                <TableView fx:id="tablaJugadores" styleClass="standings-table" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colNombre" text="Jugador" minWidth="150"/>
+                        <TableColumn fx:id="colPosicion" text="Pos." minWidth="80"/>
+                        <TableColumn fx:id="colGoles" text="⚽" minWidth="45"/>
+                        <TableColumn fx:id="colAsistencias" text="🅰️" minWidth="45"/>
+                        <TableColumn fx:id="colMinutos" text="Min" minWidth="55"/>
+                        <TableColumn fx:id="colAmarillas" text="🟨" minWidth="40"/>
+                        <TableColumn fx:id="colRojas" text="🟥" minWidth="40"/>
+                    </columns>
+                </TableView>
+                
+                <!-- Top 3 Goleadores y Asistentes - Compacto -->
+                <HBox spacing="10">
+                    <!-- Top 3 Goleadores -->
+                    <VBox spacing="4" HBox.hgrow="ALWAYS" style="-fx-background-color: #0d1117; -fx-padding: 8;">
+                        <Label text="⚽ TOP GOLEADORES" style="-fx-text-fill: #3fb950; -fx-font-size: 11px; -fx-font-weight: bold;"/>
+                        <HBox alignment="CENTER_LEFT" spacing="6" style="-fx-background-color: #161b22; -fx-padding: 4 8;">
+                            <Label text="🥇" style="-fx-font-size: 12px;"/>
+                            <Label fx:id="lblGoleador1Nombre" text="-" style="-fx-text-fill: #c9d1d9; -fx-font-size: 11px;" HBox.hgrow="ALWAYS"/>
+                            <Label fx:id="lblGoleador1Goles" text="-" style="-fx-text-fill: #3fb950; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="6" style="-fx-background-color: #161b22; -fx-padding: 4 8;">
+                            <Label text="🥈" style="-fx-font-size: 12px;"/>
+                            <Label fx:id="lblGoleador2Nombre" text="-" style="-fx-text-fill: #c9d1d9; -fx-font-size: 11px;" HBox.hgrow="ALWAYS"/>
+                            <Label fx:id="lblGoleador2Goles" text="-" style="-fx-text-fill: #3fb950; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="6" style="-fx-background-color: #161b22; -fx-padding: 4 8;">
+                            <Label text="🥉" style="-fx-font-size: 12px;"/>
+                            <Label fx:id="lblGoleador3Nombre" text="-" style="-fx-text-fill: #c9d1d9; -fx-font-size: 11px;" HBox.hgrow="ALWAYS"/>
+                            <Label fx:id="lblGoleador3Goles" text="-" style="-fx-text-fill: #3fb950; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                        </HBox>
+                    </VBox>
+                    
+                    <!-- Top 3 Asistentes -->
+                    <VBox spacing="4" HBox.hgrow="ALWAYS" style="-fx-background-color: #0d1117; -fx-padding: 8;">
+                        <Label text="🅰️ TOP ASISTENTES" style="-fx-text-fill: #58a6ff; -fx-font-size: 11px; -fx-font-weight: bold;"/>
+                        <HBox alignment="CENTER_LEFT" spacing="6" style="-fx-background-color: #161b22; -fx-padding: 4 8;">
+                            <Label text="🥇" style="-fx-font-size: 12px;"/>
+                            <Label fx:id="lblAsistente1Nombre" text="-" style="-fx-text-fill: #c9d1d9; -fx-font-size: 11px;" HBox.hgrow="ALWAYS"/>
+                            <Label fx:id="lblAsistente1Asist" text="-" style="-fx-text-fill: #58a6ff; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="6" style="-fx-background-color: #161b22; -fx-padding: 4 8;">
+                            <Label text="🥈" style="-fx-font-size: 12px;"/>
+                            <Label fx:id="lblAsistente2Nombre" text="-" style="-fx-text-fill: #c9d1d9; -fx-font-size: 11px;" HBox.hgrow="ALWAYS"/>
+                            <Label fx:id="lblAsistente2Asist" text="-" style="-fx-text-fill: #58a6ff; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="6" style="-fx-background-color: #161b22; -fx-padding: 4 8;">
+                            <Label text="🥉" style="-fx-font-size: 12px;"/>
+                            <Label fx:id="lblAsistente3Nombre" text="-" style="-fx-text-fill: #c9d1d9; -fx-font-size: 11px;" HBox.hgrow="ALWAYS"/>
+                            <Label fx:id="lblAsistente3Asist" text="-" style="-fx-text-fill: #58a6ff; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                        </HBox>
+                    </VBox>
+                </HBox>
+            </VBox>
+            
+            <!-- DERECHA: Información del Equipo - Card Style -->
+            <VBox spacing="0" alignment="TOP_CENTER" style="-fx-min-width: 420; -fx-max-width: 450; -fx-background-color: linear-gradient(to bottom, #0d1117 0%, #161b22 100%); -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 20, 0, 0, 8);">
+                
+                <!-- Header con nombre y liga -->
+                <VBox alignment="CENTER" spacing="6" style="-fx-background-color: linear-gradient(to bottom, #2d3a4d 0%, #1f2937 100%); -fx-padding: 25 20; -fx-border-color: transparent transparent #30363d transparent; -fx-border-width: 0 0 1 0;">
+                    <Label fx:id="lblNombreEquipo" text="Nombre del Equipo" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0, 0, 1);"/>
+                    <Label fx:id="lblLiga" text="Liga" style="-fx-text-fill: #63b3ed; -fx-font-size: 13px; -fx-font-weight: bold;"/>
+                </VBox>
+                
+                <!-- Posición y Puntos destacados -->
+                <HBox spacing="0" alignment="CENTER" style="-fx-background-color: #21262d;">
+                    <VBox alignment="CENTER" spacing="2" style="-fx-padding: 20 40; -fx-border-color: transparent #30363d transparent transparent; -fx-border-width: 0 1 0 0;" HBox.hgrow="ALWAYS">
+                        <Label fx:id="lblPosicion" text="-" style="-fx-text-fill: #58a6ff; -fx-font-size: 42px; -fx-font-weight: bold;"/>
+                        <Label text="POSICIÓN" style="-fx-text-fill: #8b949e; -fx-font-size: 11px; -fx-font-weight: bold; -fx-letter-spacing: 1;"/>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="2" style="-fx-padding: 20 40;" HBox.hgrow="ALWAYS">
+                        <Label fx:id="lblPuntos" text="-" style="-fx-text-fill: #f0883e; -fx-font-size: 42px; -fx-font-weight: bold;"/>
+                        <Label text="PUNTOS" style="-fx-text-fill: #8b949e; -fx-font-size: 11px; -fx-font-weight: bold; -fx-letter-spacing: 1;"/>
+                    </VBox>
+                </HBox>
+                
+                <!-- Separador -->
+                <HBox style="-fx-background-color: #30363d; -fx-min-height: 1; -fx-max-height: 1;"/>
+                
+                <!-- Estadísticas de partidos en grid -->
+                <VBox spacing="0" style="-fx-padding: 0;">
+                    <!-- Fila: Partidos Jugados -->
+                    <HBox alignment="CENTER" spacing="15" style="-fx-background-color: #161b22; -fx-padding: 14 20; -fx-border-color: transparent transparent #30363d transparent; -fx-border-width: 0 0 1 0;">
+                        <Label text="⚽  Partidos Jugados" style="-fx-text-fill: #c9d1d9; -fx-font-size: 14px;" HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="lblPJ" text="-" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    </HBox>
+                    
+                    <!-- Fila: Victorias -->
+                    <HBox alignment="CENTER" spacing="15" style="-fx-background-color: #0d1117; -fx-padding: 14 20; -fx-border-color: transparent transparent #30363d transparent; -fx-border-width: 0 0 1 0;">
+                        <Label text="✅  Victorias" style="-fx-text-fill: #c9d1d9; -fx-font-size: 14px;" HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="lblVictorias" text="-" style="-fx-text-fill: #3fb950; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    </HBox>
+                    
+                    <!-- Fila: Empates -->
+                    <HBox alignment="CENTER" spacing="15" style="-fx-background-color: #161b22; -fx-padding: 14 20; -fx-border-color: transparent transparent #30363d transparent; -fx-border-width: 0 0 1 0;">
+                        <Label text="🤝  Empates" style="-fx-text-fill: #c9d1d9; -fx-font-size: 14px;" HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="lblEmpates" text="-" style="-fx-text-fill: #d29922; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    </HBox>
+                    
+                    <!-- Fila: Derrotas -->
+                    <HBox alignment="CENTER" spacing="15" style="-fx-background-color: #0d1117; -fx-padding: 14 20; -fx-border-color: transparent transparent #30363d transparent; -fx-border-width: 0 0 1 0;">
+                        <Label text="❌  Derrotas" style="-fx-text-fill: #c9d1d9; -fx-font-size: 14px;" HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="lblDerrotas" text="-" style="-fx-text-fill: #f85149; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    </HBox>
+                </VBox>
+                
+                <!-- Separador con título -->
+                <HBox alignment="CENTER" style="-fx-background-color: #21262d; -fx-padding: 10 20;">
+                    <Label text="📊 GOLES" style="-fx-text-fill: #8b949e; -fx-font-size: 11px; -fx-font-weight: bold; -fx-letter-spacing: 2;"/>
+                </HBox>
+                
+                <!-- Estadísticas de goles -->
+                <HBox spacing="0" alignment="CENTER" style="-fx-background-color: #161b22; -fx-padding: 15 10;">
+                    <VBox alignment="CENTER" spacing="4" HBox.hgrow="ALWAYS">
+                        <Label fx:id="lblGF" text="-" style="-fx-text-fill: #3fb950; -fx-font-size: 28px; -fx-font-weight: bold;"/>
+                        <Label text="A FAVOR" style="-fx-text-fill: #8b949e; -fx-font-size: 10px; -fx-font-weight: bold;"/>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="4" style="-fx-border-color: #30363d; -fx-border-width: 0 1 0 1; -fx-padding: 0 25;" HBox.hgrow="ALWAYS">
+                        <Label fx:id="lblDG" text="-" style="-fx-text-fill: #58a6ff; -fx-font-size: 28px; -fx-font-weight: bold;"/>
+                        <Label text="DIFERENCIA" style="-fx-text-fill: #8b949e; -fx-font-size: 10px; -fx-font-weight: bold;"/>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="4" HBox.hgrow="ALWAYS">
+                        <Label fx:id="lblGC" text="-" style="-fx-text-fill: #f85149; -fx-font-size: 28px; -fx-font-weight: bold;"/>
+                        <Label text="EN CONTRA" style="-fx-text-fill: #8b949e; -fx-font-size: 10px; -fx-font-weight: bold;"/>
+                    </VBox>
+                </HBox>
+                
+            </VBox>
+            
+        </HBox>
+    </center>
+
+    <!-- Footer -->
+    <bottom>
+        <HBox alignment="CENTER" styleClass="footer-bar">
+            <padding>
+                <Insets top="10" bottom="10"/>
+            </padding>
+            <Label fx:id="lblInfo" text="Información del equipo" styleClass="footer-text"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

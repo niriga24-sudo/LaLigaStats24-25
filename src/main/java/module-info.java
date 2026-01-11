@@ -15,4 +15,5 @@ module europestats {
     exports europestats.MAIN;
     exports europestats.GUI;
     exports europestats.API;
+    exports europestats.CLASES;
 }

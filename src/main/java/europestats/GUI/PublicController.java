@@ -15,21 +15,29 @@ import europestats.MAIN.App;
 import europestats.SERVEIS.SistemaService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class PublicController {
 
+    @FXML
+    private MenuButton menuLogo;
+    
     @FXML
     private ImageView imgLogoHeader;
     
@@ -113,6 +121,15 @@ public class PublicController {
     // Datos de jugadores cargados una vez
     private List<Jugador> totsJugadors;
     
+    // Datos de equipos cargados una vez
+    private List<Equip> totsEquips;
+    
+    // Listas actuales de jugadores mostrados (para el doble click)
+    private List<Jugador> currentGoleadores;
+    private List<Jugador> currentAsistidores;
+    private List<Jugador> currentAmarillas;
+    private List<Jugador> currentRojas;
+    
     // IDs de ligas en orden de tabs
     private final int[] lligaIds = {140, 39, 78, 135, 61, 88, 94};
     private final String[] lligaNoms = {"La Liga", "Premier League", "Bundesliga", "Serie A", "Ligue 1", "Eredivisie", "Primeira Liga"};
@@ -156,12 +173,22 @@ public class PublicController {
         if (tabPane == null) return;
         
         // Array de todas las tablas
-        TableView<?>[] taules = {tablaLaLiga, tablaPremier, tablaBundesliga, tablaSerieA, tablaLigue1, tablaEredivisie, tablaPrimeira};
+        @SuppressWarnings("unchecked")
+        TableView<Equip>[] taules = new TableView[] {tablaLaLiga, tablaPremier, tablaBundesliga, tablaSerieA, tablaLigue1, tablaEredivisie, tablaPrimeira};
         
-        // Configurar política de redimensionado para todas las tablas
-        for (TableView<?> taula : taules) {
+        // Configurar política de redimensionado y doble click para todas las tablas
+        for (TableView<Equip> taula : taules) {
             if (taula != null) {
                 taula.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+                // Añadir doble click para abrir detalle del equipo
+                taula.setOnMouseClicked((MouseEvent event) -> {
+                    if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
+                        Equip equipSeleccionat = taula.getSelectionModel().getSelectedItem();
+                        if (equipSeleccionat != null) {
+                            abrirDetalleEquipo(equipSeleccionat);
+                        }
+                    }
+                });
             }
         }
         
@@ -189,11 +216,25 @@ public class PublicController {
         }
     }
 
+    /**
+     * Abre la vista de detalle del equipo seleccionado
+     */
+    private void abrirDetalleEquipo(Equip equipo) {
+        try {
+            Scene escenaActual = tabPane.getScene();
+            String tituloActual = ((Stage) escenaActual.getWindow()).getTitle();
+            EquipoDetalleController.abrirDetalleEquipo(equipo, escenaActual, tituloActual);
+        } catch (Exception e) {
+            System.err.println("❌ Error al abrir detalle del equipo: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     private void carregarLogo() {
         try {
             File file = new File("LOGO/logo.png");
             if (file.exists()) {
-                Image image = new Image(file.toURI().toString(), 0, 40, true, true);
+                Image image = new Image(file.toURI().toString());
                 imgLogoHeader.setImage(image);
             }
         } catch (Exception e) {
@@ -276,7 +317,6 @@ public class PublicController {
         try {
             System.out.println("📊 Carregant dades de lligues...");
             // Obtener todos los equipos
-            List<Equip> totsEquips;
             if (sistemaService.isBBDDConnectada()) {
                 System.out.println("🌐 Carregant des de BBDD...");
                 totsEquips = equipDAO.obtenirTotsElsEquips();
@@ -329,6 +369,24 @@ public class PublicController {
             
             if (totsJugadors != null) {
                 System.out.println("✅ S'han carregat " + totsJugadors.size() + " jugadors");
+                
+                // Relacionar jugadores con equipos completos
+                if (totsEquips != null && !totsEquips.isEmpty()) {
+                    System.out.println("🔗 Relacionant jugadors amb equips...");
+                    for (Jugador j : totsJugadors) {
+                        if (j.getEquip() != null) {
+                            int idEquip = j.getEquip().getID();
+                            // Buscar el equipo completo por ID
+                            for (Equip e : totsEquips) {
+                                if (e.getID() == idEquip) {
+                                    j.setEquip(e);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    System.out.println("✅ Jugadors relacionats amb equips");
+                }
             }
         } catch (Exception e) {
             System.err.println("❌ Error carregant jugadors: " + e.getMessage());
@@ -350,10 +408,13 @@ public class PublicController {
         }
         
         // Filtrar y ordenar goleadores de esta liga (top 10)
-        List<String> goleadores = totsJugadors.stream()
+        currentGoleadores = totsJugadors.stream()
                 .filter(j -> j.getIdLliga() == idLliga)
                 .sorted(Comparator.comparingInt(Jugador::getGols_marcats).reversed())
                 .limit(10)
+                .collect(Collectors.toList());
+        
+        List<String> goleadores = currentGoleadores.stream()
                 .map(j -> String.format("%d ⚽  %s (%s)", 
                         j.getGols_marcats(), 
                         j.getNom(), 
@@ -361,6 +422,20 @@ public class PublicController {
                 .collect(Collectors.toList());
         
         listGoleadores.setItems(FXCollections.observableArrayList(goleadores));
+        
+        // Añadir doble click para abrir detalle del jugador
+        listGoleadores.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2 && event.getButton() == MouseButton.PRIMARY) {
+                int index = listGoleadores.getSelectionModel().getSelectedIndex();
+                if (index >= 0 && index < currentGoleadores.size()) {
+                    JugadorDetalleController.abrirDetalleJugador(
+                        currentGoleadores.get(index),
+                        listGoleadores.getScene(),
+                        "Europe Stats - Vista Pública"
+                    );
+                }
+            }
+        });
     }
     
     private void actualitzarAsistidores(int indexLliga) {
@@ -377,10 +452,13 @@ public class PublicController {
         }
         
         // Filtrar y ordenar asistidores de esta liga (top 10)
-        List<String> asistidores = totsJugadors.stream()
+        currentAsistidores = totsJugadors.stream()
                 .filter(j -> j.getIdLliga() == idLliga)
                 .sorted(Comparator.comparingInt(Jugador::getAssistencies).reversed())
                 .limit(10)
+                .collect(Collectors.toList());
+        
+        List<String> asistidores = currentAsistidores.stream()
                 .map(j -> String.format("%d 🎯  %s (%s)", 
                         j.getAssistencies(), 
                         j.getNom(), 
@@ -388,6 +466,20 @@ public class PublicController {
                 .collect(Collectors.toList());
         
         listAsistidores.setItems(FXCollections.observableArrayList(asistidores));
+        
+        // Añadir doble click para abrir detalle del jugador
+        listAsistidores.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2 && event.getButton() == MouseButton.PRIMARY) {
+                int index = listAsistidores.getSelectionModel().getSelectedIndex();
+                if (index >= 0 && index < currentAsistidores.size()) {
+                    JugadorDetalleController.abrirDetalleJugador(
+                        currentAsistidores.get(index),
+                        listAsistidores.getScene(),
+                        "Europe Stats - Vista Pública"
+                    );
+                }
+            }
+        });
     }
     
     private void actualitzarAmarillas(int indexLliga) {
@@ -404,10 +496,13 @@ public class PublicController {
         }
         
         // Filtrar y ordenar por tarjetas amarillas de esta liga (top 10)
-        List<String> amarillas = totsJugadors.stream()
+        currentAmarillas = totsJugadors.stream()
                 .filter(j -> j.getIdLliga() == idLliga)
                 .sorted(Comparator.comparingInt(Jugador::getTargetes_Grogues).reversed())
                 .limit(10)
+                .collect(Collectors.toList());
+        
+        List<String> amarillas = currentAmarillas.stream()
                 .map(j -> String.format("%d 🟨  %s (%s)", 
                         j.getTargetes_Grogues(), 
                         j.getNom(), 
@@ -415,6 +510,20 @@ public class PublicController {
                 .collect(Collectors.toList());
         
         listAmarillas.setItems(FXCollections.observableArrayList(amarillas));
+        
+        // Añadir doble click para abrir detalle del jugador
+        listAmarillas.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2 && event.getButton() == MouseButton.PRIMARY) {
+                int index = listAmarillas.getSelectionModel().getSelectedIndex();
+                if (index >= 0 && index < currentAmarillas.size()) {
+                    JugadorDetalleController.abrirDetalleJugador(
+                        currentAmarillas.get(index),
+                        listAmarillas.getScene(),
+                        "Europe Stats - Vista Pública"
+                    );
+                }
+            }
+        });
     }
     
     private void actualitzarRojas(int indexLliga) {
@@ -431,10 +540,13 @@ public class PublicController {
         }
         
         // Filtrar y ordenar por tarjetas rojas de esta liga (top 10)
-        List<String> rojas = totsJugadors.stream()
+        currentRojas = totsJugadors.stream()
                 .filter(j -> j.getIdLliga() == idLliga)
                 .sorted(Comparator.comparingInt(Jugador::getTargetes_Vermelles).reversed())
                 .limit(10)
+                .collect(Collectors.toList());
+        
+        List<String> rojas = currentRojas.stream()
                 .map(j -> String.format("%d 🟥  %s (%s)", 
                         j.getTargetes_Vermelles(), 
                         j.getNom(), 
@@ -442,6 +554,20 @@ public class PublicController {
                 .collect(Collectors.toList());
         
         listRojas.setItems(FXCollections.observableArrayList(rojas));
+        
+        // Añadir doble click para abrir detalle del jugador
+        listRojas.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2 && event.getButton() == MouseButton.PRIMARY) {
+                int index = listRojas.getSelectionModel().getSelectedIndex();
+                if (index >= 0 && index < currentRojas.size()) {
+                    JugadorDetalleController.abrirDetalleJugador(
+                        currentRojas.get(index),
+                        listRojas.getScene(),
+                        "Europe Stats - Vista Pública"
+                    );
+                }
+            }
+        });
     }
 
     @FXML
@@ -473,5 +599,129 @@ public class PublicController {
             System.err.println("❌ Error en carregar el login: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+    
+    // ============================================
+    // MÉTODOS DEL MENÚ DESPLEGABLE DEL LOGO
+    // ============================================
+    
+    @FXML
+    private void handleInicio(ActionEvent event) {
+        if (tabPane != null) {
+            tabPane.getSelectionModel().selectFirst();
+        }
+        System.out.println("🏠 Navegando al inicio");
+    }
+    
+    @FXML
+    private void handleEstadisticas(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("📊 Estadísticas Disponibles");
+        alert.setHeaderText("EUROPESTATS - Estadísticas 2023/24");
+        alert.setContentText(
+            "🏆 Ligas disponibles:\n" +
+            "• La Liga (España)\n" +
+            "• Premier League (Inglaterra)\n" +
+            "• Bundesliga (Alemania)\n" +
+            "• Serie A (Italia)\n" +
+            "• Ligue 1 (Francia)\n" +
+            "• Eredivisie (Países Bajos)\n" +
+            "• Primeira Liga (Portugal)\n\n" +
+            "📈 Datos: Clasificación, Goleadores, Asistidores, Tarjetas"
+        );
+        alert.showAndWait();
+    }
+    
+    @FXML
+    private void handleActualizar(ActionEvent event) {
+        try {
+            carregarDadesLligues();
+            carregarJugadors();
+            
+            int indexActual = tabPane.getSelectionModel().getSelectedIndex();
+            actualitzarGoleadores(indexActual);
+            actualitzarAsistidores(indexActual);
+            actualitzarAmarillas(indexActual);
+            actualitzarRojas(indexActual);
+            
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("🔄 Actualización");
+            alert.setHeaderText(null);
+            alert.setContentText("✅ Datos actualizados correctamente");
+            alert.showAndWait();
+        } catch (Exception e) {
+            System.err.println("❌ Error al actualizar: " + e.getMessage());
+        }
+    }
+    
+    @FXML
+    private void handleAcercaDe(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("ℹ️ Acerca de EUROPESTATS");
+        alert.setHeaderText("EUROPESTATS v1.0");
+        alert.setContentText(
+            "📊 Aplicación de estadísticas del fútbol europeo\n\n" +
+            "🏟️ Temporada: 2023/24\n\n" +
+            "📦 Datos: API-Football\n\n" +
+            "💻 JavaFX 21 - Proyecto DAM2"
+        );
+        alert.showAndWait();
+    }
+    
+    @FXML
+    private void handleEquipos(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/europestats/GUI/equipos_view.fxml"));
+            Parent root = loader.load();
+            
+            Stage stage = (Stage) imgLogoHeader.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("EUROPESTATS - Todos los Equipos");
+            stage.centerOnScreen();
+            
+        } catch (IOException e) {
+            System.err.println("❌ Error al cargar la página de equipos: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    @FXML
+    private void handleJugadores(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/europestats/GUI/jugadores_view.fxml"));
+            Parent root = loader.load();
+            
+            Stage stage = (Stage) imgLogoHeader.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("EUROPESTATS - Todos los Jugadores");
+            stage.centerOnScreen();
+            
+        } catch (IOException e) {
+            System.err.println("❌ Error al cargar la página de jugadores: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Selecciona la pestaña de la liga correspondiente por su ID
+     * @param ligaId ID de la liga (API Football)
+     */
+    public void seleccionarLigaPorId(int ligaId) {
+        if (tabPane == null) return;
+        
+        int index = switch (ligaId) {
+            case 140 -> 0; // La Liga
+            case 39 -> 1;  // Premier League
+            case 78 -> 2;  // Bundesliga
+            case 135 -> 3; // Serie A
+            case 61 -> 4;  // Ligue 1
+            case 88 -> 5;  // Eredivisie
+            case 94 -> 6;  // Primeira Liga
+            default -> 0;
+        };
+        
+        tabPane.getSelectionModel().select(index);
     }
 }

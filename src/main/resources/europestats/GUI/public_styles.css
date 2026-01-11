@@ -30,14 +30,72 @@
     -fx-effect: dropshadow(gaussian, rgba(66, 153, 225, 0.6), 10, 0, 0, 3);
 }
 
+/* === LOGO MENU BUTTON === */
+.logo-menu-button {
+    -fx-background-color: transparent;
+    -fx-padding: 5;
+    -fx-cursor: hand;
+}
+
+.logo-menu-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 8;
+}
+
+.logo-menu-button > .arrow-button {
+    -fx-padding: 0 0 0 5;
+}
+
+.logo-menu-button > .arrow-button > .arrow {
+    -fx-background-color: #63b3ed;
+    -fx-shape: "M 0 0 L 4 4 L 8 0 Z";
+}
+
+.logo-menu-button .context-menu {
+    -fx-background-color: linear-gradient(to bottom, #1a252f 0%, #0f1419 100%);
+    -fx-background-radius: 8;
+    -fx-border-color: #63b3ed;
+    -fx-border-radius: 8;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 15, 0, 0, 5);
+}
+
+.logo-menu-button .menu-item {
+    -fx-background-color: transparent;
+    -fx-padding: 10 20;
+}
+
+.logo-menu-button .menu-item:hover {
+    -fx-background-color: rgba(99, 179, 237, 0.2);
+}
+
+.logo-menu-button .menu-item > .label {
+    -fx-text-fill: #e2e8f0;
+    -fx-font-size: 13px;
+}
+
+.logo-menu-button .separator {
+    -fx-background-color: transparent;
+}
+
+.logo-menu-button .separator > .line {
+    -fx-border-color: rgba(99, 179, 237, 0.3);
+    -fx-border-width: 1 0 0 0;
+}
+
 /* === HEADER TABS (Navigation in header) === */
 .header-tabs {
     -fx-background-color: transparent;
+    -fx-pref-height: 60;
+    -fx-min-height: 60;
 }
 
 .header-tabs > .tab-header-area {
     -fx-padding: 0;
     -fx-background-color: transparent;
+    -fx-pref-height: 60;
+    -fx-min-height: 60;
+    -fx-alignment: center;
 }
 
 .header-tabs > .tab-header-area > .tab-header-background {
@@ -46,19 +104,21 @@
 
 .header-tabs > .tab-header-area > .headers-region {
     -fx-background-color: transparent;
+    -fx-alignment: center;
 }
 
 .header-tabs > .tab-header-area > .headers-region > .tab {
     -fx-background-color: transparent;
     -fx-background-radius: 6;
-    -fx-padding: 8 12;
-    -fx-pref-height: 36;
+    -fx-padding: 15 14;
+    -fx-pref-height: 50;
+    -fx-min-height: 50;
     -fx-background-insets: 0;
 }
 
 .header-tabs > .tab-header-area > .headers-region > .tab > .tab-container > .tab-label {
     -fx-text-fill: #c0d0e0;
-    -fx-font-size: 11px;
+    -fx-font-size: 13px;
     -fx-font-weight: bold;
 }
 
@@ -77,6 +137,25 @@
 .header-tabs > .tab-content-area {
     -fx-background-color: transparent;
     -fx-padding: 0;
+}
+
+/* Ocultar el botón desplegable del TabPane */
+.header-tabs > .tab-header-area > .control-buttons-tab {
+    -fx-background-color: transparent;
+    visibility: hidden;
+    -fx-pref-width: 0;
+    -fx-max-width: 0;
+    -fx-min-width: 0;
+}
+
+.header-tabs > .tab-header-area > .control-buttons-tab > .container {
+    visibility: hidden;
+}
+
+.header-tabs > .tab-header-area > .control-buttons-tab > .container > .tab-down-button {
+    visibility: hidden;
+    -fx-pref-width: 0;
+    -fx-max-width: 0;
 }
 
 /* === CONTENT AREA === */
@@ -384,3 +463,77 @@
 
 /* === RELEGATION ZONE (Last 3 positions) === */
 /* Note: This would need JavaFX code to implement properly */
+
+/* ============================================
+   EQUIPOS PAGE - SEARCH & LIST STYLES
+   ============================================ */
+
+/* === PAGE TITLE === */
+.page-title {
+    -fx-text-fill: #63b3ed;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+/* === SEARCH BAR === */
+.search-bar {
+    -fx-background-color: linear-gradient(to bottom, #1a1f2e 0%, #141824 100%);
+    -fx-background-radius: 10;
+    -fx-padding: 15 20;
+    -fx-border-color: rgba(99, 179, 237, 0.3);
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+}
+
+.search-icon {
+    -fx-font-size: 18px;
+}
+
+.search-field {
+    -fx-background-color: #0f1419;
+    -fx-text-fill: #e2e8f0;
+    -fx-prompt-text-fill: #718096;
+    -fx-font-size: 14px;
+    -fx-padding: 10 15;
+    -fx-background-radius: 6;
+    -fx-border-color: #4a5568;
+    -fx-border-radius: 6;
+    -fx-border-width: 1;
+}
+
+.search-field:focused {
+    -fx-border-color: #63b3ed;
+    -fx-effect: dropshadow(gaussian, rgba(99, 179, 237, 0.3), 8, 0, 0, 0);
+}
+
+.clear-button {
+    -fx-background-color: linear-gradient(to bottom, #4a5568 0%, #2d3748 100%);
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 15;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.clear-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #718096 0%, #4a5568 100%);
+}
+
+/* === RESULTS INFO === */
+.results-info {
+    -fx-text-fill: #a0aec0;
+    -fx-font-size: 13px;
+    -fx-font-style: italic;
+}
+
+/* === FOOTER BAR === */
+.footer-bar {
+    -fx-background-color: linear-gradient(to right, #1e3a5f 0%, #2c5282 50%, #1e3a5f 100%);
+}
+
+.footer-text {
+    -fx-text-fill: #e2e8f0;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}

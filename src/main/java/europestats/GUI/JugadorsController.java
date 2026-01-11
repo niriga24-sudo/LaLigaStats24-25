@@ -65,8 +65,8 @@ public class JugadorsController {
                 omplirFormulari(nou);
         });
 
-        carregarDades();
-        carregarEquips(); // Omple el combo d'equips
+        carregarEquips(); // Cargar equipos PRIMERO
+        carregarDades();  // Luego cargar jugadores (así se pueden relacionar)
     }
 
     private void configurarComboEquip() {
@@ -93,17 +93,35 @@ public class JugadorsController {
         List<Jugador> dades = sistemaService.isBBDDConnectada()
                 ? jugadorDAO.obtenirTotsElsJugadors()
                 : LectorCSV.carregarJugadorsDesDeFitxer("DATA/jugadors.csv");
-        if (dades != null)
+        if (dades != null) {
+            // Relacionar jugadores con equipos completos
+            if (!equipsDisponibles.isEmpty()) {
+                for (Jugador j : dades) {
+                    if (j.getEquip() != null) {
+                        int idEquip = j.getEquip().getID();
+                        for (Equip e : equipsDisponibles) {
+                            if (e.getID() == idEquip) {
+                                j.setEquip(e);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
             masterData.addAll(dades);
+        }
     }
 
     public void carregarEquips() {
         equipsDisponibles.clear();
+        List<Equip> llista;
         if (sistemaService.isBBDDConnectada()) {
-            List<Equip> llista = equipDAO.obtenirTotsElsEquips();
-            if (llista != null)
-                equipsDisponibles.addAll(llista);
+            llista = equipDAO.obtenirTotsElsEquips();
+        } else {
+            llista = LectorCSV.carregarEquipsDesDeFitxer("DATA/equips.csv");
         }
+        if (llista != null)
+            equipsDisponibles.addAll(llista);
         comboEquip.setItems(equipsDisponibles);
     }
 
@@ -123,6 +141,20 @@ public class JugadorsController {
 
         dadesFiltrades = new FilteredList<>(masterData, p -> true);
         taulaJugadors.setItems(dadesFiltrades);
+        
+        // Doble click para abrir detalle del jugador
+        taulaJugadors.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2 && event.getButton() == javafx.scene.input.MouseButton.PRIMARY) {
+                Jugador jugadorSeleccionado = taulaJugadors.getSelectionModel().getSelectedItem();
+                if (jugadorSeleccionado != null) {
+                    JugadorDetalleController.abrirDetalleJugador(
+                        jugadorSeleccionado,
+                        taulaJugadors.getScene(),
+                        "Gestió de Jugadors"
+                    );
+                }
+            }
+        });
     }
 
     private void configurarFiltre() {

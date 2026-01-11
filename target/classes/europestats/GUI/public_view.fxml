@@ -4,6 +4,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -24,7 +27,7 @@
     <top>
         <HBox alignment="CENTER" spacing="0" styleClass="header-bar">
             <!-- Izquierda: Navegación entre ligas (ancho fijo más amplio) -->
-            <HBox alignment="CENTER_LEFT" minWidth="520" maxWidth="520">
+            <HBox alignment="CENTER" minWidth="520" maxWidth="520">
                 <padding>
                     <Insets left="10"/>
                 </padding>
@@ -39,9 +42,19 @@
                 </TabPane>
             </HBox>
             
-            <!-- Centro: Logo de la página (crece para centrar) -->
+            <!-- Centro: Logo como MenuButton desplegable -->
             <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
-                <ImageView fx:id="imgLogoHeader" fitHeight="50" fitWidth="150" preserveRatio="true"/>
+                <MenuButton fx:id="menuLogo" styleClass="logo-menu-button">
+                    <graphic>
+                        <ImageView fx:id="imgLogoHeader" fitHeight="50" fitWidth="150" preserveRatio="true"/>
+                    </graphic>
+                    <items>
+                        <MenuItem text="🏠 Inicio" onAction="#handleInicio"/>
+                        <MenuItem text="🏟️ Todos los Equipos" onAction="#handleEquipos"/>
+                        <MenuItem text="⚽ Todos los Jugadores" onAction="#handleJugadores"/>
+                        <MenuItem text=" Actualizar Datos" onAction="#handleActualizar"/>
+                    </items>
+                </MenuButton>
             </HBox>
             
             <!-- Derecha: mismo ancho que izquierda para mantener logo centrado -->
