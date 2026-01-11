@@ -69,4 +69,10 @@ public class CrearBBDD {
         new UsuariDAO().crearTaulaUsuaris();
         System.out.println("✅ Estructura de taules verificada.");
     }
+
+    public static void main(String[] args) {
+        // Prova de les funcions
+        resetTotalSistema();
+        // buidarDadesEsportives();
+    }
 }

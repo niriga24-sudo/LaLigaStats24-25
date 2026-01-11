@@ -1,6 +1,7 @@
 module europestats {
     requires javafx.controls;
     requires javafx.fxml;
+    requires transitive javafx.graphics;
     requires java.sql;
     requires com.google.gson;
     requires java.net.http; // Permet usar HttpClient
@@ -13,4 +14,5 @@ module europestats {
 
     exports europestats.MAIN;
     exports europestats.GUI;
+    exports europestats.API;
 }

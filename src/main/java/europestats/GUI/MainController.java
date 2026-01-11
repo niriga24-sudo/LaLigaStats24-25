@@ -112,8 +112,8 @@ public class MainController {
             contentArea.getChildren().removeIf(node -> node != menuRajoles);
             contentArea.getChildren().add(view);
         } catch (Exception e) {
+            System.err.println("❌ Error carregant vista interior: " + fxml + " - " + e.getMessage());
             mostrarAlerta("Error de Càrrega", "No s'ha pogut carregar la vista: " + fxml);
-            e.printStackTrace();
         }
     }
 
@@ -143,35 +143,41 @@ public class MainController {
 
     @FXML
     private void ImportarCSV() {
-        if (!sistemaService.isBBDDConnectada())
+        if (!sistemaService.isBBDDConnectada()) {
+            mostrarAlerta("Error de Connexió", "No es pot importar sense connexió a la base de dades.");
             return;
+        }
 
         Alert dialog = new Alert(Alert.AlertType.CONFIRMATION, "Vols importar de CSV a MySQL?", ButtonType.OK,
                 ButtonType.CANCEL);
-        if (dialog.showAndWait().orElse(null) == ButtonType.OK) {
+        if (dialog.showAndWait().orElse(ButtonType.CANCEL) == ButtonType.OK) {
             try {
                 int[] totals = ImportadorCSV.importarTotDelsCSV();
                 mostrarAlerta("Èxit", "Importats: " + totals[0] + " equips i " + totals[1] + " jugadors.");
             } catch (Exception e) {
-                mostrarAlerta("Error", e.getMessage());
+                System.err.println("❌ Error durant la importació CSV: " + e.getMessage());
+                mostrarAlerta("Error", "Error durant la importació: " + e.getMessage());
             }
         }
     }
 
     @FXML
     private void ExportarCSV() {
-        if (!sistemaService.isBBDDConnectada())
+        if (!sistemaService.isBBDDConnectada()) {
+            mostrarAlerta("Error de Connexió", "No es pot exportar sense connexió a la base de dades.");
             return;
+        }
 
         Alert dialog = new Alert(Alert.AlertType.CONFIRMATION, "Vols exportar de MySQL a CSV?", ButtonType.OK,
                 ButtonType.CANCEL);
-        if (dialog.showAndWait().orElse(null) == ButtonType.OK) {
+        if (dialog.showAndWait().orElse(ButtonType.CANCEL) == ButtonType.OK) {
             try {
                 exportadorCSV.exportarTaulaEquips();
                 exportadorCSV.exportarTaulaJugadors();
                 mostrarAlerta("Èxit", "Exportació finalitzada.");
             } catch (Exception e) {
-                mostrarAlerta("Error", e.getMessage());
+                System.err.println("❌ Error durant l'exportació CSV: " + e.getMessage());
+                mostrarAlerta("Error", "Error durant l'exportació: " + e.getMessage());
             }
         }
     }
@@ -191,19 +197,27 @@ public class MainController {
 
     private void obrirFitxer(String path) {
         try {
-            Desktop.getDesktop().open(new File(path));
+            File fitxer = new File(path);
+            if (!fitxer.exists()) {
+                mostrarAlerta("Error", "El fitxer no existeix: " + path);
+                return;
+            }
+            Desktop.getDesktop().open(fitxer);
         } catch (Exception e) {
-            mostrarAlerta("Error", "No s'ha pogut obrir el fitxer.");
+            System.err.println("❌ Error obrint fitxer " + path + ": " + e.getMessage());
+            mostrarAlerta("Error", "No s'ha pogut obrir el fitxer: " + e.getMessage());
         }
     }
 
     @FXML
     private void tancarSessio() {
-        Sessio.getInstancia().tancar();
-        ((Stage) lblEstatSistema.getScene().getWindow()).close();
         try {
+            Sessio.getInstancia().tancar();
+            Stage currentStage = (Stage) lblEstatSistema.getScene().getWindow();
+            currentStage.close();
             new App().start(new Stage());
         } catch (Exception e) {
+            System.err.println("❌ Error tancant sessió: " + e.getMessage());
             e.printStackTrace();
         }
     }

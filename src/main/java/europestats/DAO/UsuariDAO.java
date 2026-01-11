@@ -61,7 +61,9 @@ public class UsuariDAO {
             ps.setString(4, "ADMIN");
             ps.executeUpdate();
 
+            System.out.println("✅ Usuaris administradors inicialitzats correctament.");
         } catch (SQLException e) {
+            System.err.println("❌ Error inicialitzant usuaris administradors: " + e.getMessage());
             e.printStackTrace();
         }
     }

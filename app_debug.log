@@ -1,0 +1,35 @@
+=== INICIANDO CAPTURA DE LOGS ===
+Fecha: Fri Jan  9 19:57:50 CET 2026
+
+ene 09, 2026 7:57:56 P. M. com.sun.glass.ui.mac.MacApplication lambda$waitForReactivation$6
+ADVERTENCIA: Timeout while waiting for app reactivation
+==================================================
+   EUROPESTATS - Iniciant aplicació
+==================================================
+🚀 Iniciant aplicació...
+✅ Stage assignat correctament
+❌ Error carregant vista pública: 
+/Volumes/Toshiba%201TB/DAM2n/Acces_Dades/VSCode_Java_Workspace/LaLigaStats24-25/target/classes/europestats/GUI/public_view.fxml:705
+
+javafx.fxml.LoadException: 
+/Volumes/Toshiba%201TB/DAM2n/Acces_Dades/VSCode_Java_Workspace/LaLigaStats24-25/target/classes/europestats/GUI/public_view.fxml:705
+
+	at javafx.fxml@21/javafx.fxml.FXMLLoader.constructLoadException(FXMLLoader.java:2722)
+	at javafx.fxml@21/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2665)
+	at javafx.fxml@21/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2563)
+	at javafx.fxml@21/javafx.fxml.FXMLLoader.load(FXMLLoader.java:2531)
+	at europestats/europestats.MAIN.App.mostrarVistaPublica(App.java:55)
+	at europestats/europestats.MAIN.App.start(App.java:23)
+	at javafx.graphics@21/com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$9(LauncherImpl.java:839)
+	at javafx.graphics@21/com.sun.javafx.application.PlatformImpl.lambda$runAndWait$12(PlatformImpl.java:483)
+	at javafx.graphics@21/com.sun.javafx.application.PlatformImpl.lambda$runLater$10(PlatformImpl.java:456)
+	at java.base/java.security.AccessController.doPrivileged(Unknown Source)
+	at javafx.graphics@21/com.sun.javafx.application.PlatformImpl.lambda$runLater$11(PlatformImpl.java:455)
+	at javafx.graphics@21/com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+Caused by: javax.xml.stream.XMLStreamException: ParseError at [row,col]:[705,19]
+Message: El tipo de elemento "content" debe finalizar por la etiqueta final coincidente "</content>".
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLStreamReaderImpl.next(Unknown Source)
+	at java.xml/javax.xml.stream.util.StreamReaderDelegate.next(Unknown Source)
+	at javafx.fxml@21/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2635)
+	... 10 more
+✅ Vista pública carregada

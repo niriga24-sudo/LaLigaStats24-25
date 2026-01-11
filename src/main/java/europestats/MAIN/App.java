@@ -16,8 +16,17 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
-        mainStage = stage;
-        mostrarLogin();
+        try {
+            System.out.println("🚀 Iniciant aplicació...");
+            mainStage = stage;
+            System.out.println("✅ Stage assignat correctament");
+            mostrarVistaPublica();
+            System.out.println("✅ Vista pública carregada");
+        } catch (Exception e) {
+            System.err.println("❌ ERROR CRÍTIC en start(): " + e.getMessage());
+            e.printStackTrace();
+            throw e;
+        }
     }
 
     /**
@@ -40,6 +49,21 @@ public class App extends Application {
         }
     }
 
+    public static void mostrarVistaPublica() {
+        try {
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("/europestats/GUI/public_view.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            mainStage.setTitle("EUROPESTATS - Estadístiques Europees");
+            mainStage.setScene(scene);
+            configurarIcona(mainStage);
+            mainStage.show(); // Mostrem la finestra
+        } catch (IOException e) {
+            System.err.println("❌ Error carregant vista pública: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     public static void mostrarLogin() {
         try {
             FXMLLoader loader = new FXMLLoader(App.class.getResource("/europestats/GUI/login.fxml"));
@@ -52,6 +76,7 @@ public class App extends Application {
             mainStage.centerOnScreen();
             mainStage.show();
         } catch (IOException e) {
+            System.err.println("❌ Error carregant pantalla de login: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -68,11 +93,21 @@ public class App extends Application {
             mainStage.centerOnScreen();
             mainStage.show();
         } catch (IOException e) {
+            System.err.println("❌ Error carregant aplicació principal: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     public static void main(String[] args) {
-        launch(args);
+        try {
+            System.out.println("=".repeat(50));
+            System.out.println("   EUROPESTATS - Iniciant aplicació");
+            System.out.println("=".repeat(50));
+            launch(args);
+        } catch (Exception e) {
+            System.err.println("❌ ERROR FATAL en main(): " + e.getMessage());
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
 }

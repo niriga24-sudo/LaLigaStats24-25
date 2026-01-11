@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="europestats.GUI.PublicController" 
+            prefHeight="750.0" prefWidth="1300.0" 
+            stylesheets="@public_styles.css"
+            styleClass="root-pane">
+
+    <!-- Header: Logo + Tabs de navegación + Botón login -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="15" styleClass="header-bar">
+            <ImageView fx:id="imgLogoHeader" fitHeight="40" fitWidth="40" preserveRatio="true"/>
+            <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" styleClass="header-tabs" HBox.hgrow="ALWAYS">
+                <Tab text="La Liga" fx:id="tabLaLiga"/>
+                <Tab text="Premier" fx:id="tabPremier"/>
+                <Tab text="Bundesliga" fx:id="tabBundesliga"/>
+                <Tab text="Serie A" fx:id="tabSerieA"/>
+                <Tab text="Ligue 1" fx:id="tabLigue1"/>
+                <Tab text="Eredivisie" fx:id="tabEredivisie"/>
+                <Tab text="Primeira" fx:id="tabPrimeira"/>
+            </TabPane>
+            <Button text="🔐 Admin" onAction="#handleLogin" styleClass="login-button"/>
+        </HBox>
+    </top>
+
+    <!-- Contenido Central: Tabla izquierda + Espacio derecho -->
+    <center>
+        <HBox styleClass="content-area" HBox.hgrow="ALWAYS">
+            <!-- Mitad izquierda: Tablas -->
+            <VBox styleClass="left-panel" HBox.hgrow="ALWAYS" maxWidth="610">
+                <!-- La Liga -->
+                <TableView fx:id="tablaLaLiga" styleClass="standings-table" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colPosLaLiga" text="#" prefWidth="40"/>
+                        <TableColumn fx:id="colEquipLaLiga" text="EQUIPO" prefWidth="200"/>
+                        <TableColumn fx:id="colPuntsLaLiga" text="PTS" prefWidth="50"/>
+                        <TableColumn fx:id="colPJLaLiga" text="PJ" prefWidth="40"/>
+                        <TableColumn fx:id="colVictLaLiga" text="V" prefWidth="40"/>
+                        <TableColumn fx:id="colEmpLaLiga" text="E" prefWidth="40"/>
+                        <TableColumn fx:id="colDerrLaLiga" text="D" prefWidth="40"/>
+                        <TableColumn fx:id="colGFLaLiga" text="GF" prefWidth="45"/>
+                        <TableColumn fx:id="colGCLaLiga" text="GC" prefWidth="45"/>
+                        <TableColumn fx:id="colDGLaLiga" text="+/-" prefWidth="50"/>
+                    </columns>
+                </TableView>
+
+                <!-- Premier League -->
+                <TableView fx:id="tablaPremier" styleClass="standings-table" VBox.vgrow="ALWAYS" visible="false" managed="false">
+                    <columns>
+                        <TableColumn fx:id="colPosPremier" text="#" prefWidth="40"/>
+                        <TableColumn fx:id="colEquipPremier" text="EQUIPO" prefWidth="200"/>
+                        <TableColumn fx:id="colPuntsPremier" text="PTS" prefWidth="50"/>
+                        <TableColumn fx:id="colPJPremier" text="PJ" prefWidth="40"/>
+                        <TableColumn fx:id="colVictPremier" text="V" prefWidth="40"/>
+                        <TableColumn fx:id="colEmpPremier" text="E" prefWidth="40"/>
+                        <TableColumn fx:id="colDerrPremier" text="D" prefWidth="40"/>
+                        <TableColumn fx:id="colGFPremier" text="GF" prefWidth="45"/>
+                        <TableColumn fx:id="colGCPremier" text="GC" prefWidth="45"/>
+                        <TableColumn fx:id="colDGPremier" text="+/-" prefWidth="50"/>
+                    </columns>
+                </TableView>
+
+                <!-- Bundesliga -->
+                <TableView fx:id="tablaBundesliga" styleClass="standings-table" VBox.vgrow="ALWAYS" visible="false" managed="false">
+                    <columns>
+                        <TableColumn fx:id="colPosBundesliga" text="#" prefWidth="40"/>
+                        <TableColumn fx:id="colEquipBundesliga" text="EQUIPO" prefWidth="200"/>
+                        <TableColumn fx:id="colPuntsBundesliga" text="PTS" prefWidth="50"/>
+                        <TableColumn fx:id="colPJBundesliga" text="PJ" prefWidth="40"/>
+                        <TableColumn fx:id="colVictBundesliga" text="V" prefWidth="40"/>
+                        <TableColumn fx:id="colEmpBundesliga" text="E" prefWidth="40"/>
+                        <TableColumn fx:id="colDerrBundesliga" text="D" prefWidth="40"/>
+                        <TableColumn fx:id="colGFBundesliga" text="GF" prefWidth="45"/>
+                        <TableColumn fx:id="colGCBundesliga" text="GC" prefWidth="45"/>
+                        <TableColumn fx:id="colDGBundesliga" text="+/-" prefWidth="50"/>
+                    </columns>
+                </TableView>
+
+                <!-- Serie A -->
+                <TableView fx:id="tablaSerieA" styleClass="standings-table" VBox.vgrow="ALWAYS" visible="false" managed="false">
+                    <columns>
+                        <TableColumn fx:id="colPosSerieA" text="#" prefWidth="40"/>
+                        <TableColumn fx:id="colEquipSerieA" text="EQUIPO" prefWidth="200"/>
+                        <TableColumn fx:id="colPuntsSerieA" text="PTS" prefWidth="50"/>
+                        <TableColumn fx:id="colPJSerieA" text="PJ" prefWidth="40"/>
+                        <TableColumn fx:id="colVictSerieA" text="V" prefWidth="40"/>
+                        <TableColumn fx:id="colEmpSerieA" text="E" prefWidth="40"/>
+                        <TableColumn fx:id="colDerrSerieA" text="D" prefWidth="40"/>
+                        <TableColumn fx:id="colGFSerieA" text="GF" prefWidth="45"/>
+                        <TableColumn fx:id="colGCSerieA" text="GC" prefWidth="45"/>
+                        <TableColumn fx:id="colDGSerieA" text="+/-" prefWidth="50"/>
+                    </columns>
+                </TableView>
+
+                <!-- Ligue 1 -->
+                <TableView fx:id="tablaLigue1" styleClass="standings-table" VBox.vgrow="ALWAYS" visible="false" managed="false">
+                    <columns>
+                        <TableColumn fx:id="colPosLigue1" text="#" prefWidth="40"/>
+                        <TableColumn fx:id="colEquipLigue1" text="EQUIPO" prefWidth="200"/>
+                        <TableColumn fx:id="colPuntsLigue1" text="PTS" prefWidth="50"/>
+                        <TableColumn fx:id="colPJLigue1" text="PJ" prefWidth="40"/>
+                        <TableColumn fx:id="colVictLigue1" text="V" prefWidth="40"/>
+                        <TableColumn fx:id="colEmpLigue1" text="E" prefWidth="40"/>
+                        <TableColumn fx:id="colDerrLigue1" text="D" prefWidth="40"/>
+                        <TableColumn fx:id="colGFLigue1" text="GF" prefWidth="45"/>
+                        <TableColumn fx:id="colGCLigue1" text="GC" prefWidth="45"/>
+                        <TableColumn fx:id="colDGLigue1" text="+/-" prefWidth="50"/>
+                    </columns>
+                </TableView>
+
+                <!-- Eredivisie -->
+                <TableView fx:id="tablaEredivisie" styleClass="standings-table" VBox.vgrow="ALWAYS" visible="false" managed="false">
+                    <columns>
+                        <TableColumn fx:id="colPosEredivisie" text="#" prefWidth="40"/>
+                        <TableColumn fx:id="colEquipEredivisie" text="EQUIPO" prefWidth="200"/>
+                        <TableColumn fx:id="colPuntsEredivisie" text="PTS" prefWidth="50"/>
+                        <TableColumn fx:id="colPJEredivisie" text="PJ" prefWidth="40"/>
+                        <TableColumn fx:id="colVictEredivisie" text="V" prefWidth="40"/>
+                        <TableColumn fx:id="colEmpEredivisie" text="E" prefWidth="40"/>
+                        <TableColumn fx:id="colDerrEredivisie" text="D" prefWidth="40"/>
+                        <TableColumn fx:id="colGFEredivisie" text="GF" prefWidth="45"/>
+                        <TableColumn fx:id="colGCEredivisie" text="GC" prefWidth="45"/>
+                        <TableColumn fx:id="colDGEredivisie" text="+/-" prefWidth="50"/>
+                    </columns>
+                </TableView>
+
+                <!-- Primeira Liga -->
+                <TableView fx:id="tablaPrimeira" styleClass="standings-table" VBox.vgrow="ALWAYS" visible="false" managed="false">
+                    <columns>
+                        <TableColumn fx:id="colPosPrimeira" text="#" prefWidth="40"/>
+                        <TableColumn fx:id="colEquipPrimeira" text="EQUIPO" prefWidth="200"/>
+                        <TableColumn fx:id="colPuntsPrimeira" text="PTS" prefWidth="50"/>
+                        <TableColumn fx:id="colPJPrimeira" text="PJ" prefWidth="40"/>
+                        <TableColumn fx:id="colVictPrimeira" text="V" prefWidth="40"/>
+                        <TableColumn fx:id="colEmpPrimeira" text="E" prefWidth="40"/>
+                        <TableColumn fx:id="colDerrPrimeira" text="D" prefWidth="40"/>
+                        <TableColumn fx:id="colGFPrimeira" text="GF" prefWidth="45"/>
+                        <TableColumn fx:id="colGCPrimeira" text="GC" prefWidth="45"/>
+                        <TableColumn fx:id="colDGPrimeira" text="+/-" prefWidth="50"/>
+                    </columns>
+                </TableView>
+            </VBox>
+
+            <!-- Mitad derecha: Espacio libre -->
+            <VBox fx:id="rightPanel" styleClass="right-panel" HBox.hgrow="ALWAYS">
+                <!-- Espacio libre para futuro contenido -->
+            </VBox>
+        </HBox>
+    </center>
+
+    <!-- Footer -->
+    <bottom>
+        <HBox alignment="CENTER" spacing="30" styleClass="footer-bar">
+            <Label text="© 2024 EuropeStats" styleClass="footer-text"/>
+            <Label text="•" styleClass="footer-separator"/>
+            <Label text="Temporada 2023/24" styleClass="footer-text"/>
+            <Label text="•" styleClass="footer-separator"/>
+            <Label text="Projecte DAM2" styleClass="footer-text"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

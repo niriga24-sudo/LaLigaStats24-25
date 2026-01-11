@@ -42,10 +42,10 @@
     <right>
         <ScrollPane fitToWidth="true" prefWidth="240">
             <VBox spacing="10"
-                style="-fx-padding: 15; -fx-background-color: #f8f9fa; -fx-border-color: #dee2e6; -fx-border-width: 0 0 0 1;">
+                style="-fx-padding: 15; -fx-background-color: #2c3e50; -fx-border-color: #34495e; -fx-border-width: 0 0 0 1;">
 
                 <Label text="PANELL D'EDICIÓ"
-                    style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #2c3e50;" />
+                    style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #ecf0f1;" />
                 <Separator />
 
                 <VBox spacing="5">
