@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -18,20 +20,37 @@
             stylesheets="@public_styles.css"
             styleClass="root-pane">
 
-    <!-- Header: Logo + Tabs de navegación + Botón login -->
+    <!-- Header: Tabs izquierda + Logo centro + Botón login derecha -->
     <top>
-        <HBox alignment="CENTER_LEFT" spacing="15" styleClass="header-bar">
-            <ImageView fx:id="imgLogoHeader" fitHeight="40" fitWidth="40" preserveRatio="true"/>
-            <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" styleClass="header-tabs" HBox.hgrow="ALWAYS">
-                <Tab text="La Liga" fx:id="tabLaLiga"/>
-                <Tab text="Premier" fx:id="tabPremier"/>
-                <Tab text="Bundesliga" fx:id="tabBundesliga"/>
-                <Tab text="Serie A" fx:id="tabSerieA"/>
-                <Tab text="Ligue 1" fx:id="tabLigue1"/>
-                <Tab text="Eredivisie" fx:id="tabEredivisie"/>
-                <Tab text="Primeira" fx:id="tabPrimeira"/>
-            </TabPane>
-            <Button text="🔐 Admin" onAction="#handleLogin" styleClass="login-button"/>
+        <HBox alignment="CENTER" spacing="0" styleClass="header-bar">
+            <!-- Izquierda: Navegación entre ligas (ancho fijo más amplio) -->
+            <HBox alignment="CENTER_LEFT" minWidth="520" maxWidth="520">
+                <padding>
+                    <Insets left="10"/>
+                </padding>
+                <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" styleClass="header-tabs">
+                    <Tab text="La Liga" fx:id="tabLaLiga"/>
+                    <Tab text="Premier" fx:id="tabPremier"/>
+                    <Tab text="Bundesliga" fx:id="tabBundesliga"/>
+                    <Tab text="Serie A" fx:id="tabSerieA"/>
+                    <Tab text="Ligue 1" fx:id="tabLigue1"/>
+                    <Tab text="Eredivisie" fx:id="tabEredivisie"/>
+                    <Tab text="Primeira" fx:id="tabPrimeira"/>
+                </TabPane>
+            </HBox>
+            
+            <!-- Centro: Logo de la página (crece para centrar) -->
+            <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                <ImageView fx:id="imgLogoHeader" fitHeight="50" fitWidth="150" preserveRatio="true"/>
+            </HBox>
+            
+            <!-- Derecha: mismo ancho que izquierda para mantener logo centrado -->
+            <HBox alignment="CENTER_RIGHT" minWidth="520" maxWidth="520">
+                <padding>
+                    <Insets right="20"/>
+                </padding>
+                <Button text="🔐 Admin" onAction="#handleLogin" styleClass="login-button"/>
+            </HBox>
         </HBox>
     </top>
 
@@ -153,9 +172,30 @@
                 </TableView>
             </VBox>
 
-            <!-- Mitad derecha: Espacio libre -->
-            <VBox fx:id="rightPanel" styleClass="right-panel" HBox.hgrow="ALWAYS">
-                <!-- Espacio libre para futuro contenido -->
+            <!-- Mitad derecha: 4 cuadrados para listas -->
+            <VBox fx:id="rightPanel" styleClass="right-panel" HBox.hgrow="ALWAYS" spacing="10">
+                <!-- Fila superior: 2 cuadrados -->
+                <HBox spacing="10" VBox.vgrow="ALWAYS" fillHeight="true">
+                    <VBox fx:id="quadrant1" styleClass="quadrant-box" HBox.hgrow="ALWAYS" minWidth="250" minHeight="200" fillWidth="true">
+                        <Label fx:id="lblGoleadoresTitol" text="⚽ Top Goleadores" styleClass="quadrant-title" maxWidth="Infinity"/>
+                        <ListView fx:id="listGoleadores" styleClass="stats-list" VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                    <VBox fx:id="quadrant2" styleClass="quadrant-box" HBox.hgrow="ALWAYS" minWidth="250" minHeight="200" fillWidth="true">
+                        <Label fx:id="lblAsistidoresTitol" text="🎯 Top Asistidores" styleClass="quadrant-title" maxWidth="Infinity"/>
+                        <ListView fx:id="listAsistidores" styleClass="stats-list" VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                </HBox>
+                <!-- Fila inferior: 2 cuadrados -->
+                <HBox spacing="10" VBox.vgrow="ALWAYS" fillHeight="true">
+                    <VBox fx:id="quadrant3" styleClass="quadrant-box" HBox.hgrow="ALWAYS" minWidth="250" minHeight="200" fillWidth="true">
+                        <Label fx:id="lblAmarillasTitol" text="🟨 Top Tarjetas Amarillas" styleClass="quadrant-title" maxWidth="Infinity"/>
+                        <ListView fx:id="listAmarillas" styleClass="stats-list" VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                    <VBox fx:id="quadrant4" styleClass="quadrant-box" HBox.hgrow="ALWAYS" minWidth="250" minHeight="200" fillWidth="true">
+                        <Label fx:id="lblRojasTitol" text="🟥 Top Tarjetas Rojas" styleClass="quadrant-title" maxWidth="Infinity"/>
+                        <ListView fx:id="listRojas" styleClass="stats-list" VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                </HBox>
             </VBox>
         </HBox>
     </center>

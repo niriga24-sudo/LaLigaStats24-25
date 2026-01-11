@@ -92,11 +92,88 @@
     -fx-padding: 0;
 }
 
-/* === RIGHT PANEL (Empty space) === */
+/* === RIGHT PANEL (4 quadrants) === */
 .right-panel {
-    -fx-background-color: rgba(0, 0, 0, 0.1);
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+/* === QUADRANT BOXES === */
+.quadrant-box {
+    -fx-background-color: linear-gradient(to bottom, #1a1f2e 0%, #141824 100%);
     -fx-background-radius: 10;
-    -fx-padding: 15;
+    -fx-padding: 0;
+    -fx-border-color: rgba(99, 179, 237, 0.2);
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+}
+
+.quadrant-box:hover {
+    -fx-background-color: linear-gradient(to bottom, #1e2738 0%, #1a1f2e 100%);
+    -fx-border-color: #63b3ed;
+}
+
+.quadrant-title {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #63b3ed;
+    -fx-padding: 14 15;
+    -fx-background-color: linear-gradient(to bottom, #2d3a4d 0%, #1f2937 100%);
+    -fx-background-radius: 9 9 0 0;
+    -fx-border-color: transparent transparent rgba(99, 179, 237, 0.3) transparent;
+    -fx-border-width: 0 0 2 0;
+    -fx-max-width: infinity;
+    -fx-alignment: CENTER;
+}
+
+/* === STATS LIST (ListView in quadrants) === */
+.stats-list {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.stats-list .list-cell {
+    -fx-background-color: linear-gradient(to right, #1a1f2e 0%, #1e2738 100%);
+    -fx-text-fill: #e2e8f0;
+    -fx-font-size: 13px;
+    -fx-padding: 10 12;
+    -fx-border-color: transparent transparent rgba(99, 179, 237, 0.1) transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.stats-list .list-cell:odd {
+    -fx-background-color: linear-gradient(to right, #141824 0%, #1a202c 100%);
+}
+
+.stats-list .list-cell:hover {
+    -fx-background-color: linear-gradient(to right, rgba(99, 179, 237, 0.15) 0%, rgba(66, 153, 225, 0.08) 100%);
+}
+
+.stats-list .list-cell:selected {
+    -fx-background-color: linear-gradient(to right, rgba(99, 179, 237, 0.25) 0%, rgba(66, 153, 225, 0.15) 100%);
+    -fx-text-fill: white;
+    -fx-border-color: transparent transparent #63b3ed transparent;
+}
+
+.stats-list .list-cell:empty {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* Scrollbar de la lista */
+.stats-list .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 6;
+}
+
+.stats-list .scroll-bar:vertical .thumb {
+    -fx-background-color: linear-gradient(to bottom, #4a5568 0%, #2d3748 100%);
+    -fx-background-radius: 3;
+}
+
+.stats-list .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: linear-gradient(to bottom, #63b3ed 0%, #4299e1 100%);
 }
 
 /* === TAB PANE STYLES (separate tabs below header) === */
@@ -195,63 +272,80 @@
 }
 
 .standings-table .column-header {
-    -fx-background-color: transparent;
-    -fx-border-color: transparent #3d4a5c transparent transparent;
-    -fx-border-width: 0 1 0 0;
-    -fx-padding: 12 8;
+    -fx-background-color: linear-gradient(to bottom, #2d3a4d 0%, #1f2937 100%);
+    -fx-border-color: rgba(255, 255, 255, 0.15);
+    -fx-border-width: 0 1 2 0;
+    -fx-padding: 14 8;
 }
 
 .standings-table .column-header .label {
-    -fx-text-fill: #a0aec0;
-    -fx-font-size: 12px;
+    -fx-text-fill: #63b3ed;
+    -fx-font-size: 11px;
     -fx-font-weight: bold;
     -fx-alignment: CENTER;
+    -fx-text-transform: uppercase;
 }
 
 .standings-table .table-row-cell {
-    -fx-background-color: #1e2a38;
-    -fx-border-color: transparent transparent #2d3748 transparent;
-    -fx-border-width: 0 0 1 0;
+    -fx-background-color: linear-gradient(to right, #1a1f2e 0%, #1e2738 100%);
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 0 1 1 0;
 }
 
 .standings-table .table-row-cell:odd {
-    -fx-background-color: #232f3e;
+    -fx-background-color: linear-gradient(to right, #141824 0%, #1a202c 100%);
 }
 
 .standings-table .table-row-cell:selected {
-    -fx-background-color: linear-gradient(to right, rgba(66, 153, 225, 0.3) 0%, rgba(66, 153, 225, 0.1) 100%);
+    -fx-background-color: linear-gradient(to right, rgba(99, 179, 237, 0.25) 0%, rgba(66, 153, 225, 0.15) 100%);
+    -fx-border-color: rgba(255, 255, 255, 0.15);
 }
 
 .standings-table .table-row-cell:hover {
-    -fx-background-color: #2a3a4d;
+    -fx-background-color: linear-gradient(to right, rgba(99, 179, 237, 0.15) 0%, rgba(66, 153, 225, 0.08) 100%);
 }
 
 .standings-table .table-cell {
     -fx-text-fill: #e2e8f0;
     -fx-font-size: 13px;
-    -fx-padding: 12 8;
+    -fx-padding: 10 8;
     -fx-alignment: CENTER;
+    -fx-border-color: rgba(255, 255, 255, 0.3);
+    -fx-border-width: 0 2 2 0;
+}
+
+/* Primera columna (posición) con estilo especial */
+.standings-table .table-row-cell:nth-child(-n+3) .table-cell:first-child {
+    -fx-text-fill: #48bb78;
+    -fx-font-weight: bold;
 }
 
 /* Columna de equipo alineada a la izquierda */
 .standings-table .table-cell:nth-child(2) {
     -fx-alignment: CENTER-LEFT;
     -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+}
+
+/* Columna de puntos destacada */
+.standings-table .table-cell:nth-child(3) {
+    -fx-text-fill: #fbd38d;
+    -fx-font-weight: bold;
 }
 
 /* === SCROLL BAR STYLES === */
 .standings-table .scroll-bar:vertical {
-    -fx-background-color: #1a252f;
-    -fx-pref-width: 10;
+    -fx-background-color: #0f1419;
+    -fx-pref-width: 8;
 }
 
 .standings-table .scroll-bar:vertical .thumb {
-    -fx-background-color: #4a5568;
-    -fx-background-radius: 5;
+    -fx-background-color: linear-gradient(to bottom, #4a5568 0%, #2d3748 100%);
+    -fx-background-radius: 4;
 }
 
 .standings-table .scroll-bar:vertical .thumb:hover {
-    -fx-background-color: #5a6578;
+    -fx-background-color: linear-gradient(to bottom, #63b3ed 0%, #4299e1 100%);
 }
 
 .standings-table .scroll-bar:vertical .track {

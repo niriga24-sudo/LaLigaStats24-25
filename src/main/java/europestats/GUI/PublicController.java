@@ -2,12 +2,15 @@ package europestats.GUI;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import europestats.CLASES.Equip;
+import europestats.CLASES.Jugador;
 import europestats.CSV.LectorCSV;
 import europestats.DAO.EquipDAO;
+import europestats.DAO.JugadorDAO;
 import europestats.MAIN.App;
 import europestats.SERVEIS.SistemaService;
 import javafx.collections.FXCollections;
@@ -16,6 +19,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -79,6 +84,38 @@ public class PublicController {
 
     private final SistemaService sistemaService = new SistemaService();
     private final EquipDAO equipDAO = new EquipDAO();
+    private final JugadorDAO jugadorDAO = new JugadorDAO();
+    
+    // ListView y Label para goleadores
+    @FXML
+    private ListView<String> listGoleadores;
+    @FXML
+    private Label lblGoleadoresTitol;
+    
+    // ListView y Label para asistidores
+    @FXML
+    private ListView<String> listAsistidores;
+    @FXML
+    private Label lblAsistidoresTitol;
+    
+    // ListView y Label para tarjetas amarillas
+    @FXML
+    private ListView<String> listAmarillas;
+    @FXML
+    private Label lblAmarillasTitol;
+    
+    // ListView y Label para tarjetas rojas
+    @FXML
+    private ListView<String> listRojas;
+    @FXML
+    private Label lblRojasTitol;
+    
+    // Datos de jugadores cargados una vez
+    private List<Jugador> totsJugadors;
+    
+    // IDs de ligas en orden de tabs
+    private final int[] lligaIds = {140, 39, 78, 135, 61, 88, 94};
+    private final String[] lligaNoms = {"La Liga", "Premier League", "Bundesliga", "Serie A", "Ligue 1", "Eredivisie", "Primeira Liga"};
 
     @FXML
     public void initialize() {
@@ -98,6 +135,15 @@ public class PublicController {
             
             carregarDadesLligues();
             System.out.println("✅ Dades de lligues carregades");
+            
+            carregarJugadors();
+            System.out.println("✅ Jugadors carregats");
+            
+            // Mostrar goleadores y asistidores de la primera liga por defecto
+            actualitzarGoleadores(0);
+            actualitzarAsistidores(0);
+            actualitzarAmarillas(0);
+            actualitzarRojas(0);
             
             System.out.println("✅ PublicController inicialitzat correctament");
         } catch (Exception e) {
@@ -129,6 +175,11 @@ public class PublicController {
                     taules[i].setManaged(visible);
                 }
             }
+            // Actualizar goleadores y asistidores al cambiar de liga
+            actualitzarGoleadores(index);
+            actualitzarAsistidores(index);
+            actualitzarAmarillas(index);
+            actualitzarRojas(index);
         });
         
         // Mostrar la primera tabla por defecto
@@ -263,6 +314,134 @@ public class PublicController {
 
         ObservableList<Equip> dades = FXCollections.observableArrayList(equipsLliga);
         tabla.setItems(dades);
+    }
+    
+    private void carregarJugadors() {
+        try {
+            System.out.println("⚽ Carregant jugadors...");
+            if (sistemaService.isBBDDConnectada()) {
+                System.out.println("🌐 Carregant jugadors des de BBDD...");
+                totsJugadors = jugadorDAO.obtenirTotsElsJugadors();
+            } else {
+                System.out.println("📁 Carregant jugadors des de CSV...");
+                totsJugadors = LectorCSV.carregarJugadorsDesDeFitxer("DATA/jugadors.csv");
+            }
+            
+            if (totsJugadors != null) {
+                System.out.println("✅ S'han carregat " + totsJugadors.size() + " jugadors");
+            }
+        } catch (Exception e) {
+            System.err.println("❌ Error carregant jugadors: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    private void actualitzarGoleadores(int indexLliga) {
+        if (listGoleadores == null || totsJugadors == null || totsJugadors.isEmpty()) {
+            return;
+        }
+        
+        int idLliga = lligaIds[indexLliga];
+        String nomLliga = lligaNoms[indexLliga];
+        
+        // Actualizar título
+        if (lblGoleadoresTitol != null) {
+            lblGoleadoresTitol.setText("⚽ Top Goleadores - " + nomLliga);
+        }
+        
+        // Filtrar y ordenar goleadores de esta liga (top 10)
+        List<String> goleadores = totsJugadors.stream()
+                .filter(j -> j.getIdLliga() == idLliga)
+                .sorted(Comparator.comparingInt(Jugador::getGols_marcats).reversed())
+                .limit(10)
+                .map(j -> String.format("%d ⚽  %s (%s)", 
+                        j.getGols_marcats(), 
+                        j.getNom(), 
+                        j.getEquip() != null ? j.getEquip().getNom_Equip() : ""))
+                .collect(Collectors.toList());
+        
+        listGoleadores.setItems(FXCollections.observableArrayList(goleadores));
+    }
+    
+    private void actualitzarAsistidores(int indexLliga) {
+        if (listAsistidores == null || totsJugadors == null || totsJugadors.isEmpty()) {
+            return;
+        }
+        
+        int idLliga = lligaIds[indexLliga];
+        String nomLliga = lligaNoms[indexLliga];
+        
+        // Actualizar título
+        if (lblAsistidoresTitol != null) {
+            lblAsistidoresTitol.setText("🎯 Top Asistidores - " + nomLliga);
+        }
+        
+        // Filtrar y ordenar asistidores de esta liga (top 10)
+        List<String> asistidores = totsJugadors.stream()
+                .filter(j -> j.getIdLliga() == idLliga)
+                .sorted(Comparator.comparingInt(Jugador::getAssistencies).reversed())
+                .limit(10)
+                .map(j -> String.format("%d 🎯  %s (%s)", 
+                        j.getAssistencies(), 
+                        j.getNom(), 
+                        j.getEquip() != null ? j.getEquip().getNom_Equip() : ""))
+                .collect(Collectors.toList());
+        
+        listAsistidores.setItems(FXCollections.observableArrayList(asistidores));
+    }
+    
+    private void actualitzarAmarillas(int indexLliga) {
+        if (listAmarillas == null || totsJugadors == null || totsJugadors.isEmpty()) {
+            return;
+        }
+        
+        int idLliga = lligaIds[indexLliga];
+        String nomLliga = lligaNoms[indexLliga];
+        
+        // Actualizar título
+        if (lblAmarillasTitol != null) {
+            lblAmarillasTitol.setText("🟨 Top Tarjetas Amarillas - " + nomLliga);
+        }
+        
+        // Filtrar y ordenar por tarjetas amarillas de esta liga (top 10)
+        List<String> amarillas = totsJugadors.stream()
+                .filter(j -> j.getIdLliga() == idLliga)
+                .sorted(Comparator.comparingInt(Jugador::getTargetes_Grogues).reversed())
+                .limit(10)
+                .map(j -> String.format("%d 🟨  %s (%s)", 
+                        j.getTargetes_Grogues(), 
+                        j.getNom(), 
+                        j.getEquip() != null ? j.getEquip().getNom_Equip() : ""))
+                .collect(Collectors.toList());
+        
+        listAmarillas.setItems(FXCollections.observableArrayList(amarillas));
+    }
+    
+    private void actualitzarRojas(int indexLliga) {
+        if (listRojas == null || totsJugadors == null || totsJugadors.isEmpty()) {
+            return;
+        }
+        
+        int idLliga = lligaIds[indexLliga];
+        String nomLliga = lligaNoms[indexLliga];
+        
+        // Actualizar título
+        if (lblRojasTitol != null) {
+            lblRojasTitol.setText("🟥 Top Tarjetas Rojas - " + nomLliga);
+        }
+        
+        // Filtrar y ordenar por tarjetas rojas de esta liga (top 10)
+        List<String> rojas = totsJugadors.stream()
+                .filter(j -> j.getIdLliga() == idLliga)
+                .sorted(Comparator.comparingInt(Jugador::getTargetes_Vermelles).reversed())
+                .limit(10)
+                .map(j -> String.format("%d 🟥  %s (%s)", 
+                        j.getTargetes_Vermelles(), 
+                        j.getNom(), 
+                        j.getEquip() != null ? j.getEquip().getNom_Equip() : ""))
+                .collect(Collectors.toList());
+        
+        listRojas.setItems(FXCollections.observableArrayList(rojas));
     }
 
     @FXML
