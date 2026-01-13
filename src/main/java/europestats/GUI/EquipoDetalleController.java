@@ -143,7 +143,7 @@ public class EquipoDetalleController {
         if (equipoActual == null) return;
 
         // Nombre y liga
-        lblNombreEquipo.setText(equipoActual.getNom_Equip() != null ? equipoActual.getNom_Equip() : "Equipo desconocido");
+        lblNombreEquipo.setText(equipoActual.getNom_Equip() != null ? equipoActual.getNom_Equip() : "Equip desconegut");
         
         String nombreLiga = equipoActual.getLliga();
         if (nombreLiga == null || nombreLiga.isEmpty()) {
@@ -204,7 +204,7 @@ public class EquipoDetalleController {
                 ObservableList<Jugador> datos = FXCollections.observableArrayList(jugadoresEquipo);
                 tablaJugadores.setItems(datos);
                 
-                lblTotalJugadores.setText("Total: " + jugadoresEquipo.size() + " jugadores");
+                lblTotalJugadores.setText("Total: " + jugadoresEquipo.size() + " jugadors");
                 System.out.println("✅ Cargados " + jugadoresEquipo.size() + " jugadores para " + equipoActual.getNom_Equip());
                 
                 // Cargar Top 3 Goleadores y Asistentes
@@ -213,7 +213,7 @@ public class EquipoDetalleController {
             }
         } catch (Exception e) {
             System.err.println("❌ Error cargando jugadores: " + e.getMessage());
-            lblTotalJugadores.setText("Error al cargar jugadores");
+            lblTotalJugadores.setText("Error al carregar jugadors");
         }
     }
     
@@ -359,7 +359,7 @@ public class EquipoDetalleController {
             Parent root = loader.load();
             Stage stage = (Stage) lblNombreEquipo.getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.setTitle("EUROPESTATS - Todos los Equipos");
+            stage.setTitle("EUROPESTATS - Tots els Equips");
         } catch (Exception e) {
             System.err.println("Error al cargar equipos: " + e.getMessage());
         }
@@ -372,7 +372,7 @@ public class EquipoDetalleController {
             Parent root = loader.load();
             Stage stage = (Stage) lblNombreEquipo.getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.setTitle("EUROPESTATS - Todos los Jugadores");
+            stage.setTitle("EUROPESTATS - Tots els Jugadors");
         } catch (Exception e) {
             System.err.println("Error al cargar jugadores: " + e.getMessage());
         }
@@ -381,9 +381,9 @@ public class EquipoDetalleController {
     @FXML
     private void handleAcercaDe() {
         javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
-        alert.setTitle("ℹ️ Acerca de EUROPESTATS");
-        alert.setHeaderText("EUROPESTATS - Estadísticas de Fútbol Europeo");
-        alert.setContentText("Versión 1.0\n\nAplicación de estadísticas de las principales ligas europeas.\n\nTemporada 2023-2024\n\n© 2024 EUROPESTATS");
+        alert.setTitle("ℹ️ Sobre EUROPESTATS");
+        alert.setHeaderText("EUROPESTATS - Estadístiques de Futbol Europeu");
+        alert.setContentText("Versió 1.0\n\nAplicació d'estadístiques de les principals lligues europees.\n\nTemporada 2023-2024\n\n© 2024 EUROPESTATS");
         alert.showAndWait();
     }
 }

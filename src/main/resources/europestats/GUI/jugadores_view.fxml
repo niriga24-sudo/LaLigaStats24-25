@@ -23,36 +23,36 @@
     <!-- Header -->
     <top>
         <HBox alignment="CENTER" spacing="20" styleClass="header-bar">
-            <!-- Botón Volver -->
+            <!-- Botó Tornar -->
             <HBox alignment="CENTER_LEFT" minWidth="200">
                 <padding>
                     <Insets left="20"/>
                 </padding>
-                <Button text="← Volver" onAction="#handleVolver" style="-fx-background-color: transparent; -fx-text-fill: #58a6ff; -fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                <Button text="← Tornar" onAction="#handleVolver" style="-fx-background-color: transparent; -fx-text-fill: #58a6ff; -fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;"/>
             </HBox>
             
-            <!-- Logo centro como MenuButton -->
+            <!-- Logo centre com a MenuButton -->
             <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
                 <MenuButton fx:id="menuLogo" styleClass="logo-menu-button">
                     <graphic>
                         <ImageView fx:id="imgLogoHeader" fitHeight="50" fitWidth="150" preserveRatio="true"/>
                     </graphic>
                     <items>
-                        <MenuItem text="🏠 Inicio" onAction="#handleInicio"/>
-                        <MenuItem text="🏟️ Todos los Equipos" onAction="#handleEquipos"/>
-                        <MenuItem text="⚽ Todos los Jugadores" onAction="#handleJugadores"/>
+                        <MenuItem text="🏠 Inici" onAction="#handleInicio"/>
+                        <MenuItem text="🏟️ Tots els Equips" onAction="#handleEquipos"/>
+                        <MenuItem text="⚽ Tots els Jugadors" onAction="#handleJugadores"/>
                         <SeparatorMenuItem/>
-                        <MenuItem text="ℹ️ Acerca de" onAction="#handleAcercaDe"/>
+                        <MenuItem text="ℹ️ Sobre l'aplicació" onAction="#handleAcercaDe"/>
                     </items>
                 </MenuButton>
             </HBox>
             
-            <!-- Título -->
+            <!-- Títol -->
             <HBox alignment="CENTER_RIGHT" minWidth="200">
                 <padding>
                     <Insets right="20"/>
                 </padding>
-                <Label text="⚽ Todos los Jugadores" styleClass="page-title"/>
+                <Label text="⚽ Tots els Jugadors" styleClass="page-title"/>
             </HBox>
         </HBox>
     </top>
@@ -64,29 +64,29 @@
                 <Insets top="20" right="30" bottom="20" left="30"/>
             </padding>
             
-            <!-- Barra de búsqueda -->
+            <!-- Barra de cerca -->
             <HBox alignment="CENTER" spacing="15" styleClass="search-bar">
                 <Label text="🔍" styleClass="search-icon"/>
-                <TextField fx:id="txtBuscar" promptText="Buscar jugador por nombre, equipo o posición..." 
+                <TextField fx:id="txtBuscar" promptText="Cercar jugador per nom, equip o posició..." 
                            styleClass="search-field" prefWidth="500" 
                            onKeyReleased="#handleBuscar"/>
-                <Button text="Limpiar" onAction="#handleLimpiar" styleClass="clear-button"/>
+                <Button text="Netejar" onAction="#handleLimpiar" styleClass="clear-button"/>
             </HBox>
             
-            <!-- Info de resultados -->
+            <!-- Info de resultats -->
             <HBox alignment="CENTER_LEFT">
-                <Label fx:id="lblResultados" text="Mostrando todos los jugadores" styleClass="results-info"/>
+                <Label fx:id="lblResultados" text="Mostrant tots els jugadors" styleClass="results-info"/>
             </HBox>
             
-            <!-- Tabla de jugadores -->
+            <!-- Taula de jugadors -->
             <TableView fx:id="tablaJugadores" styleClass="standings-table" VBox.vgrow="ALWAYS">
                 <columns>
                     <TableColumn fx:id="colNombre" text="JUGADOR" prefWidth="200"/>
                     <TableColumn fx:id="colPosicion" text="POS" prefWidth="80"/>
-                    <TableColumn fx:id="colEquipo" text="EQUIPO" prefWidth="180"/>
-                    <TableColumn fx:id="colLiga" text="LIGA" prefWidth="130"/>
-                    <TableColumn fx:id="colGoles" text="GOLES" prefWidth="70"/>
-                    <TableColumn fx:id="colAsistencias" text="ASIST" prefWidth="70"/>
+                    <TableColumn fx:id="colEquipo" text="EQUIP" prefWidth="180"/>
+                    <TableColumn fx:id="colLiga" text="LLIGA" prefWidth="130"/>
+                    <TableColumn fx:id="colGoles" text="GOLS" prefWidth="70"/>
+                    <TableColumn fx:id="colAsistencias" text="ASSIST" prefWidth="70"/>
                     <TableColumn fx:id="colMinutos" text="MIN" prefWidth="70"/>
                     <TableColumn fx:id="colAmarillas" text="🟨" prefWidth="50"/>
                     <TableColumn fx:id="colRojas" text="🟥" prefWidth="50"/>
@@ -103,7 +103,7 @@
             <padding>
                 <Insets top="10" bottom="10"/>
             </padding>
-            <Label fx:id="lblTotalJugadores" text="Total: 0 jugadores" styleClass="footer-text"/>
+            <Label fx:id="lblTotalJugadores" text="Total: 0 jugadors" styleClass="footer-text"/>
         </HBox>
     </bottom>
 

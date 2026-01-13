@@ -95,7 +95,7 @@ public class JugadorDetalleController {
         if (jugadorActual == null) return;
 
         // Nombre y posición
-        lblNombreJugador.setText(jugadorActual.getNom() != null ? jugadorActual.getNom() : "Jugador desconocido");
+        lblNombreJugador.setText(jugadorActual.getNom() != null ? jugadorActual.getNom() : "Jugador desconegut");
         lblPosicion.setText(jugadorActual.getPosicio() != null ? jugadorActual.getPosicio() : "-");
 
         // Equipo y Liga
@@ -289,7 +289,7 @@ public class JugadorDetalleController {
             Parent root = loader.load();
             Stage stage = (Stage) lblNombreJugador.getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.setTitle("EUROPESTATS - Todos los Equipos");
+            stage.setTitle("EUROPESTATS - Tots els Equips");
         } catch (Exception e) {
             System.err.println("Error al cargar equipos: " + e.getMessage());
         }
@@ -302,7 +302,7 @@ public class JugadorDetalleController {
             Parent root = loader.load();
             Stage stage = (Stage) lblNombreJugador.getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.setTitle("EUROPESTATS - Todos los Jugadores");
+            stage.setTitle("EUROPESTATS - Tots els Jugadors");
         } catch (Exception e) {
             System.err.println("Error al cargar jugadores: " + e.getMessage());
         }
@@ -311,9 +311,9 @@ public class JugadorDetalleController {
     @FXML
     private void handleAcercaDe() {
         javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
-        alert.setTitle("ℹ️ Acerca de EUROPESTATS");
-        alert.setHeaderText("EUROPESTATS - Estadísticas de Fútbol Europeo");
-        alert.setContentText("Versión 1.0\n\nAplicación de estadísticas de las principales ligas europeas.\n\nTemporada 2023-2024\n\n© 2024 EUROPESTATS");
+        alert.setTitle("ℹ️ Sobre EUROPESTATS");
+        alert.setHeaderText("EUROPESTATS - Estadístiques de Futbol Europeu");
+        alert.setContentText("Versió 1.0\n\nAplicació d'estadístiques de les principals lligues europees.\n\nTemporada 2023-2024\n\n© 2024 EUROPESTATS");
         alert.showAndWait();
     }
 }

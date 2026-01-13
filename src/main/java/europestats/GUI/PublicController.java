@@ -404,7 +404,7 @@ public class PublicController {
         
         // Actualizar título
         if (lblGoleadoresTitol != null) {
-            lblGoleadoresTitol.setText("⚽ Top Goleadores - " + nomLliga);
+            lblGoleadoresTitol.setText("⚽ Top Golejadors - " + nomLliga);
         }
         
         // Filtrar y ordenar goleadores de esta liga (top 10)
@@ -448,7 +448,7 @@ public class PublicController {
         
         // Actualizar título
         if (lblAsistidoresTitol != null) {
-            lblAsistidoresTitol.setText("🎯 Top Asistidores - " + nomLliga);
+            lblAsistidoresTitol.setText("🎯 Top Assistents - " + nomLliga);
         }
         
         // Filtrar y ordenar asistidores de esta liga (top 10)
@@ -492,7 +492,7 @@ public class PublicController {
         
         // Actualizar título
         if (lblAmarillasTitol != null) {
-            lblAmarillasTitol.setText("🟨 Top Tarjetas Amarillas - " + nomLliga);
+            lblAmarillasTitol.setText("🟨 Top Targetes Grogues - " + nomLliga);
         }
         
         // Filtrar y ordenar por tarjetas amarillas de esta liga (top 10)
@@ -536,7 +536,7 @@ public class PublicController {
         
         // Actualizar título
         if (lblRojasTitol != null) {
-            lblRojasTitol.setText("🟥 Top Tarjetas Rojas - " + nomLliga);
+            lblRojasTitol.setText("🟥 Top Targetes Vermelles - " + nomLliga);
         }
         
         // Filtrar y ordenar por tarjetas rojas de esta liga (top 10)
@@ -616,18 +616,18 @@ public class PublicController {
     @FXML
     private void handleEstadisticas(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("📊 Estadísticas Disponibles");
-        alert.setHeaderText("EUROPESTATS - Estadísticas 2023/24");
+        alert.setTitle("📊 Estadístiques Disponibles");
+        alert.setHeaderText("EUROPESTATS - Estadístiques 2023/24");
         alert.setContentText(
-            "🏆 Ligas disponibles:\n" +
-            "• La Liga (España)\n" +
-            "• Premier League (Inglaterra)\n" +
-            "• Bundesliga (Alemania)\n" +
-            "• Serie A (Italia)\n" +
-            "• Ligue 1 (Francia)\n" +
-            "• Eredivisie (Países Bajos)\n" +
+            "🏆 Lligues disponibles:\n" +
+            "• La Liga (Espanya)\n" +
+            "• Premier League (Anglaterra)\n" +
+            "• Bundesliga (Alemanya)\n" +
+            "• Serie A (Itàlia)\n" +
+            "• Ligue 1 (França)\n" +
+            "• Eredivisie (Països Baixos)\n" +
             "• Primeira Liga (Portugal)\n\n" +
-            "📈 Datos: Clasificación, Goleadores, Asistidores, Tarjetas"
+            "📈 Dades: Classificació, Golejadors, Assistents, Targetes"
         );
         alert.showAndWait();
     }
@@ -645,9 +645,9 @@ public class PublicController {
             actualitzarRojas(indexActual);
             
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("🔄 Actualización");
+            alert.setTitle("🔄 Actualització");
             alert.setHeaderText(null);
-            alert.setContentText("✅ Datos actualizados correctamente");
+            alert.setContentText("✅ Dades actualitzades correctament");
             alert.showAndWait();
         } catch (Exception e) {
             System.err.println("❌ Error al actualizar: " + e.getMessage());
@@ -657,13 +657,13 @@ public class PublicController {
     @FXML
     private void handleAcercaDe(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("ℹ️ Acerca de EUROPESTATS");
+        alert.setTitle("ℹ️ Sobre EUROPESTATS");
         alert.setHeaderText("EUROPESTATS v1.0");
         alert.setContentText(
-            "📊 Aplicación de estadísticas del fútbol europeo\n\n" +
+            "📊 Aplicació d'estadístiques del futbol europeu\n\n" +
             "🏟️ Temporada: 2023/24\n\n" +
-            "📦 Datos: API-Football\n\n" +
-            "💻 JavaFX 21 - Proyecto DAM2"
+            "📦 Dades: API-Football\n\n" +
+            "💻 JavaFX 21 - Projecte DAM2"
         );
         alert.showAndWait();
     }
@@ -677,7 +677,7 @@ public class PublicController {
             Stage stage = (Stage) imgLogoHeader.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            stage.setTitle("EUROPESTATS - Todos los Equipos");
+            stage.setTitle("EUROPESTATS - Tots els Equips");
             stage.centerOnScreen();
             
         } catch (IOException e) {
@@ -695,7 +695,7 @@ public class PublicController {
             Stage stage = (Stage) imgLogoHeader.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            stage.setTitle("EUROPESTATS - Todos los Jugadores");
+            stage.setTitle("EUROPESTATS - Tots els Jugadors");
             stage.centerOnScreen();
             
         } catch (IOException e) {

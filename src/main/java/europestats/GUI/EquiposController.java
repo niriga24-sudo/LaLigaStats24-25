@@ -169,7 +169,7 @@ public class EquiposController {
         
         if (filtro.isEmpty()) {
             equiposFiltrados.setAll(todosEquipos);
-            lblResultados.setText("Mostrando todos los equipos");
+            lblResultados.setText("Mostrant tots els equips");
         } else {
             List<Equip> resultados = todosEquipos.stream()
                 .filter(e -> e.getNom_Equip().toLowerCase().contains(filtro) ||
@@ -177,7 +177,7 @@ public class EquiposController {
                 .collect(Collectors.toList());
             
             equiposFiltrados.setAll(resultados);
-            lblResultados.setText("Resultados para: \"" + txtBuscar.getText() + "\"");
+            lblResultados.setText("Resultats per: \"" + txtBuscar.getText() + "\"");
         }
         
         actualizarContadores(equiposFiltrados.size(), todosEquipos.size());
@@ -187,15 +187,15 @@ public class EquiposController {
     private void handleLimpiar() {
         txtBuscar.clear();
         equiposFiltrados.setAll(todosEquipos);
-        lblResultados.setText("Mostrando todos los equipos");
+        lblResultados.setText("Mostrant tots els equips");
         actualizarContadores(todosEquipos.size(), todosEquipos.size());
     }
     
     private void actualizarContadores(int mostrados, int total) {
         if (mostrados == total) {
-            lblTotalEquipos.setText("Total: " + total + " equipos");
+            lblTotalEquipos.setText("Total: " + total + " equips");
         } else {
-            lblTotalEquipos.setText("Mostrando " + mostrados + " de " + total + " equipos");
+            lblTotalEquipos.setText("Mostrant " + mostrados + " de " + total + " equips");
         }
     }
     
@@ -238,7 +238,7 @@ public class EquiposController {
             Parent root = loader.load();
             Stage stage = (Stage) imgLogoHeader.getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.setTitle("EUROPESTATS - Todos los Jugadores");
+            stage.setTitle("EUROPESTATS - Tots els Jugadors");
         } catch (Exception e) {
             System.err.println("Error al cargar jugadores: " + e.getMessage());
         }
@@ -247,9 +247,9 @@ public class EquiposController {
     @FXML
     private void handleAcercaDe() {
         javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
-        alert.setTitle("ℹ️ Acerca de EUROPESTATS");
-        alert.setHeaderText("EUROPESTATS - Estadísticas de Fútbol Europeo");
-        alert.setContentText("Versión 1.0\n\nAplicación de estadísticas de las principales ligas europeas.\n\nTemporada 2023-2024\n\n© 2024 EUROPESTATS");
+        alert.setTitle("ℹ️ Sobre EUROPESTATS");
+        alert.setHeaderText("EUROPESTATS - Estadístiques de Futbol Europeu");
+        alert.setContentText("Versió 1.0\n\nAplicació d'estadístiques de les principals lligues europees.\n\nTemporada 2023-2024\n\n© 2024 EUROPESTATS");
         alert.showAndWait();
     }
 }

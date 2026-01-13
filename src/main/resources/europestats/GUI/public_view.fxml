@@ -49,10 +49,10 @@
                         <ImageView fx:id="imgLogoHeader" fitHeight="50" fitWidth="150" preserveRatio="true"/>
                     </graphic>
                     <items>
-                        <MenuItem text="🏠 Inicio" onAction="#handleInicio"/>
-                        <MenuItem text="🏟️ Todos los Equipos" onAction="#handleEquipos"/>
-                        <MenuItem text="⚽ Todos los Jugadores" onAction="#handleJugadores"/>
-                        <MenuItem text=" Actualizar Datos" onAction="#handleActualizar"/>
+                        <MenuItem text="🏠 Inici" onAction="#handleInicio"/>
+                        <MenuItem text="🏟️ Tots els Equips" onAction="#handleEquipos"/>
+                        <MenuItem text="⚽ Tots els Jugadors" onAction="#handleJugadores"/>
+                        <MenuItem text=" Actualitzar Dades" onAction="#handleActualizar"/>
                     </items>
                 </MenuButton>
             </HBox>
@@ -76,7 +76,7 @@
                 <TableView fx:id="tablaLaLiga" styleClass="standings-table" VBox.vgrow="ALWAYS">
                     <columns>
                         <TableColumn fx:id="colPosLaLiga" text="#" prefWidth="40"/>
-                        <TableColumn fx:id="colEquipLaLiga" text="EQUIPO" prefWidth="200"/>
+                        <TableColumn fx:id="colEquipLaLiga" text="EQUIP" prefWidth="200"/>
                         <TableColumn fx:id="colPuntsLaLiga" text="PTS" prefWidth="50"/>
                         <TableColumn fx:id="colPJLaLiga" text="PJ" prefWidth="40"/>
                         <TableColumn fx:id="colVictLaLiga" text="V" prefWidth="40"/>
@@ -92,7 +92,7 @@
                 <TableView fx:id="tablaPremier" styleClass="standings-table" VBox.vgrow="ALWAYS" visible="false" managed="false">
                     <columns>
                         <TableColumn fx:id="colPosPremier" text="#" prefWidth="40"/>
-                        <TableColumn fx:id="colEquipPremier" text="EQUIPO" prefWidth="200"/>
+                        <TableColumn fx:id="colEquipPremier" text="EQUIP" prefWidth="200"/>
                         <TableColumn fx:id="colPuntsPremier" text="PTS" prefWidth="50"/>
                         <TableColumn fx:id="colPJPremier" text="PJ" prefWidth="40"/>
                         <TableColumn fx:id="colVictPremier" text="V" prefWidth="40"/>
@@ -108,7 +108,7 @@
                 <TableView fx:id="tablaBundesliga" styleClass="standings-table" VBox.vgrow="ALWAYS" visible="false" managed="false">
                     <columns>
                         <TableColumn fx:id="colPosBundesliga" text="#" prefWidth="40"/>
-                        <TableColumn fx:id="colEquipBundesliga" text="EQUIPO" prefWidth="200"/>
+                        <TableColumn fx:id="colEquipBundesliga" text="EQUIP" prefWidth="200"/>
                         <TableColumn fx:id="colPuntsBundesliga" text="PTS" prefWidth="50"/>
                         <TableColumn fx:id="colPJBundesliga" text="PJ" prefWidth="40"/>
                         <TableColumn fx:id="colVictBundesliga" text="V" prefWidth="40"/>
@@ -124,7 +124,7 @@
                 <TableView fx:id="tablaSerieA" styleClass="standings-table" VBox.vgrow="ALWAYS" visible="false" managed="false">
                     <columns>
                         <TableColumn fx:id="colPosSerieA" text="#" prefWidth="40"/>
-                        <TableColumn fx:id="colEquipSerieA" text="EQUIPO" prefWidth="200"/>
+                        <TableColumn fx:id="colEquipSerieA" text="EQUIP" prefWidth="200"/>
                         <TableColumn fx:id="colPuntsSerieA" text="PTS" prefWidth="50"/>
                         <TableColumn fx:id="colPJSerieA" text="PJ" prefWidth="40"/>
                         <TableColumn fx:id="colVictSerieA" text="V" prefWidth="40"/>
@@ -140,7 +140,7 @@
                 <TableView fx:id="tablaLigue1" styleClass="standings-table" VBox.vgrow="ALWAYS" visible="false" managed="false">
                     <columns>
                         <TableColumn fx:id="colPosLigue1" text="#" prefWidth="40"/>
-                        <TableColumn fx:id="colEquipLigue1" text="EQUIPO" prefWidth="200"/>
+                        <TableColumn fx:id="colEquipLigue1" text="EQUIP" prefWidth="200"/>
                         <TableColumn fx:id="colPuntsLigue1" text="PTS" prefWidth="50"/>
                         <TableColumn fx:id="colPJLigue1" text="PJ" prefWidth="40"/>
                         <TableColumn fx:id="colVictLigue1" text="V" prefWidth="40"/>
@@ -156,7 +156,7 @@
                 <TableView fx:id="tablaEredivisie" styleClass="standings-table" VBox.vgrow="ALWAYS" visible="false" managed="false">
                     <columns>
                         <TableColumn fx:id="colPosEredivisie" text="#" prefWidth="40"/>
-                        <TableColumn fx:id="colEquipEredivisie" text="EQUIPO" prefWidth="200"/>
+                        <TableColumn fx:id="colEquipEredivisie" text="EQUIP" prefWidth="200"/>
                         <TableColumn fx:id="colPuntsEredivisie" text="PTS" prefWidth="50"/>
                         <TableColumn fx:id="colPJEredivisie" text="PJ" prefWidth="40"/>
                         <TableColumn fx:id="colVictEredivisie" text="V" prefWidth="40"/>
@@ -172,7 +172,7 @@
                 <TableView fx:id="tablaPrimeira" styleClass="standings-table" VBox.vgrow="ALWAYS" visible="false" managed="false">
                     <columns>
                         <TableColumn fx:id="colPosPrimeira" text="#" prefWidth="40"/>
-                        <TableColumn fx:id="colEquipPrimeira" text="EQUIPO" prefWidth="200"/>
+                        <TableColumn fx:id="colEquipPrimeira" text="EQUIP" prefWidth="200"/>
                         <TableColumn fx:id="colPuntsPrimeira" text="PTS" prefWidth="50"/>
                         <TableColumn fx:id="colPJPrimeira" text="PJ" prefWidth="40"/>
                         <TableColumn fx:id="colVictPrimeira" text="V" prefWidth="40"/>
@@ -190,22 +190,22 @@
                 <!-- Fila superior: 2 cuadrados -->
                 <HBox spacing="10" VBox.vgrow="ALWAYS" fillHeight="true">
                     <VBox fx:id="quadrant1" styleClass="quadrant-box" HBox.hgrow="ALWAYS" minWidth="250" minHeight="200" fillWidth="true">
-                        <Label fx:id="lblGoleadoresTitol" text="⚽ Top Goleadores" styleClass="quadrant-title" maxWidth="Infinity"/>
+                        <Label fx:id="lblGoleadoresTitol" text="⚽ Top Golejadors" styleClass="quadrant-title" maxWidth="Infinity"/>
                         <ListView fx:id="listGoleadores" styleClass="stats-list" VBox.vgrow="ALWAYS"/>
                     </VBox>
                     <VBox fx:id="quadrant2" styleClass="quadrant-box" HBox.hgrow="ALWAYS" minWidth="250" minHeight="200" fillWidth="true">
-                        <Label fx:id="lblAsistidoresTitol" text="🎯 Top Asistidores" styleClass="quadrant-title" maxWidth="Infinity"/>
+                        <Label fx:id="lblAsistidoresTitol" text="🎯 Top Assistents" styleClass="quadrant-title" maxWidth="Infinity"/>
                         <ListView fx:id="listAsistidores" styleClass="stats-list" VBox.vgrow="ALWAYS"/>
                     </VBox>
                 </HBox>
                 <!-- Fila inferior: 2 cuadrados -->
                 <HBox spacing="10" VBox.vgrow="ALWAYS" fillHeight="true">
                     <VBox fx:id="quadrant3" styleClass="quadrant-box" HBox.hgrow="ALWAYS" minWidth="250" minHeight="200" fillWidth="true">
-                        <Label fx:id="lblAmarillasTitol" text="🟨 Top Tarjetas Amarillas" styleClass="quadrant-title" maxWidth="Infinity"/>
+                        <Label fx:id="lblAmarillasTitol" text="🟨 Top Targetes Grogues" styleClass="quadrant-title" maxWidth="Infinity"/>
                         <ListView fx:id="listAmarillas" styleClass="stats-list" VBox.vgrow="ALWAYS"/>
                     </VBox>
                     <VBox fx:id="quadrant4" styleClass="quadrant-box" HBox.hgrow="ALWAYS" minWidth="250" minHeight="200" fillWidth="true">
-                        <Label fx:id="lblRojasTitol" text="🟥 Top Tarjetas Rojas" styleClass="quadrant-title" maxWidth="Infinity"/>
+                        <Label fx:id="lblRojasTitol" text="🟥 Top Targetes Vermelles" styleClass="quadrant-title" maxWidth="Infinity"/>
                         <ListView fx:id="listRojas" styleClass="stats-list" VBox.vgrow="ALWAYS"/>
                     </VBox>
                 </HBox>

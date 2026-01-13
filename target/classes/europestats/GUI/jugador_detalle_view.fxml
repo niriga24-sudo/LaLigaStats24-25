@@ -24,7 +24,7 @@
                 <padding>
                     <Insets left="20"/>
                 </padding>
-                <Button text="← Volver" onAction="#handleVolver" style="-fx-background-color: transparent; -fx-text-fill: #58a6ff; -fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                <Button text="← Tornar" onAction="#handleVolver" style="-fx-background-color: transparent; -fx-text-fill: #58a6ff; -fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;"/>
             </HBox>
             
             <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
@@ -33,11 +33,11 @@
                         <ImageView fx:id="imgLogoHeader" fitHeight="50" fitWidth="150" preserveRatio="true"/>
                     </graphic>
                     <items>
-                        <MenuItem text="🏠 Inicio" onAction="#handleInicio"/>
-                        <MenuItem text="🏟️ Todos los Equipos" onAction="#handleEquipos"/>
-                        <MenuItem text="⚽ Todos los Jugadores" onAction="#handleJugadores"/>
+                        <MenuItem text="🏠 Inici" onAction="#handleInicio"/>
+                        <MenuItem text="🏟️ Tots els Equips" onAction="#handleEquipos"/>
+                        <MenuItem text="⚽ Tots els Jugadors" onAction="#handleJugadores"/>
                         <SeparatorMenuItem/>
-                        <MenuItem text="ℹ️ Acerca de" onAction="#handleAcercaDe"/>
+                        <MenuItem text="ℹ️ Sobre nosaltres" onAction="#handleAcercaDe"/>
                     </items>
                 </MenuButton>
             </HBox>
@@ -60,13 +60,13 @@
             <!-- FILA SUPERIOR: Nombre del jugador grande -->
             <HBox alignment="CENTER" spacing="20" style="-fx-background-color: linear-gradient(to right, #1a1f29, #2d3748, #1a1f29); -fx-padding: 25 40;">
                 <VBox alignment="CENTER" spacing="5">
-                    <Label fx:id="lblNombreJugador" text="Nombre del Jugador" style="-fx-text-fill: white; -fx-font-size: 36px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 5, 0, 0, 2);"/>
+                    <Label fx:id="lblNombreJugador" text="Nom del Jugador" style="-fx-text-fill: white; -fx-font-size: 36px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 5, 0, 0, 2);"/>
                     <HBox alignment="CENTER" spacing="20">
-                        <Label fx:id="lblPosicion" text="Posición" style="-fx-text-fill: #f0883e; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+                        <Label fx:id="lblPosicion" text="Posició" style="-fx-text-fill: #f0883e; -fx-font-size: 18px; -fx-font-weight: bold;"/>
                         <Label text="|" style="-fx-text-fill: #30363d; -fx-font-size: 18px;"/>
-                        <Button fx:id="btnEquipo" text="Equipo" onAction="#handleVerEquipo" style="-fx-background-color: transparent; -fx-text-fill: #58a6ff; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand; -fx-underline: true;"/>
+                        <Button fx:id="btnEquipo" text="Equip" onAction="#handleVerEquipo" style="-fx-background-color: transparent; -fx-text-fill: #58a6ff; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand; -fx-underline: true;"/>
                         <Label text="|" style="-fx-text-fill: #30363d; -fx-font-size: 18px;"/>
-                        <Button fx:id="btnLiga" text="Liga" onAction="#handleVerLiga" style="-fx-background-color: transparent; -fx-text-fill: #63b3ed; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand; -fx-underline: true;"/>
+                        <Button fx:id="btnLiga" text="Lliga" onAction="#handleVerLiga" style="-fx-background-color: transparent; -fx-text-fill: #63b3ed; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand; -fx-underline: true;"/>
                     </HBox>
                 </VBox>
             </HBox>
@@ -82,54 +82,54 @@
                     
                     <!-- Estadísticas principales -->
                     <VBox spacing="0" style="-fx-background-color: #0d1117; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 4);">
-                        <Label text="📊 ESTADÍSTICAS PRINCIPALES" style="-fx-text-fill: #58a6ff; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #161b22; -fx-padding: 15 20; -fx-min-width: 380;"/>
+                        <Label text="📊 ESTADÍSTIQUES PRINCIPALS" style="-fx-text-fill: #58a6ff; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #161b22; -fx-padding: 15 20; -fx-min-width: 380;"/>
                         
                         <HBox alignment="CENTER" spacing="20" style="-fx-background-color: #161b22; -fx-padding: 20 25; -fx-border-color: transparent transparent #30363d transparent; -fx-border-width: 0 0 1 0;">
                             <Label text="⚽" style="-fx-font-size: 24px;"/>
-                            <Label text="Goles" style="-fx-text-fill: #c9d1d9; -fx-font-size: 18px;" HBox.hgrow="ALWAYS"/>
+                            <Label text="Gols" style="-fx-text-fill: #c9d1d9; -fx-font-size: 18px;" HBox.hgrow="ALWAYS"/>
                             <Label fx:id="lblGoles" text="-" style="-fx-text-fill: #3fb950; -fx-font-size: 28px; -fx-font-weight: bold;"/>
                         </HBox>
                         
                         <HBox alignment="CENTER" spacing="20" style="-fx-background-color: #0d1117; -fx-padding: 20 25; -fx-border-color: transparent transparent #30363d transparent; -fx-border-width: 0 0 1 0;">
                             <Label text="🅰️" style="-fx-font-size: 24px;"/>
-                            <Label text="Asistencias" style="-fx-text-fill: #c9d1d9; -fx-font-size: 18px;" HBox.hgrow="ALWAYS"/>
+                            <Label text="Assistències" style="-fx-text-fill: #c9d1d9; -fx-font-size: 18px;" HBox.hgrow="ALWAYS"/>
                             <Label fx:id="lblAsistencias" text="-" style="-fx-text-fill: #58a6ff; -fx-font-size: 28px; -fx-font-weight: bold;"/>
                         </HBox>
                         
                         <HBox alignment="CENTER" spacing="20" style="-fx-background-color: #161b22; -fx-padding: 20 25; -fx-border-color: transparent transparent #30363d transparent; -fx-border-width: 0 0 1 0;">
                             <Label text="⏱️" style="-fx-font-size: 24px;"/>
-                            <Label text="Minutos Jugados" style="-fx-text-fill: #c9d1d9; -fx-font-size: 18px;" HBox.hgrow="ALWAYS"/>
+                            <Label text="Minuts Jugats" style="-fx-text-fill: #c9d1d9; -fx-font-size: 18px;" HBox.hgrow="ALWAYS"/>
                             <Label fx:id="lblMinutos" text="-" style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold;"/>
                         </HBox>
                         
                         <HBox alignment="CENTER" spacing="20" style="-fx-background-color: #0d1117; -fx-padding: 20 25; -fx-border-color: transparent transparent #30363d transparent; -fx-border-width: 0 0 1 0;">
                             <Label text="🟨" style="-fx-font-size: 24px;"/>
-                            <Label text="Tarjetas Amarillas" style="-fx-text-fill: #c9d1d9; -fx-font-size: 18px;" HBox.hgrow="ALWAYS"/>
+                            <Label text="Targetes Grogues" style="-fx-text-fill: #c9d1d9; -fx-font-size: 18px;" HBox.hgrow="ALWAYS"/>
                             <Label fx:id="lblAmarillas" text="-" style="-fx-text-fill: #d29922; -fx-font-size: 28px; -fx-font-weight: bold;"/>
                         </HBox>
                         
                         <HBox alignment="CENTER" spacing="20" style="-fx-background-color: #161b22; -fx-padding: 20 25;">
                             <Label text="🟥" style="-fx-font-size: 24px;"/>
-                            <Label text="Tarjetas Rojas" style="-fx-text-fill: #c9d1d9; -fx-font-size: 18px;" HBox.hgrow="ALWAYS"/>
+                            <Label text="Targetes Vermelles" style="-fx-text-fill: #c9d1d9; -fx-font-size: 18px;" HBox.hgrow="ALWAYS"/>
                             <Label fx:id="lblRojas" text="-" style="-fx-text-fill: #f85149; -fx-font-size: 28px; -fx-font-weight: bold;"/>
                         </HBox>
                     </VBox>
                     
-                    <!-- Rendimiento por 90 minutos -->
+                    <!-- Rendiment per 90 minuts -->
                     <VBox spacing="0" style="-fx-background-color: #0d1117; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 4);">
-                        <Label text="⏱️ RENDIMIENTO POR 90 MIN" style="-fx-text-fill: #f0883e; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #161b22; -fx-padding: 15 20; -fx-min-width: 380;"/>
+                        <Label text="⏱️ RENDIMENT PER 90 MIN" style="-fx-text-fill: #f0883e; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #161b22; -fx-padding: 15 20; -fx-min-width: 380;"/>
                         <HBox spacing="0" alignment="CENTER" style="-fx-padding: 25 15;">
                             <VBox alignment="CENTER" spacing="8" HBox.hgrow="ALWAYS">
                                 <Label fx:id="lblGolesPer90" text="-" style="-fx-text-fill: #3fb950; -fx-font-size: 38px; -fx-font-weight: bold;"/>
-                                <Label text="GOLES/90" style="-fx-text-fill: #8b949e; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                                <Label text="GOLS/90" style="-fx-text-fill: #8b949e; -fx-font-size: 12px; -fx-font-weight: bold;"/>
                             </VBox>
                             <VBox alignment="CENTER" spacing="8" style="-fx-border-color: #30363d; -fx-border-width: 0 1 0 1; -fx-padding: 0 35;" HBox.hgrow="ALWAYS">
                                 <Label fx:id="lblAsistPer90" text="-" style="-fx-text-fill: #58a6ff; -fx-font-size: 38px; -fx-font-weight: bold;"/>
-                                <Label text="ASIST/90" style="-fx-text-fill: #8b949e; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                                <Label text="ASSIST/90" style="-fx-text-fill: #8b949e; -fx-font-size: 12px; -fx-font-weight: bold;"/>
                             </VBox>
                             <VBox alignment="CENTER" spacing="8" HBox.hgrow="ALWAYS">
                                 <Label fx:id="lblPartidos" text="-" style="-fx-text-fill: #f0883e; -fx-font-size: 38px; -fx-font-weight: bold;"/>
-                                <Label text="PARTIDOS" style="-fx-text-fill: #8b949e; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                                <Label text="PARTITS" style="-fx-text-fill: #8b949e; -fx-font-size: 12px; -fx-font-weight: bold;"/>
                             </VBox>
                         </HBox>
                     </VBox>
@@ -139,17 +139,17 @@
                 <!-- COLUMNA CENTRAL -->
                 <VBox spacing="20" alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
                     
-                    <!-- Contribución Ofensiva -->
+                    <!-- Contribució Ofensiva -->
                     <VBox spacing="0" style="-fx-background-color: #0d1117; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 4);">
-                        <Label text="🎯 CONTRIBUCIÓN OFENSIVA" style="-fx-text-fill: #3fb950; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #161b22; -fx-padding: 15 20; -fx-min-width: 380;"/>
+                        <Label text="🎯 CONTRIBUCIÓ OFENSIVA" style="-fx-text-fill: #3fb950; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #161b22; -fx-padding: 15 20; -fx-min-width: 380;"/>
                         <HBox alignment="CENTER" spacing="30" style="-fx-padding: 30 20;">
                             <VBox alignment="CENTER" spacing="10">
                                 <Label fx:id="lblGolesTotal" text="-" style="-fx-text-fill: #3fb950; -fx-font-size: 52px; -fx-font-weight: bold;"/>
-                                <Label text="⚽ Goles" style="-fx-text-fill: #8b949e; -fx-font-size: 14px;"/>
+                                <Label text="⚽ Gols" style="-fx-text-fill: #8b949e; -fx-font-size: 14px;"/>
                             </VBox>
                             <VBox alignment="CENTER" spacing="10">
                                 <Label fx:id="lblAsistenciasTotal" text="-" style="-fx-text-fill: #58a6ff; -fx-font-size: 52px; -fx-font-weight: bold;"/>
-                                <Label text="🅰️ Asistencias" style="-fx-text-fill: #8b949e; -fx-font-size: 14px;"/>
+                                <Label text="🅰️ Assistències" style="-fx-text-fill: #8b949e; -fx-font-size: 14px;"/>
                             </VBox>
                             <VBox alignment="CENTER" spacing="10">
                                 <Label fx:id="lblContribucion" text="-" style="-fx-text-fill: #f0883e; -fx-font-size: 52px; -fx-font-weight: bold;"/>
@@ -164,11 +164,11 @@
                         <HBox alignment="CENTER" spacing="50" style="-fx-padding: 30 20;">
                             <VBox alignment="CENTER" spacing="10">
                                 <Label fx:id="lblAmarillasTotal" text="-" style="-fx-text-fill: #d29922; -fx-font-size: 52px; -fx-font-weight: bold;"/>
-                                <Label text="🟨 Amarillas" style="-fx-text-fill: #8b949e; -fx-font-size: 14px;"/>
+                                <Label text="🟨 Grogues" style="-fx-text-fill: #8b949e; -fx-font-size: 14px;"/>
                             </VBox>
                             <VBox alignment="CENTER" spacing="10">
                                 <Label fx:id="lblRojasTotal" text="-" style="-fx-text-fill: #f85149; -fx-font-size: 52px; -fx-font-weight: bold;"/>
-                                <Label text="🟥 Rojas" style="-fx-text-fill: #8b949e; -fx-font-size: 14px;"/>
+                                <Label text="🟥 Vermelles" style="-fx-text-fill: #8b949e; -fx-font-size: 14px;"/>
                             </VBox>
                             <VBox alignment="CENTER" spacing="10">
                                 <Label fx:id="lblTarjetasTotal" text="-" style="-fx-text-fill: #8b949e; -fx-font-size: 52px; -fx-font-weight: bold;"/>
@@ -179,52 +179,52 @@
                     
                 </VBox>
                 
-                <!-- COLUMNA DERECHA: Datos del Equipo -->
+                <!-- COLUMNA DRETA: Dades de l'Equip -->
                 <VBox spacing="20" alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
                     
-                    <!-- Info del equipo -->
+                    <!-- Info de l'equip -->
                     <VBox spacing="0" style="-fx-background-color: #0d1117; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 4);">
-                        <Label text="🏆 EQUIPO ACTUAL" style="-fx-text-fill: #63b3ed; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #161b22; -fx-padding: 15 20; -fx-min-width: 340;"/>
+                        <Label text="🏆 EQUIP ACTUAL" style="-fx-text-fill: #63b3ed; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #161b22; -fx-padding: 15 20; -fx-min-width: 340;"/>
                         <VBox alignment="CENTER" spacing="8" style="-fx-padding: 25 20;">
-                            <Label fx:id="lblEquipoInfo" text="Nombre del equipo" style="-fx-text-fill: white; -fx-font-size: 26px; -fx-font-weight: bold;"/>
-                            <Label fx:id="lblLigaInfo" text="Liga" style="-fx-text-fill: #63b3ed; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+                            <Label fx:id="lblEquipoInfo" text="Nom de l'equip" style="-fx-text-fill: white; -fx-font-size: 26px; -fx-font-weight: bold;"/>
+                            <Label fx:id="lblLigaInfo" text="Lliga" style="-fx-text-fill: #63b3ed; -fx-font-size: 16px; -fx-font-weight: bold;"/>
                         </VBox>
                     </VBox>
                     
-                    <!-- Datos del Equipo en la Liga -->
+                    <!-- Dades de l'Equip a la Lliga -->
                     <VBox spacing="0" style="-fx-background-color: #0d1117; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 4);">
-                        <Label fx:id="lblNombreEquipoSeccion" text="🏟️ CLASIFICACIÓN" style="-fx-text-fill: #58a6ff; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #161b22; -fx-padding: 15 20; -fx-min-width: 340;"/>
+                        <Label fx:id="lblNombreEquipoSeccion" text="🏟️ CLASSIFICACIÓ" style="-fx-text-fill: #58a6ff; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #161b22; -fx-padding: 15 20; -fx-min-width: 340;"/>
                         <HBox alignment="CENTER" spacing="25" style="-fx-padding: 25 15;">
                             <VBox alignment="CENTER" spacing="10">
                                 <Label fx:id="lblPosicionEquipo" text="-" style="-fx-text-fill: #3fb950; -fx-font-size: 44px; -fx-font-weight: bold;"/>
-                                <Label text="📊 Posición" style="-fx-text-fill: #8b949e; -fx-font-size: 13px;"/>
+                                <Label text="📊 Posició" style="-fx-text-fill: #8b949e; -fx-font-size: 13px;"/>
                             </VBox>
                             <VBox alignment="CENTER" spacing="10">
                                 <Label fx:id="lblPuntosEquipo" text="-" style="-fx-text-fill: #58a6ff; -fx-font-size: 44px; -fx-font-weight: bold;"/>
-                                <Label text="⭐ Puntos" style="-fx-text-fill: #8b949e; -fx-font-size: 13px;"/>
+                                <Label text="⭐ Punts" style="-fx-text-fill: #8b949e; -fx-font-size: 13px;"/>
                             </VBox>
                             <VBox alignment="CENTER" spacing="10">
                                 <Label fx:id="lblDifGoles" text="-" style="-fx-text-fill: #f0883e; -fx-font-size: 44px; -fx-font-weight: bold;"/>
-                                <Label text="⚽ Dif. Goles" style="-fx-text-fill: #8b949e; -fx-font-size: 13px;"/>
+                                <Label text="⚽ Dif. Gols" style="-fx-text-fill: #8b949e; -fx-font-size: 13px;"/>
                             </VBox>
                         </HBox>
                     </VBox>
                     
-                    <!-- Estadísticas adicionales del equipo -->
+                    <!-- Estadístiques addicionals de l'equip -->
                     <VBox spacing="0" style="-fx-background-color: #0d1117; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 4);">
-                        <Label text="📈 BALANCE DEL EQUIPO" style="-fx-text-fill: #a371f7; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #161b22; -fx-padding: 15 20; -fx-min-width: 340;"/>
+                        <Label text="📈 BALANÇ DE L'EQUIP" style="-fx-text-fill: #a371f7; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #161b22; -fx-padding: 15 20; -fx-min-width: 340;"/>
                         <HBox alignment="CENTER" spacing="20" style="-fx-padding: 25 15;">
                             <VBox alignment="CENTER" spacing="10">
                                 <Label fx:id="lblVictorias" text="-" style="-fx-text-fill: #3fb950; -fx-font-size: 38px; -fx-font-weight: bold;"/>
-                                <Label text="✅ Victorias" style="-fx-text-fill: #8b949e; -fx-font-size: 12px;"/>
+                                <Label text="✅ Victòries" style="-fx-text-fill: #8b949e; -fx-font-size: 12px;"/>
                             </VBox>
                             <VBox alignment="CENTER" spacing="10">
                                 <Label fx:id="lblEmpates" text="-" style="-fx-text-fill: #d29922; -fx-font-size: 38px; -fx-font-weight: bold;"/>
-                                <Label text="🤝 Empates" style="-fx-text-fill: #8b949e; -fx-font-size: 12px;"/>
+                                <Label text="🤝 Empats" style="-fx-text-fill: #8b949e; -fx-font-size: 12px;"/>
                             </VBox>
                             <VBox alignment="CENTER" spacing="10">
                                 <Label fx:id="lblDerrotas" text="-" style="-fx-text-fill: #f85149; -fx-font-size: 38px; -fx-font-weight: bold;"/>
-                                <Label text="❌ Derrotas" style="-fx-text-fill: #8b949e; -fx-font-size: 12px;"/>
+                                <Label text="❌ Derrotes" style="-fx-text-fill: #8b949e; -fx-font-size: 12px;"/>
                             </VBox>
                         </HBox>
                     </VBox>
@@ -242,7 +242,7 @@
             <padding>
                 <Insets top="10" bottom="10"/>
             </padding>
-            <Label fx:id="lblInfo" text="Información del jugador" styleClass="footer-text"/>
+            <Label fx:id="lblInfo" text="Informació del jugador" styleClass="footer-text"/>
         </HBox>
     </bottom>
 
