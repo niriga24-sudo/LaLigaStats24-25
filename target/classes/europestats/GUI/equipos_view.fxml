@@ -38,11 +38,11 @@
                         <ImageView fx:id="imgLogoHeader" fitHeight="50" fitWidth="150" preserveRatio="true"/>
                     </graphic>
                     <items>
-                        <MenuItem text="🏠 Inici" onAction="#handleInicio"/>
-                        <MenuItem text="🏟️ Tots els Equips" onAction="#handleEquipos"/>
-                        <MenuItem text="⚽ Tots els Jugadors" onAction="#handleJugadores"/>
+                        <MenuItem text="Inici" onAction="#handleInicio"/>
+                        <MenuItem text="Tots els Equips" onAction="#handleEquipos"/>
+                        <MenuItem text="Tots els Jugadors" onAction="#handleJugadores"/>
                         <SeparatorMenuItem/>
-                        <MenuItem text="ℹ️ Sobre l'aplicació" onAction="#handleAcercaDe"/>
+                        <MenuItem text="Sobre l'aplicació" onAction="#handleAcercaDe"/>
                     </items>
                 </MenuButton>
             </HBox>
@@ -52,7 +52,7 @@
                 <padding>
                     <Insets right="20"/>
                 </padding>
-                <Label text="🏟️ Tots els Equips" styleClass="page-title"/>
+                <Label text="Tots els Equips" styleClass="page-title"/>
             </HBox>
         </HBox>
     </top>

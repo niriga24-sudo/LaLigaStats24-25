@@ -58,8 +58,8 @@ public class JugadorsOfflineController {
                 omplirFormulari(nou);
         });
 
-        carregarEquipsCSV(); // Cargar equipos PRIMERO
-        carregarDadesCSV();  // Luego jugadores
+        carregarDadesCSV();
+        carregarEquipsCSV(); // Carrega equips des de DATA/equips.csv
     }
 
     private void configurarComboEquip() {
@@ -90,23 +90,8 @@ public class JugadorsOfflineController {
     public void carregarDadesCSV() {
         masterData.clear();
         List<Jugador> dades = LectorCSV.carregarJugadorsDesDeFitxer("DATA/jugadors.csv");
-        if (dades != null) {
-            // Relacionar jugadores con equipos completos
-            if (!equipsOffline.isEmpty()) {
-                for (Jugador j : dades) {
-                    if (j.getEquip() != null) {
-                        int idEquip = j.getEquip().getID();
-                        for (Equip e : equipsOffline) {
-                            if (e.getID() == idEquip) {
-                                j.setEquip(e);
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
+        if (dades != null)
             masterData.addAll(dades);
-        }
     }
 
     private void carregarEquipsCSV() {
@@ -135,20 +120,6 @@ public class JugadorsOfflineController {
 
         dadesFiltrades = new FilteredList<>(masterData, p -> true);
         taulaJugadors.setItems(dadesFiltrades);
-        
-        // Doble click para abrir detalle del jugador
-        taulaJugadors.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2 && event.getButton() == javafx.scene.input.MouseButton.PRIMARY) {
-                Jugador jugadorSeleccionado = taulaJugadors.getSelectionModel().getSelectedItem();
-                if (jugadorSeleccionado != null) {
-                    JugadorDetalleController.abrirDetalleJugador(
-                        jugadorSeleccionado,
-                        taulaJugadors.getScene(),
-                        "Gestió de Jugadors (Offline)"
-                    );
-                }
-            }
-        });
     }
 
     private void configurarFiltre() {

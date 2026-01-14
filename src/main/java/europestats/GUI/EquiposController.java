@@ -14,9 +14,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -25,6 +27,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class EquiposController {
@@ -84,6 +87,45 @@ public class EquiposController {
     private void configurarColumnas() {
         colLiga.setCellValueFactory(new PropertyValueFactory<>("Lliga"));
         colEquipo.setCellValueFactory(new PropertyValueFactory<>("nom_Equip"));
+
+        // Mostrar escudo a la izquierda del nombre del equipo
+        colEquipo.setCellFactory(column -> new TableCell<Equip, String>() {
+            private final ImageView iv = new ImageView();
+            private final HBox box = new HBox(8);
+            {
+                iv.setFitHeight(22); // ajusta al recuadro de la tabla
+                iv.setPreserveRatio(true);
+                box.setAlignment(Pos.CENTER_LEFT);
+            }
+
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    Equip e = getTableRow() != null ? getTableRow().getItem() : null;
+                    iv.setImage(null);
+                    if (e != null) {
+                        // buscar escudo para el equipo
+                        String path = buscarEscudoLocal(e);
+                        if (path != null && !path.isEmpty()) {
+                            java.io.File f = new java.io.File(path);
+                            if (f.exists()) {
+                                iv.setImage(new javafx.scene.image.Image(f.toURI().toString(), 24, 24, true, true));
+                            }
+                        }
+                    }
+                    javafx.scene.control.Label lbl = new javafx.scene.control.Label(item);
+                    lbl.setStyle("-fx-text-fill: #c9d1d9; -fx-font-size: 13px;");
+                    box.getChildren().clear();
+                    box.getChildren().addAll(iv, lbl);
+                    setGraphic(box);
+                    setText(null);
+                }
+            }
+        });
         colPosicion.setCellValueFactory(new PropertyValueFactory<>("Posicio"));
         colPuntos.setCellValueFactory(new PropertyValueFactory<>("Punts"));
         colPJ.setCellValueFactory(new PropertyValueFactory<>("Partits_Jugats"));
@@ -197,6 +239,86 @@ public class EquiposController {
         } else {
             lblTotalEquipos.setText("Mostrant " + mostrados + " de " + total + " equips");
         }
+    }
+
+    /**
+     * Buscar escudo localmente (similar a EquipoDetalleController)
+     */
+    private String buscarEscudoLocal(Equip e) {
+        if (e == null || e.getNom_Equip() == null) return "";
+        String nomEquip = normalitzarPerFitxer(e.getNom_Equip());
+        String nomLliga = normalitzarPerFitxer(e.getLliga());
+        String base = "LOGO/ESCUDOS" + java.io.File.separator;
+        String[] exts = new String[]{".png", ".jpg", ".webp"};
+        java.util.LinkedHashSet<String> candidates = new java.util.LinkedHashSet<>();
+        candidates.add(nomEquip);
+        candidates.add(nomEquip.replaceFirst("^\\d+-", ""));
+        String[] parts = nomEquip.split("-");
+        if (parts.length > 0) candidates.add(parts[parts.length - 1]);
+        candidates.add(nomEquip.replaceAll("^(fsv|vfl|vfb|fc)-", ""));
+        candidates.add(stripCommonSuffixes(nomEquip));
+        java.util.Map<String,String> overrides = java.util.Map.of(
+            "1899-hoffenheim","hoffenheim",
+            "vfl-wolfsburg","wolfsburg",
+            "fsv-mainz-05","mainz-05",
+            "vfl-bochum","bochum",
+            "sheffield-utd","sheffield-united",
+            "stade-brestois-29","brest",
+            "bayern-munich","bayern-munchen",
+            "sv-darmstadt-98","darmstadt",
+            "psv-eindhoven","psv",
+            "celta-vigo","celta"
+        );
+        String norm = nomEquip.toLowerCase();
+        if (overrides.containsKey(norm)) candidates.add(overrides.get(norm));
+
+        // try league folder first
+        for (String c : candidates) {
+            for (String ext : exts) {
+                java.io.File possible = new java.io.File(base + nomLliga + java.io.File.separator + c + ext);
+                if (possible.exists()) return possible.getPath();
+            }
+        }
+        // try all subfolders
+        java.io.File baseDir = new java.io.File(base);
+        java.io.File[] dirs = baseDir.listFiles(java.io.File::isDirectory);
+        if (dirs != null) {
+            for (java.io.File d : dirs) {
+                for (String c : candidates) {
+                    for (String ext : exts) {
+                        java.io.File f = new java.io.File(d, c + ext);
+                        if (f.exists()) return f.getPath();
+                    }
+                }
+            }
+            // fuzzy
+            for (java.io.File d : dirs) {
+                java.io.File[] files = d.listFiles();
+                if (files == null) continue;
+                for (java.io.File f : files) {
+                    String name = f.getName().toLowerCase();
+                    if (name.endsWith(".png") || name.endsWith(".jpg") || name.endsWith(".webp")) {
+                        for (String c : candidates) {
+                            if (!c.isEmpty() && name.contains(c)) return f.getPath();
+                        }
+                    }
+                }
+            }
+        }
+        return "";
+    }
+
+    private String stripCommonSuffixes(String s) {
+        if (s == null) return "";
+        return s.replaceAll("-(cf|fc|c-f|c-f-)$", "").replaceAll("-(a|b)$", "");
+    }
+
+    private String normalitzarPerFitxer(String s) {
+        if (s == null) return "";
+        String n = java.text.Normalizer.normalize(s, java.text.Normalizer.Form.NFD).replaceAll("\\p{M}", "");
+        n = n.toLowerCase().replaceAll("[^a-z0-9]+", "-");
+        n = n.replaceAll("(^-+|-+$)", "");
+        return n;
     }
     
     @FXML

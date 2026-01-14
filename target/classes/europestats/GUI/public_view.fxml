@@ -46,13 +46,12 @@
             <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
                 <MenuButton fx:id="menuLogo" styleClass="logo-menu-button">
                     <graphic>
-                        <ImageView fx:id="imgLogoHeader" fitHeight="50" fitWidth="150" preserveRatio="true"/>
+                        <ImageView fx:id="imgLogoHeader" fitHeight="55" fitWidth="150" preserveRatio="true"/>
                     </graphic>
                     <items>
-                        <MenuItem text="🏠 Inici" onAction="#handleInicio"/>
-                        <MenuItem text="🏟️ Tots els Equips" onAction="#handleEquipos"/>
-                        <MenuItem text="⚽ Tots els Jugadors" onAction="#handleJugadores"/>
-                        <MenuItem text=" Actualitzar Dades" onAction="#handleActualizar"/>
+                        <MenuItem text="Inici" onAction="#handleInicio"/>
+                        <MenuItem text="Tots els Equips" onAction="#handleEquipos"/>
+                        <MenuItem text="Tots els Jugadors" onAction="#handleJugadores"/>
                     </items>
                 </MenuButton>
             </HBox>
@@ -67,11 +66,16 @@
         </HBox>
     </top>
 
+
     <!-- Contenido Central: Tabla izquierda + Espacio derecho -->
     <center>
         <HBox styleClass="content-area" HBox.hgrow="ALWAYS">
             <!-- Mitad izquierda: Tablas -->
             <VBox styleClass="left-panel" HBox.hgrow="ALWAYS" maxWidth="610">
+                <HBox fx:id="leagueHeader" alignment="CENTER_LEFT" spacing="10" styleClass="league-header">
+                    <ImageView fx:id="imgLeagueIcon" fitHeight="36" preserveRatio="true" styleClass="league-icon"/>
+                    <Label fx:id="lblLeagueName" text="" styleClass="league-title"/>
+                </HBox>
                 <!-- La Liga -->
                 <TableView fx:id="tablaLaLiga" styleClass="standings-table" VBox.vgrow="ALWAYS">
                     <columns>
@@ -190,22 +194,22 @@
                 <!-- Fila superior: 2 cuadrados -->
                 <HBox spacing="10" VBox.vgrow="ALWAYS" fillHeight="true">
                     <VBox fx:id="quadrant1" styleClass="quadrant-box" HBox.hgrow="ALWAYS" minWidth="250" minHeight="200" fillWidth="true">
-                        <Label fx:id="lblGoleadoresTitol" text="⚽ Top Golejadors" styleClass="quadrant-title" maxWidth="Infinity"/>
+                        <Label fx:id="lblGoleadoresTitol" text="Top Golejadors" styleClass="quadrant-title" maxWidth="Infinity"/>
                         <ListView fx:id="listGoleadores" styleClass="stats-list" VBox.vgrow="ALWAYS"/>
                     </VBox>
                     <VBox fx:id="quadrant2" styleClass="quadrant-box" HBox.hgrow="ALWAYS" minWidth="250" minHeight="200" fillWidth="true">
-                        <Label fx:id="lblAsistidoresTitol" text="🎯 Top Assistents" styleClass="quadrant-title" maxWidth="Infinity"/>
+                        <Label fx:id="lblAsistidoresTitol" text="Top Assistents" styleClass="quadrant-title" maxWidth="Infinity"/>
                         <ListView fx:id="listAsistidores" styleClass="stats-list" VBox.vgrow="ALWAYS"/>
                     </VBox>
                 </HBox>
                 <!-- Fila inferior: 2 cuadrados -->
                 <HBox spacing="10" VBox.vgrow="ALWAYS" fillHeight="true">
                     <VBox fx:id="quadrant3" styleClass="quadrant-box" HBox.hgrow="ALWAYS" minWidth="250" minHeight="200" fillWidth="true">
-                        <Label fx:id="lblAmarillasTitol" text="🟨 Top Targetes Grogues" styleClass="quadrant-title" maxWidth="Infinity"/>
+                        <Label fx:id="lblAmarillasTitol" text="Top Targetes Grogues" styleClass="quadrant-title" maxWidth="Infinity"/>
                         <ListView fx:id="listAmarillas" styleClass="stats-list" VBox.vgrow="ALWAYS"/>
                     </VBox>
                     <VBox fx:id="quadrant4" styleClass="quadrant-box" HBox.hgrow="ALWAYS" minWidth="250" minHeight="200" fillWidth="true">
-                        <Label fx:id="lblRojasTitol" text="🟥 Top Targetes Vermelles" styleClass="quadrant-title" maxWidth="Infinity"/>
+                        <Label fx:id="lblRojasTitol" text="Top Targetes Vermelles" styleClass="quadrant-title" maxWidth="Infinity"/>
                         <ListView fx:id="listRojas" styleClass="stats-list" VBox.vgrow="ALWAYS"/>
                     </VBox>
                 </HBox>
@@ -216,11 +220,9 @@
     <!-- Footer -->
     <bottom>
         <HBox alignment="CENTER" spacing="30" styleClass="footer-bar">
-            <Label text="© 2024 EuropeStats" styleClass="footer-text"/>
+            <Label text="© 2026 EuropeStats" styleClass="footer-text"/>
             <Label text="•" styleClass="footer-separator"/>
             <Label text="Temporada 2023/24" styleClass="footer-text"/>
-            <Label text="•" styleClass="footer-separator"/>
-            <Label text="Projecte DAM2" styleClass="footer-text"/>
         </HBox>
     </bottom>
 

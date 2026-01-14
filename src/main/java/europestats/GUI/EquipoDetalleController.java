@@ -1,5 +1,9 @@
 package europestats.GUI;
 
+import java.io.File;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import europestats.CLASES.Equip;
 import europestats.CLASES.Jugador;
 import europestats.CSV.LectorCSV;
@@ -19,16 +23,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.util.List;
-import java.util.stream.Collectors;
-
 /**
  * Controlador para la vista de detalle de un equipo
  */
 public class EquipoDetalleController {
 
     @FXML private ImageView imgLogoHeader;
+    @FXML private ImageView imgEscudoEquipo;
     @FXML private Label lblNombreEquipo;
     @FXML private Label lblLiga;
     @FXML private Label lblPosicion;
@@ -126,6 +127,30 @@ public class EquipoDetalleController {
     public void setEquipo(Equip equipo) {
         this.equipoActual = equipo;
         cargarDatosEquipo();
+        cargarEscudoEquipo();
+    }
+
+    private void cargarEscudoEquipo() {
+        try {
+            if (equipoActual == null) return;
+            String escudoPath = buscarEscudoLocal(equipoActual);
+            if (escudoPath != null && !escudoPath.isEmpty()) {
+                File escFile = new File(escudoPath);
+                if (escFile.exists()) {
+                    Image esc = new Image(escFile.toURI().toString(), 48, 48, true, true);
+                    imgEscudoEquipo.setImage(esc);
+                } else {
+                    imgEscudoEquipo.setImage(null);
+                }
+            } else {
+                imgEscudoEquipo.setImage(null);
+            }
+            // Ensure name is readable
+            lblNombreEquipo.setStyle("-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0, 0, 1);");
+        } catch (Exception e) {
+            System.err.println("❌ Error cargando escudo de equipo: " + e.getMessage());
+            imgEscudoEquipo.setImage(null);
+        }
     }
 
     /**
@@ -169,7 +194,7 @@ public class EquipoDetalleController {
         lblDG.setText(difGolesStr);
 
         // Info footer
-        lblInfo.setText("Temporada 2024-2025 | " + nombreLiga);
+        lblInfo.setText("Temporada 2023-2024 | " + nombreLiga);
         
         // Cargar jugadores del equipo
         cargarJugadoresEquipo();
@@ -178,6 +203,86 @@ public class EquipoDetalleController {
     /**
      * Carga los jugadores del equipo actual
      */
+
+    /**
+     * Buscar escudo localmente en LOGO/ESCUDOS usando variantes del nombre
+     */
+    private String buscarEscudoLocal(Equip e) {
+        if (e == null || e.getNom_Equip() == null) return "";
+        String nomEquip = normalitzarPerFitxer(e.getNom_Equip());
+        String nomLliga = normalitzarPerFitxer(e.getLliga());
+        String base = "LOGO/ESCUDOS" + File.separator;
+        String[] exts = new String[]{".png", ".jpg", ".webp"};
+        java.util.LinkedHashSet<String> candidates = new java.util.LinkedHashSet<>();
+        candidates.add(nomEquip);
+        candidates.add(nomEquip.replaceFirst("^\\d+-", ""));
+        String[] parts = nomEquip.split("-");
+        if (parts.length > 0) candidates.add(parts[parts.length - 1]);
+        candidates.add(nomEquip.replaceAll("^(fsv|vfl|vfb|fc)-", ""));
+        candidates.add(stripCommonSuffixes(nomEquip));
+        java.util.Map<String,String> overrides = java.util.Map.of(
+            "1899-hoffenheim","hoffenheim",
+            "vfl-wolfsburg","wolfsburg",
+            "fsv-mainz-05","mainz-05",
+            "vfl-bochum","bochum",
+            "sheffield-utd","sheffield-united",
+            "stade-brestois-29","brest",
+            "bayern-munich","bayern-munchen",
+            "sv-darmstadt-98","darmstadt",
+            "psv-eindhoven","psv",
+            "celta-vigo","celta"
+        );
+        String norm = nomEquip.toLowerCase();
+        if (overrides.containsKey(norm)) candidates.add(overrides.get(norm));
+
+        // try league folder first
+        for (String c : candidates) {
+            for (String ext : exts) {
+                File possible = new File(base + nomLliga + File.separator + c + ext);
+                if (possible.exists()) return possible.getPath();
+            }
+        }
+        // try all subfolders
+        File baseDir = new File(base);
+        File[] dirs = baseDir.listFiles(File::isDirectory);
+        if (dirs != null) {
+            for (File d : dirs) {
+                for (String c : candidates) {
+                    for (String ext : exts) {
+                        File f = new File(d, c + ext);
+                        if (f.exists()) return f.getPath();
+                    }
+                }
+            }
+            // fuzzy
+            for (File d : dirs) {
+                File[] files = d.listFiles();
+                if (files == null) continue;
+                for (File f : files) {
+                    String name = f.getName().toLowerCase();
+                    if (name.endsWith(".png") || name.endsWith(".jpg") || name.endsWith(".webp")) {
+                        for (String c : candidates) {
+                            if (!c.isEmpty() && name.contains(c)) return f.getPath();
+                        }
+                    }
+                }
+            }
+        }
+        return "";
+    }
+
+    private String stripCommonSuffixes(String s) {
+        if (s == null) return "";
+        return s.replaceAll("-(cf|fc|c-f|c-f-)$", "").replaceAll("-(a|b)$", "");
+    }
+
+    private String normalitzarPerFitxer(String s) {
+        if (s == null) return "";
+        String n = java.text.Normalizer.normalize(s, java.text.Normalizer.Form.NFD).replaceAll("\\p{M}", "");
+        n = n.toLowerCase().replaceAll("[^a-z0-9]+", "-");
+        n = n.replaceAll("(^-+|-+$)", "");
+        return n;
+    }
     private void cargarJugadoresEquipo() {
         try {
             List<Jugador> todosJugadores;

@@ -22,6 +22,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TableColumn;
@@ -31,6 +32,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 public class PublicController {
@@ -43,6 +47,12 @@ public class PublicController {
     
     @FXML
     private javafx.scene.control.TabPane tabPane;
+
+    @FXML
+    private ImageView imgLeagueIcon;
+    
+    @FXML
+    private Label lblLeagueName;
 
     // TablesViews para cada liga
     @FXML
@@ -141,11 +151,17 @@ public class PublicController {
             carregarLogo();
             System.out.println("✅ Logo principal carregat");
             
-            carregarLogosLligues();
-            System.out.println("✅ Logos de lligues carregats");
+            carregarBanderesLligues();
+            System.out.println("✅ Banderes de lligues carregades");
             
             configurarNavegacio();
             System.out.println("✅ Navegació configurada");
+            
+            // Inicialitzar l'encapçalament de la lliga (logo + nom)
+            if (tabPane != null) {
+                int initIndex = tabPane.getSelectionModel().getSelectedIndex();
+                actualizarEncabezadoLiga(initIndex >= 0 ? initIndex : 0);
+            }
             
             configurarTaules();
             System.out.println("✅ Taules configurades");
@@ -202,18 +218,13 @@ public class PublicController {
                     taules[i].setManaged(visible);
                 }
             }
-            // Actualizar goleadores y asistidores al cambiar de liga
+            // Actualizar encabezado (logo + nombre) y estadísticas al cambiar de liga
+            actualizarEncabezadoLiga(index);
             actualitzarGoleadores(index);
             actualitzarAsistidores(index);
             actualitzarAmarillas(index);
             actualitzarRojas(index);
         });
-        
-        // Mostrar la primera tabla por defecto
-        if (taules[0] != null) {
-            taules[0].setVisible(true);
-            taules[0].setManaged(true);
-        }
     }
 
     /**
@@ -242,32 +253,67 @@ public class PublicController {
         }
     }
 
-    private void carregarLogosLligues() {
+
+    private void carregarBanderesLligues() {
         if (tabPane == null) return;
         
-        String[] logos = {
-            "LOGO/Logos_Ligas/LaLiga_2023_Vertical_Logo.svg.png",
-            "LOGO/Logos_Ligas/premierLeague.png",
-            "LOGO/Logos_Ligas/bundesliga.png",
-            "LOGO/Logos_Ligas/serieA.png",
-            "LOGO/Logos_Ligas/ligue1.png",
-            "LOGO/Logos_Ligas/eredivisie.png",
-            "LOGO/Logos_Ligas/primeiraLiga.png"
+        // Banderes per a cada lliga en l'ordre de les pestanyes
+        String[] banderes = {
+            "LOGO/Bandera_Paises/espana.jpg",      // La Liga
+            "LOGO/Bandera_Paises/inglaterra.jpg",  // Premier League
+            "LOGO/Bandera_Paises/alemana.jpg",     // Bundesliga
+            "LOGO/Bandera_Paises/italia.jpeg",     // Serie A
+            "LOGO/Bandera_Paises/francia.jpg",     // Ligue 1
+            "LOGO/Bandera_Paises/paisesbajos.jpg",// Eredivisie
+            "LOGO/Bandera_Paises/portugal.jpg"     // Primeira Liga
         };
         
-        for (int i = 0; i < Math.min(logos.length, tabPane.getTabs().size()); i++) {
+        for (int i = 0; i < Math.min(banderes.length, tabPane.getTabs().size()); i++) {
             try {
-                File file = new File(logos[i]);
+                File file = new File(banderes[i]);
                 if (file.exists()) {
                     Image image = new Image(file.toURI().toString(), 0, 24, true, true);
                     ImageView imageView = new ImageView(image);
                     imageView.setPreserveRatio(true);
                     imageView.setFitHeight(24);
                     tabPane.getTabs().get(i).setGraphic(imageView);
-                    tabPane.getTabs().get(i).setText(""); // Eliminar texto, solo icono
+                    tabPane.getTabs().get(i).setText(""); // Mostrar només la bandera
+                } else {
+                    System.err.println("⚠️ Bandera no trobada: " + banderes[i]);
                 }
             } catch (Exception e) {
-                System.err.println("⚠️ Error carregant logo " + i + ": " + e.getMessage());
+                System.err.println("⚠️ Error carregant bandera " + i + ": " + e.getMessage());
+            }
+        }
+    }
+
+    private void actualizarEncabezadoLiga(int index) {
+        if (lblLeagueName != null && index >= 0 && index < lligaNoms.length) {
+            lblLeagueName.setText(lligaNoms[index]);
+        }
+        if (imgLeagueIcon != null) {
+            String[] logos = {
+                "LOGO/Logos_Ligas/LaLiga_2023_Vertical_Logo.svg.png",
+                "LOGO/Logos_Ligas/premierLeague.png",
+                "LOGO/Logos_Ligas/bundesliga.png",
+                "LOGO/Logos_Ligas/serieA.png",
+                "LOGO/Logos_Ligas/ligue1.png",
+                "LOGO/Logos_Ligas/eredivisie.png",
+                "LOGO/Logos_Ligas/primeiraLiga.png"
+            };
+            if (index >= 0 && index < logos.length) {
+                try {
+                    File file = new File(logos[index]);
+                    if (file.exists()) {
+                        Image image = new Image(file.toURI().toString(), 0, 36, true, true);
+                        imgLeagueIcon.setImage(image);
+                    } else {
+                        imgLeagueIcon.setImage(null);
+                        System.err.println("⚠️ Logo de lliga no trobat per encapçalament: " + logos[index]);
+                    }
+                } catch (Exception e) {
+                    System.err.println("⚠️ Error carregant logo d'encapçalament: " + e.getMessage());
+                }
             }
         }
     }
@@ -303,6 +349,45 @@ public class PublicController {
         
         colPos.setCellValueFactory(new PropertyValueFactory<>("Posicio"));
         colEquip.setCellValueFactory(new PropertyValueFactory<>("nom_Equip"));
+        // Mostrar escudo a la izquierda del nombre del equip
+        colEquip.setCellFactory(column -> new javafx.scene.control.TableCell<Equip, String>() {
+            private final HBox box = new HBox(8);
+            private final ImageView escut = new ImageView();
+            private final Label nom = new Label();
+            {
+                escut.setFitHeight(28);
+                escut.setPreserveRatio(true);
+                escut.setSmooth(true);
+                box.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
+                nom.setStyle("-fx-text-fill: #c9d1d9; -fx-font-weight: 600; -fx-font-size: 12px;");
+                nom.setWrapText(false);
+                nom.setMaxWidth(220);
+                nom.setTextOverrun(javafx.scene.control.OverrunStyle.ELLIPSIS);
+                box.getChildren().addAll(escut, nom);
+            }
+
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setGraphic(null);
+                } else {
+                    Equip e = (Equip) getTableRow().getItem();
+                    String ruta = buscarEscut(e);
+                    try {
+                        if (ruta != null && !ruta.isEmpty()) {
+                            escut.setImage(new Image(new File(ruta).toURI().toString(), 28, 28, true, true));
+                        } else {
+                            escut.setImage(null);
+                        }
+                    } catch (Exception ex) {
+                        escut.setImage(null);
+                    }
+                    nom.setText(item != null ? item : "");
+                    setGraphic(box);
+                }
+            }
+        });
         colPunts.setCellValueFactory(new PropertyValueFactory<>("Punts"));
         colPJ.setCellValueFactory(new PropertyValueFactory<>("Partits_Jugats"));
         colVict.setCellValueFactory(new PropertyValueFactory<>("Victories"));
@@ -344,6 +429,95 @@ public class PublicController {
             e.printStackTrace();
             // NO re-llancem per no aturar la càrrega
         }
+    }
+
+    /**
+     * Normalize strings to safe filenames and try to locate the escudo image.
+     */
+    private String buscarEscut(Equip e) {
+        if (e == null || e.getNom_Equip() == null) return "";
+        String nomEquipRaw = e.getNom_Equip();
+        String nomEquip = normalitzarPerFitxer(nomEquipRaw);
+        String nomLliga = normalitzarPerFitxer(e.getLliga());
+        String base = "LOGO/ESCUDOS" + File.separator;
+
+        String[] exts = new String[]{".png", ".jpg", ".webp"};
+        java.util.LinkedHashSet<String> candidates = new java.util.LinkedHashSet<>();
+        candidates.add(nomEquip);
+        // Add variants: strip leading digits (e.g., 1899-hoffenheim -> hoffenheim)
+        candidates.add(nomEquip.replaceFirst("^\\d+-", ""));
+        // Add last token (after '-')
+        String[] parts = nomEquip.split("-");
+        if (parts.length > 0) candidates.add(parts[parts.length - 1]);
+        // Strip common prefixes like fsv-, vfl-, vfb-
+        candidates.add(nomEquip.replaceAll("^(fsv|vfl|vfb|fc)-", ""));
+        // Add simplified version
+        candidates.add(stripCommonSuffixes(nomEquip));
+        // Known mappings for tricky names
+        java.util.Map<String, String> overrides = java.util.Map.of(
+            "1899-hoffenheim", "hoffenheim",
+            "vfl-wolfsburg", "wolfsburg",
+            "fsv-mainz-05", "mainz-05",
+            "vfl-bochum", "bochum",
+            "sheffield-utd", "sheffield-united",
+            "stade-brestois-29", "brest",
+            "bayern-munich", "bayern-munchen",
+            "sv-darmstadt-98", "darmstadt",
+            "psv-eindhoven", "psv",
+            "celta-vigo", "celta"
+        );
+        String norm = nomEquip.toLowerCase();
+        if (overrides.containsKey(norm)) candidates.add(overrides.get(norm));
+
+        // Try league folder first
+        for (String c : candidates) {
+            for (String ext : exts) {
+                File possible = new File(base + nomLliga + File.separator + c + ext);
+                if (possible.exists()) return possible.getPath();
+            }
+        }
+
+        // Try all subfolders with the candidate names
+        File baseDir = new File(base);
+        File[] dirs = baseDir.listFiles(File::isDirectory);
+        if (dirs != null) {
+            for (File d : dirs) {
+                for (String c : candidates) {
+                    for (String ext : exts) {
+                        File f = new File(d, c + ext);
+                        if (f.exists()) return f.getPath();
+                    }
+                }
+            }
+            // Fuzzy fallback: any file name containing any candidate token
+            for (File d : dirs) {
+                File[] files = d.listFiles();
+                if (files == null) continue;
+                for (File f : files) {
+                    String name = f.getName().toLowerCase();
+                    if (name.endsWith(".png") || name.endsWith(".jpg") || name.endsWith(".webp")) {
+                        for (String c : candidates) {
+                            if (!c.isEmpty() && name.contains(c)) return f.getPath();
+                        }
+                    }
+                }
+            }
+        }
+
+        return "";
+    }
+
+    private String stripCommonSuffixes(String s) {
+        if (s == null) return "";
+        return s.replaceAll("-(cf|fc|c-f|c-f-)$", "").replaceAll("-(a|b)$", "");
+    }
+
+    private String normalitzarPerFitxer(String s) {
+        if (s == null) return "";
+        String n = java.text.Normalizer.normalize(s, java.text.Normalizer.Form.NFD).replaceAll("\\p{M}", "");
+        n = n.toLowerCase().replaceAll("[^a-z0-9]+", "-");
+        n = n.replaceAll("(^-+|-+$)", "");
+        return n;
     }
 
     private void carregarLliga(TableView<Equip> tabla, List<Equip> totsEquips, int idLliga) {
@@ -404,7 +578,7 @@ public class PublicController {
         
         // Actualizar título
         if (lblGoleadoresTitol != null) {
-            lblGoleadoresTitol.setText("⚽ Top Golejadors - " + nomLliga);
+            lblGoleadoresTitol.setText("Top Golejadors");
         }
         
         // Filtrar y ordenar goleadores de esta liga (top 10)
@@ -448,7 +622,7 @@ public class PublicController {
         
         // Actualizar título
         if (lblAsistidoresTitol != null) {
-            lblAsistidoresTitol.setText("🎯 Top Assistents - " + nomLliga);
+            lblAsistidoresTitol.setText("Top Assistents");
         }
         
         // Filtrar y ordenar asistidores de esta liga (top 10)
@@ -492,7 +666,7 @@ public class PublicController {
         
         // Actualizar título
         if (lblAmarillasTitol != null) {
-            lblAmarillasTitol.setText("🟨 Top Targetes Grogues - " + nomLliga);
+            lblAmarillasTitol.setText("Top Targetes Grogues");
         }
         
         // Filtrar y ordenar por tarjetas amarillas de esta liga (top 10)
@@ -510,6 +684,42 @@ public class PublicController {
                 .collect(Collectors.toList());
         
         listAmarillas.setItems(FXCollections.observableArrayList(amarillas));
+        
+        // Renderizar caja amarilla en la celda en vez del emoji (mejora compatibilidad en Windows)
+        listAmarillas.setCellFactory(lv -> new ListCell<String>() {
+            @Override
+            protected void updateItem(String s, boolean empty) {
+                super.updateItem(s, empty);
+                if (empty || s == null) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    String content = s;
+                    String count = "";
+                    String rest = content;
+                    int firstSpace = content.indexOf(' ');
+                    if (firstSpace > 0) {
+                        count = content.substring(0, firstSpace);
+                        rest = content.substring(firstSpace + 1).trim();
+                    }
+                    HBox h = new HBox(8);
+                    Label lblCount = new Label(count);
+                    lblCount.setStyle("-fx-font-weight: bold; -fx-text-fill: #e2e8f0;");
+                    Region colorBox = new Region();
+                    colorBox.setPrefSize(12, 16);
+                    if (content.contains("🟨")) {
+                        colorBox.setStyle("-fx-background-color: #f6e05e; -fx-border-color: #d69e2e; -fx-border-radius: 3; -fx-background-radius: 3;");
+                    } else {
+                        colorBox.setStyle("-fx-background-color: transparent;");
+                    }
+                    Label lblName = new Label(rest.replace("🟨", "").trim());
+                    lblName.setStyle("-fx-text-fill: #e2e8f0;");
+                    HBox.setHgrow(lblName, Priority.ALWAYS);
+                    h.getChildren().addAll(lblCount, colorBox, lblName);
+                    setGraphic(h);
+                }
+            }
+        });
         
         // Añadir doble click para abrir detalle del jugador
         listAmarillas.setOnMouseClicked(event -> {
@@ -536,7 +746,7 @@ public class PublicController {
         
         // Actualizar título
         if (lblRojasTitol != null) {
-            lblRojasTitol.setText("🟥 Top Targetes Vermelles - " + nomLliga);
+            lblRojasTitol.setText("Top Targetes Vermelles");
         }
         
         // Filtrar y ordenar por tarjetas rojas de esta liga (top 10)
@@ -554,6 +764,42 @@ public class PublicController {
                 .collect(Collectors.toList());
         
         listRojas.setItems(FXCollections.observableArrayList(rojas));
+        
+        // Renderizar caja roja en la celda en vez del emoji (mejora compatibilidad en Windows)
+        listRojas.setCellFactory(lv -> new ListCell<String>() {
+            @Override
+            protected void updateItem(String s, boolean empty) {
+                super.updateItem(s, empty);
+                if (empty || s == null) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    String content = s;
+                    String count = "";
+                    String rest = content;
+                    int firstSpace = content.indexOf(' ');
+                    if (firstSpace > 0) {
+                        count = content.substring(0, firstSpace);
+                        rest = content.substring(firstSpace + 1).trim();
+                    }
+                    HBox h = new HBox(8);
+                    Label lblCount = new Label(count);
+                    lblCount.setStyle("-fx-font-weight: bold; -fx-text-fill: #e2e8f0;");
+                    Region colorBox = new Region();
+                    colorBox.setPrefSize(12, 16);
+                    if (content.contains("🟥")) {
+                        colorBox.setStyle("-fx-background-color: #fc8181; -fx-border-color: #f56565; -fx-border-radius: 3; -fx-background-radius: 3;");
+                    } else {
+                        colorBox.setStyle("-fx-background-color: transparent;");
+                    }
+                    Label lblName = new Label(rest.replace("🟥", "").trim());
+                    lblName.setStyle("-fx-text-fill: #e2e8f0;");
+                    HBox.setHgrow(lblName, Priority.ALWAYS);
+                    h.getChildren().addAll(lblCount, colorBox, lblName);
+                    setGraphic(h);
+                }
+            }
+        });
         
         // Añadir doble click para abrir detalle del jugador
         listRojas.setOnMouseClicked(event -> {

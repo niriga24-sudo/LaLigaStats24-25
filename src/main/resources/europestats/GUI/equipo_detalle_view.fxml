@@ -35,11 +35,11 @@
                         <ImageView fx:id="imgLogoHeader" fitHeight="50" fitWidth="150" preserveRatio="true"/>
                     </graphic>
                     <items>
-                        <MenuItem text="🏠 Inici" onAction="#handleInicio"/>
-                        <MenuItem text="🏟️ Tots els Equips" onAction="#handleEquipos"/>
-                        <MenuItem text="⚽ Tots els Jugadors" onAction="#handleJugadores"/>
+                        <MenuItem text="Inici" onAction="#handleInicio"/>
+                        <MenuItem text="Tots els Equips" onAction="#handleEquipos"/>
+                        <MenuItem text="Tots els Jugadors" onAction="#handleJugadores"/>
                         <SeparatorMenuItem/>
-                        <MenuItem text="ℹ️ Sobre l'aplicació" onAction="#handleAcercaDe"/>
+                        <MenuItem text="Sobre l'aplicació" onAction="#handleAcercaDe"/>
                     </items>
                 </MenuButton>
             </HBox>
@@ -67,12 +67,12 @@
                 <TableView fx:id="tablaJugadores" styleClass="standings-table" VBox.vgrow="ALWAYS">
                     <columns>
                         <TableColumn fx:id="colNombre" text="Jugador" minWidth="150"/>
-                        <TableColumn fx:id="colPosicion" text="Pos." minWidth="80"/>
-                        <TableColumn fx:id="colGoles" text="⚽" minWidth="45"/>
-                        <TableColumn fx:id="colAsistencias" text="🅰️" minWidth="45"/>
+                        <TableColumn fx:id="colPosicion" text="Pos" minWidth="80"/>
+                        <TableColumn fx:id="colGoles" text="Gols" minWidth="45"/>
+                        <TableColumn fx:id="colAsistencias" text="Assist" minWidth="45"/>
                         <TableColumn fx:id="colMinutos" text="Min" minWidth="55"/>
-                        <TableColumn fx:id="colAmarillas" text="🟨" minWidth="40"/>
-                        <TableColumn fx:id="colRojas" text="🟥" minWidth="40"/>
+                        <TableColumn fx:id="colAmarillas" text="Grogues" minWidth="40"/>
+                        <TableColumn fx:id="colRojas" text="Vermelles" minWidth="40"/>
                     </columns>
                 </TableView>
                 
@@ -100,7 +100,7 @@
                     
                     <!-- Top 3 Assistents -->
                     <VBox spacing="4" HBox.hgrow="ALWAYS" style="-fx-background-color: #0d1117; -fx-padding: 8;">
-                        <Label text="🅰️ TOP ASSISTENTS" style="-fx-text-fill: #58a6ff; -fx-font-size: 11px; -fx-font-weight: bold;"/>
+                        <Label text="🎯 TOP ASSISTENTS" style="-fx-text-fill: #58a6ff; -fx-font-size: 11px; -fx-font-weight: bold;"/>
                         <HBox alignment="CENTER_LEFT" spacing="6" style="-fx-background-color: #161b22; -fx-padding: 4 8;">
                             <Label text="🥇" style="-fx-font-size: 12px;"/>
                             <Label fx:id="lblAsistente1Nombre" text="-" style="-fx-text-fill: #c9d1d9; -fx-font-size: 11px;" HBox.hgrow="ALWAYS"/>
@@ -125,8 +125,11 @@
                 
                 <!-- Header amb nom i lliga -->
                 <VBox alignment="CENTER" spacing="6" style="-fx-background-color: linear-gradient(to bottom, #2d3a4d 0%, #1f2937 100%); -fx-padding: 25 20; -fx-border-color: transparent transparent #30363d transparent; -fx-border-width: 0 0 1 0;">
-                    <Label fx:id="lblNombreEquipo" text="Nom de l'Equip" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0, 0, 1);"/>
-                    <Label fx:id="lblLiga" text="Lliga" style="-fx-text-fill: #63b3ed; -fx-font-size: 13px; -fx-font-weight: bold;"/>
+                    <HBox alignment="CENTER_LEFT" spacing="12">
+                        <ImageView fx:id="imgEscudoEquipo" fitHeight="48" preserveRatio="true" smooth="true" />
+                        <Label fx:id="lblNombreEquipo" text="Nom de l'Equip" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0, 0, 1);"/>
+                    </HBox>
+                    <Label fx:id="lblLiga" text="Lliga" alignment="CENTER" style="-fx-text-fill: #63b3ed; -fx-font-size: 18px; -fx-font-weight: bold; -fx-padding: 2 0 0 0;"/>
                 </VBox>
                 
                 <!-- Posició i Punts destacats -->
